@@ -4,6 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        game.cpp \
+        gameobject.cpp \
         main.cpp \
         player.cpp
 
@@ -13,4 +15,7 @@ CONFIG(debug, debug|release){
 
 HEADERS += \
     common_defs.h \
-    player.h
+    player.h \
+    game.h \
+    gameobject.h
+

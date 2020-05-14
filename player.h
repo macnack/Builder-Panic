@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#pragma once
 #include "common_defs.h"
-
 class Player : public sf::RectangleShape
 {
 public:
@@ -9,43 +9,18 @@ public:
     {
         sf::RectangleShape::setPosition(pos);
     }
+    Player(){}
     void setBounds(r_vec);
-    void move(const sf::Time &elapsed)
-    {
-        sf::FloatRect player = sf::RectangleShape::getGlobalBounds();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            if(player.top > 10)
-            sf::RectangleShape::move(0, -500 * elapsed.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            if(player.top + player.height < 600)
-            sf::RectangleShape::move(0, 500 * elapsed.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            if(player.left < 0)
-                sf::RectangleShape::setPosition(800, player.top);
-            sf::RectangleShape::move(-500 * elapsed.asSeconds(), 0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            if(player.left + player.width > 800)
-                sf::RectangleShape::setPosition(0, player.top);
-            sf::RectangleShape::move(500 * elapsed.asSeconds(), 0);
-        }
-    }
-    void paint(){
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
-            sf::FloatRect player = sf::RectangleShape::getGlobalBounds();
-            sf::RectangleShape (sf::Vector2f(800.0, 10.0));
-            sf::RectangleShape::setPosition(player.top, player.top);
-            sf::RectangleShape::setFillColor(sf::Color(124, 124, 124));
-        }
-    }
+    void move(const sf::Time &elapsed);
+    void paint();
 private:
-    double feet = 600;
+    double attack = 1;
+    double healt = 5;
+    sf::Vector2f size;
+
+    //sf::Vector2f::Vector2(50,100) size ;
+
+    sf::RectangleShape body_ ;
 };
 
 #endif // PLAYER_H
