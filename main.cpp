@@ -82,8 +82,12 @@ int main()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
             //sf::FloatRect player_b = gracz.getGlobalBounds();
             //std::cout << "Current pos: \n y:" << player_b.top+player_b.height << " x: " << player_b.left << "\n";
-            auto itlow=map.upper_bound (30);
-            std::cout << itlow->first;
+            for(auto &sc: scianka){
+                if(sc.getGlobalBounds().intersects(player_b)){
+                    std::cout << "yes yes yes" << endl;
+                }
+            }
+
         }
         //obiekt.setPosition(x,y);
         window.clear(sf::Color::Black);
@@ -93,9 +97,9 @@ int main()
         for(const auto &fl:floor){
             window.draw(fl);
         }
-        for(const auto &sc:scianka){
+        /*for(const auto &sc:scianka){
             window.draw(sc);
-        }
+        }*/
         window.draw(obiekt);
         window.draw(gracz);
         window.display();
