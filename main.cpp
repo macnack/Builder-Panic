@@ -100,7 +100,7 @@ int main()
         /*for(const auto &sc:scianka){
             window.draw(sc);
         }*/
-        window.draw(obiekt);
+       // window.draw(obiekt);
         window.draw(gracz);
         window.display();
     }
