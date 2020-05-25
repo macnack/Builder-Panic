@@ -5,7 +5,7 @@
 class Floor : Object
 {
 public:
-    Floor();
+    Floor(){};
 private:
 };
 

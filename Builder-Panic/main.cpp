@@ -1,13 +1,25 @@
 
 #include "game.h"
 #include "object.h"
-
+#include "wall.h"
 using namespace std;
 int main()
 {
     float maxHeight = 610.0f;//600
     float maxWidth = 795.0f;//800
     Game game(maxWidth,maxHeight);
+    sf::Texture wall_texture;
+    if (!wall_texture.loadFromFile("/home/maciek/work/tekstury/teksturki/wall.png")) {
+        std::cerr << "Could not load texture" << std::endl;
+        return 1;
+    }
+    wall_texture.setRepeated(true);
+    Object obj(sf::Vector2f(100,150), sf::IntRect(0,0,50,300));
+    obj.setTexture(wall_texture);
+    std::unique_ptr<sf::Sprite> walle = std::make_unique<Object>
+            (sf::Vector2f(150,150), sf::IntRect(0,0,50,300));
+    walle->setTexture(wall_texture);
+
     std::map<std::string, std::vector<std::unique_ptr<sf::RectangleShape>>> map;
     double x = 95;
     for(int i = 0 ; i < 7; i++){ //wall
@@ -50,6 +62,8 @@ int main()
         }
         gracz.move(elapsed);
         game.window_.clear(sf::Color::Black);
+        game.window_.draw(obj);
+        game.window_.draw(*walle);
 
         for(const auto &wl: map["walls"]){
             game.window_.draw(*wl);
@@ -57,7 +71,6 @@ int main()
         for(const auto &fl: map["floors"]){
             game.window_.draw(*fl);
         }
-
         game.window_.draw(gracz);
         game.window_.display();
     }
