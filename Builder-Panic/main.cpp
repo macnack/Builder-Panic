@@ -6,7 +6,7 @@ using namespace std;
 int main()
 {
     float maxHeight = 610.0f;//600
-    float maxWidth = 795.0f;//800
+    float maxWidth = 800.0f;//800
     Game game(maxWidth,maxHeight);
     sf::Texture wall_texture;
     if (!wall_texture.loadFromFile("/home/maciek/work/tekstury/teksturki/wall.png")) {
@@ -14,36 +14,24 @@ int main()
         return 1;
     }
     wall_texture.setRepeated(true);
-    Object obj(sf::Vector2f(100,150), sf::IntRect(0,0,50,300));
-    obj.setTexture(wall_texture);
-    std::unique_ptr<sf::Sprite> walle = std::make_unique<Object>
-            (sf::Vector2f(150,150), sf::IntRect(0,0,50,300));
-    walle->setTexture(wall_texture);
-
-    std::map<std::string, std::vector<std::unique_ptr<sf::RectangleShape>>> map;
-    double x = 95;
-    for(int i = 0 ; i < 7; i++){ //wall
-        std::unique_ptr<sf::RectangleShape> wall = std::make_unique<sf::RectangleShape>();
-        wall->setSize(sf::Vector2f(5.0, 800.0));
-        wall->setPosition(x,0);
-        wall->setFillColor(sf::Color(124, 124, 250));
+    std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
+    double x = 91.25;
+    for(int i = 0 ; i < 8; i++){ //wall
+        std::unique_ptr<sf::Sprite> wall = std::make_unique<Object>
+                (sf::Vector2f(x,0), sf::IntRect(0,0,10.0,800.0));
+        wall->setTexture(wall_texture);
         map["walls"].emplace_back(std::move(wall));
-        x += 100;
+        x += 101.25;
     }
     double y = 0;
     for(int i = 0 ; i < 5; i++){ //floor
-        std::unique_ptr<sf::RectangleShape> floor = std::make_unique<sf::RectangleShape>();
-        floor->setSize(sf::Vector2f(800.0, 10.0));
-        floor->setPosition(0,y);
-        floor->setFillColor(sf::Color(124, 124, 250));
+        std::unique_ptr<sf::Sprite> floor = std::make_unique<Object>
+                (sf::Vector2f(0,y), sf::IntRect(0,0,800.0,10.0));
+        floor->setTexture(wall_texture);
         map["floors"].emplace_back(std::move(floor));
         y += 150;
     }
-    std::vector<sf::RectangleShape> scianka;
-    //sf::RectangleShape
-    sf::Vector2f pos(457,480);
-    sf::Vector2f size(50, 100);
-    Player gracz(size,pos);
+    Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,480));
     while (game.getWindow().isOpen())
     {
         sf::Time elapsed = game.clock_.restart();
@@ -62,8 +50,6 @@ int main()
         }
         gracz.move(elapsed);
         game.window_.clear(sf::Color::Black);
-        game.window_.draw(obj);
-        game.window_.draw(*walle);
 
         for(const auto &wl: map["walls"]){
             game.window_.draw(*wl);
