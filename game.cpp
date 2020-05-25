@@ -1,41 +1,47 @@
 #include "game.h"
-float Game::width = 800;
-float Game::height = 610;
-std::string Game::name = "STAGE";
-sf::Clock Game::clock;
-sf::RenderWindow Game::window;
-sf::Event Game::event;
-void Game::makeWindow(){
-    window.create(sf::VideoMode(width, height), name);
-}
-Game::Game()
+
+
+void Game::draw()
 {
-    makeWindow();
+    //draw here
 }
-Game::~Game(){
+void Game::run()
+{
+    //game loop
+    while (window_.isOpen()) {
+            // check all the window's events that were triggered since the last iteration of the loop
+            while (window_.pollEvent(event)) {
+                // "close requested" event: we close the window
+                if (event.type == sf::Event::Closed)
+                    window_.close();
+            }
+            window_.clear(sf::Color::Black);
+
+            this->draw();
+
+            window_.display();
+    }
+}
+
+Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding Panic")
+{
+        Player player;
+        sf::Clock clock;
+        clock_ = clock;
 
 }
-void Game::update(){
-    //game loop
-}
-void Game::render(){
-    //game draw
-}
-const sf::RenderWindow &Game::Window() const
+
+const sf::RenderWindow &Game::getWindow()
 {
-    return window;
+    return window_;
 }
-void Game::run(){
-    gracz.paint();
-    while(Window().isOpen()){
-        update();
-        render();
-        window.clear(sf::Color::Black);
-        window.display();
-    }
-//        sf::Time elapsed = clock.restart();
-//        gracz.move(elapsed);
-//        window_.clear(sf::Color::Black);
-//        window_.draw(gracz);
-//        window_.display();
+
+const sf::Clock &Game::getClock()
+{
+    return clock_;
+}
+
+const sf::Event &Game::getEvent()
+{
+    return event;
 }

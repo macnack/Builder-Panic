@@ -5,7 +5,8 @@
 #include <cmath>
 #include <time.h>
 #include <iostream>
-
+#include <map>
+#include <memory>
 using r_vec = std::vector<sf::RectangleShape>;
 
 #endif // COMMON_DEFS_H
