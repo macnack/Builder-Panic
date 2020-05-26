@@ -15,22 +15,19 @@ int main()
     }
     wall_texture.setRepeated(true);
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
-    double x = 91.25;
-    for(int i = 0 ; i < 8; i++){ //wall
+    for(double i = 91.25 ; i <= 800; i += 101.25){ //wall
         std::unique_ptr<sf::Sprite> wall = std::make_unique<Object>
-                (sf::Vector2f(x,0), sf::IntRect(0,0,10.0,800.0));
+                (sf::Vector2f(i,0), sf::IntRect(0,0,10.0,800.0));
         wall->setTexture(wall_texture);
         map["walls"].emplace_back(std::move(wall));
-        x += 101.25;
     }
-    double y = 0;
-    for(int i = 0 ; i < 5; i++){ //floor
+    for(int i = 0 ; i <= 600; i += 150){ //floor
         std::unique_ptr<sf::Sprite> floor = std::make_unique<Object>
-                (sf::Vector2f(0,y), sf::IntRect(0,0,800.0,10.0));
+                (sf::Vector2f(0,i), sf::IntRect(0,0,800.0,10.0));
         floor->setTexture(wall_texture);
         map["floors"].emplace_back(std::move(floor));
-        y += 150;
     }
+
     Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,480));
     while (game.getWindow().isOpen())
     {
