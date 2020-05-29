@@ -28,13 +28,19 @@ int main()
         map["floors"].emplace_back(std::move(floor));
     }
     std::vector<unique_ptr<sf::RectangleShape>> blocks;
-    for(double i = 0; i <= 800; i += 101.25){
-        for (double j  = 10.0 ; j <= 610.0; j += 150){
+    //std::pair<
+    double x = 0.0;
+    double y = 10.0;
+    for(int i = 0 ; i <= 8; i++){
+        for(int k =0; k <= 4; k++){
             std::unique_ptr<sf::RectangleShape> block = std::make_unique<sf::RectangleShape>(sf::Vector2f(91.25,140));
-            block->setPosition(i,j);
+            block->setPosition(x,y);
             block->setFillColor(sf::Color(128,128,128));
             blocks.emplace_back(std::move(block));
+            y += 150;
         }
+        x += 101.25;
+        y = 10.0;
     }
     Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,480));
     while (game.getWindow().isOpen())
