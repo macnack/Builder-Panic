@@ -9,7 +9,7 @@ int main()
     float maxWidth = 800.0f;//800
     Game game(maxWidth,maxHeight);
     sf::Texture wall_texture;
-    if (!wall_texture.loadFromFile("/home/maciek/work/tekstury/teksturki/wall.png")) {
+    if (!wall_texture.loadFromFile("/home/macko/Builder-Panic/Texture/wall.png")) {
         std::cerr << "Could not load texture" << std::endl;
         return 1;
     }
