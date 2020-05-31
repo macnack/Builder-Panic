@@ -9,7 +9,7 @@ int main()
     float maxWidth = 800.0f;//800
     Game game(maxWidth,maxHeight);
     sf::Texture wall_texture;
-    if (!wall_texture.loadFromFile("/home/maciek/work/tekstury/teksturki/wall.png")) {
+    if (!wall_texture.loadFromFile("Texture/wall.png")) {
         std::cerr << "Could not load texture" << std::endl;
         return 1;
     }
@@ -27,7 +27,25 @@ int main()
         floor->setTexture(wall_texture);
         map["floors"].emplace_back(std::move(floor));
     }
+<<<<<<< HEAD
     for(int i = 0; i < 800; i += 1)
+=======
+    std::vector<unique_ptr<sf::RectangleShape>> blocks;
+    //std::pair<
+    double x = 0.0;
+    double y = 10.0;
+    for(int i = 0 ; i <= 8; i++){
+        for(int k =0; k <= 4; k++){
+            std::unique_ptr<sf::RectangleShape> block = std::make_unique<sf::RectangleShape>(sf::Vector2f(91.25,140));
+            block->setPosition(x,y);
+            block->setFillColor(sf::Color(128,128,128));
+            blocks.emplace_back(std::move(block));
+            y += 150;
+        }
+        x += 101.25;
+        y = 10.0;
+    }
+>>>>>>> 904a21924b4423663cefb366fe39804cceadf915
     Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,480));
     while (game.getWindow().isOpen())
     {
@@ -39,10 +57,24 @@ int main()
                 game.window_.close();
             }
             if (game.event.type == sf::Event::MouseButtonPressed) {
-                if(game.event.mouseButton.button == sf::Mouse::Left) {
-                    sf::Vector2i mouse_pos = sf::Mouse::getPosition(game.window_);
-                    std::cout << "Mouse clicked: " << mouse_pos.x << ", " << mouse_pos.y << std::endl;
+
+                sf::Vector2i mouse_pos = sf::Mouse::getPosition(game.window_);
+                //std::cout << "Mouse clicked: " << mouse_pos.x << ", " << mouse_pos.y << std::endl;
+                for(auto &bl : blocks){
+                    if(bl->getGlobalBounds().contains(mouse_pos.x,mouse_pos.y)){
+                        if(game.event.mouseButton.button == sf::Mouse::Left){
+                            bl->setFillColor(sf::Color(0,0,0));
+                        }
+                        if(game.event.mouseButton.button == sf::Mouse::Right){
+                            bl->setFillColor(sf::Color(255,255,255));
+                        }
+                    }
                 }
+            }
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
+            for(auto &bl :blocks){
+                bl->setFillColor(sf::Color(124,124,124));
             }
         }
         gracz.move(elapsed);
@@ -53,6 +85,9 @@ int main()
         }
         for(const auto &fl: map["floors"]){
             game.window_.draw(*fl);
+        }
+        for(const auto &bl: blocks){
+            game.window_.draw(*bl);
         }
         game.window_.draw(gracz);
         game.window_.display();

@@ -45,5 +45,7 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 
 #### Obecny stan gry :disappointed_relieved:
 ![Image of gra right now](https://github.com/macnack/Builder-Panic/blob/master/images/scena.png)
+![Image of board](https://github.com/macnack/Builder-Panic/blob/master/images/reversi_board.png)
+##### Małym druczkiem ...
 <br/>*elementy zapisane w **Italic** proszę uznać za elementy, które mogą zostać zmodyfikowane, bądź pominięte*
 <br/>*model uml nie pokrywa się z opisem klas, ponieważ podczas pisania opisu uległ lekkim modyfikacja, **do zaktualizowania w najbliższym czasie***
