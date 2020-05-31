@@ -27,7 +27,7 @@ int main()
         floor->setTexture(wall_texture);
         map["floors"].emplace_back(std::move(floor));
     }
-
+    for(int i = 0; i < 800; i += 1)
     Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,480));
     while (game.getWindow().isOpen())
     {
