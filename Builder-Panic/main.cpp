@@ -1,7 +1,5 @@
 
-#include "game.h"
-#include "object.h"
-#include "wall.h"
+#include "objectmanager.h"
 using namespace std;
 int main()
 {
@@ -30,12 +28,15 @@ int main()
     double x = 0.f;
     double y = 10.f;
     std::map<int , std::map<int, std::unique_ptr<Object>>> board;
+    ObjectManager obj_manager;
     for(int i = 0 ; i < 8; i++){
         for(int k =0; k < 4; k++){
             std::unique_ptr<Object> block_ = std::make_unique<Object>
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91.25,140),wall_texture);
-            board.insert(make_pair(k, std::map<int,std::unique_ptr<Object>>()));
-            board[k].insert(make_pair(i, std::move(block_)));
+            obj_manager.add(k,i,std::move(block_));
+            //std::cerr << k << " " << i << std::endl;
+            //board.insert(make_pair(k, std::map<int,std::unique_ptr<Object>>()));
+            //board[k].insert(make_pair(i, std::move(block_)));
             y += 150;
         }
         x += 101.25;
@@ -52,29 +53,7 @@ int main()
                 game.window_.close();
             }
             if (game.event.type == sf::Event::MouseButtonPressed) {
-
-                sf::Vector2i mouse_pos = sf::Mouse::getPosition(game.window_);
-                //std::cout << "Mouse clicked: " << mouse_pos.x << ", " << mouse_pos.y << std::endl;
-                for(auto &bd : board){
-                    int m = bd.first;
-                    for(auto &bd_el : bd.second){
-                    if(bd_el.second->getGlobalBounds().contains(mouse_pos.x,mouse_pos.y)){
-                        if(game.event.mouseButton.button == sf::Mouse::Left){
-                            std::cerr << m << " " <<bd_el.first << std::endl;
-                            bd_el.second->Paint(Object::Color::Player);
-                        }
-                        if(game.event.mouseButton.button == sf::Mouse::Right){
-                            bd_el.second->Paint(Object::Color::Enemy);
-                        }
-                    }
-                }
-            }
-        } }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
-            for(auto &bd : board){
-                for(auto &bd_el : bd.second){
-                    bd_el.second->setColor(sf::Color(128,128,128));
-                }
+                obj_manager.Paint(game);
             }
         }
         gracz.move(elapsed);
@@ -86,7 +65,7 @@ int main()
         for(const auto &fl: map["floors"]){
             game.window_.draw(*fl);
         }
-        for(const auto &el : board){
+        for(const auto &el : obj_manager.board_){
             for(const auto &v : el.second){
                 game.window_.draw(*v.second);
             }

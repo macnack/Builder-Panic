@@ -1,7 +1,7 @@
 #include "object.h"
 
 
-void Object::Paint(Object::Color color){
+void Object::Paint(const Object::Color color){
     color_ = color;
     switch (color) {
     case Color::Enemy:
@@ -16,6 +16,13 @@ void Object::Paint(Object::Color color){
     }
 }
 
-Object::Color Object::getColor(){
-    return color_;
+int Object::getIntColor(){
+    switch (color_) {
+    case Color::Enemy:
+        return -1;
+    case Color::Default:
+        return 0;
+    case Color::Player:
+        return 1;
+    }
 }

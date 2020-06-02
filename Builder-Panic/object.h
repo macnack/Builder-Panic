@@ -19,7 +19,7 @@ public:
         Player,
     };
     void Paint(Object::Color color);
-    Color getColor();
+    int getIntColor();
 private:
     Object::Color color_;
     sf::Vector2f pos_;
