@@ -5,12 +5,7 @@
 class Object : public sf::Sprite
 {
 public:
-    Object(sf::Vector2f pos, sf::FloatRect rect, sf::Texture texture): pos_(pos), rect_(rect), texture_(texture){
-        this->setPosition(pos_);
-        this->setTexture(texture_);
-        this->setTextureRect(rect_);
-        color_ = Color::Default;
-    }
+    Object(sf::Vector2f pos, sf::FloatRect rect, sf::Texture texture);
     Object(){}
     virtual ~Object() = default;
     enum class Color{

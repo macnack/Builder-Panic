@@ -1,6 +1,13 @@
 #include "object.h"
 
 
+Object::Object(sf::Vector2f pos, sf::FloatRect rect, sf::Texture texture): pos_(pos), rect_(rect), texture_(texture){
+    this->setPosition(pos_);
+    this->setTexture(texture_);
+    this->setTextureRect(rect_);
+    color_ = Color::Default;
+}
+
 void Object::Paint(const Object::Color color){
     color_ = color;
     switch (color) {

@@ -34,9 +34,6 @@ int main()
             std::unique_ptr<Object> block_ = std::make_unique<Object>
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91.25,140),wall_texture);
             obj_manager.add(k,i,std::move(block_));
-            //std::cerr << k << " " << i << std::endl;
-            //board.insert(make_pair(k, std::map<int,std::unique_ptr<Object>>()));
-            //board[k].insert(make_pair(i, std::move(block_)));
             y += 150;
         }
         x += 101.25;
