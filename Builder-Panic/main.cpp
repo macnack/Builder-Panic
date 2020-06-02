@@ -17,35 +17,31 @@ int main()
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
     for(double i = 91.25 ; i <= 800; i += 101.25){ //wall
         std::unique_ptr<sf::Sprite> wall = std::make_unique<Object>
-                (sf::Vector2f(i,0), sf::IntRect(0,0,10.0,800.0));
-        wall->setTexture(wall_texture);
+                (sf::Vector2f(i,0), sf::FloatRect(0,0,10.0,800.0),wall_texture);
+        wall->setColor(sf::Color(255,0,0));
         map["walls"].emplace_back(std::move(wall));
     }
     for(int i = 0 ; i <= 600; i += 150){ //floor
         std::unique_ptr<sf::Sprite> floor = std::make_unique<Object>
-                (sf::Vector2f(0,i), sf::IntRect(0,0,800.0,10.0));
-        floor->setTexture(wall_texture);
+                (sf::Vector2f(0,i), sf::FloatRect(0,0,800.0,10.0),wall_texture);
+        floor->setColor(sf::Color(255,0,0));
         map["floors"].emplace_back(std::move(floor));
     }
-<<<<<<< HEAD
-    for(int i = 0; i < 800; i += 1)
-=======
-    std::vector<unique_ptr<sf::RectangleShape>> blocks;
+    std::vector<unique_ptr<sf::Sprite>> blocks;
     //std::pair<
-    double x = 0.0;
-    double y = 10.0;
+    double x = 0.f;
+    double y = 10.f;
     for(int i = 0 ; i <= 8; i++){
         for(int k =0; k <= 4; k++){
-            std::unique_ptr<sf::RectangleShape> block = std::make_unique<sf::RectangleShape>(sf::Vector2f(91.25,140));
-            block->setPosition(x,y);
-            block->setFillColor(sf::Color(128,128,128));
+            std::unique_ptr<sf::Sprite> block = std::make_unique<Object>
+                    (sf::Vector2f(x,y),sf::FloatRect(0,0,91.25,140),wall_texture);
+            //block->setColor(sf::Color(128,128,128));
             blocks.emplace_back(std::move(block));
             y += 150;
         }
         x += 101.25;
         y = 10.0;
     }
->>>>>>> 904a21924b4423663cefb366fe39804cceadf915
     Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,480));
     while (game.getWindow().isOpen())
     {
@@ -61,12 +57,13 @@ int main()
                 sf::Vector2i mouse_pos = sf::Mouse::getPosition(game.window_);
                 //std::cout << "Mouse clicked: " << mouse_pos.x << ", " << mouse_pos.y << std::endl;
                 for(auto &bl : blocks){
+                    Object *bl_as_obj = dynamic_cast<Object *>(bl.get());
                     if(bl->getGlobalBounds().contains(mouse_pos.x,mouse_pos.y)){
                         if(game.event.mouseButton.button == sf::Mouse::Left){
-                            bl->setFillColor(sf::Color(0,0,0));
+                            bl_as_obj->Paint(Object::Color::Player);
                         }
                         if(game.event.mouseButton.button == sf::Mouse::Right){
-                            bl->setFillColor(sf::Color(255,255,255));
+                            bl_as_obj->Paint(Object::Color::Enemy);
                         }
                     }
                 }
@@ -74,7 +71,7 @@ int main()
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
             for(auto &bl :blocks){
-                bl->setFillColor(sf::Color(124,124,124));
+                bl->setColor(sf::Color(124,124,124));
             }
         }
         gracz.move(elapsed);
