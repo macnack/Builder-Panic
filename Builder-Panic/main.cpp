@@ -27,16 +27,15 @@ int main()
         floor->setColor(sf::Color(255,0,0));
         map["floors"].emplace_back(std::move(floor));
     }
-    std::vector<unique_ptr<sf::Sprite>> blocks;
-    //std::pair<
     double x = 0.f;
     double y = 10.f;
-    for(int i = 0 ; i <= 8; i++){
-        for(int k =0; k <= 4; k++){
-            std::unique_ptr<sf::Sprite> block = std::make_unique<Object>
+    std::map<int , std::map<int, std::unique_ptr<Object>>> board;
+    for(int i = 0 ; i < 8; i++){
+        for(int k =0; k < 4; k++){
+            std::unique_ptr<Object> block_ = std::make_unique<Object>
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91.25,140),wall_texture);
-            //block->setColor(sf::Color(128,128,128));
-            blocks.emplace_back(std::move(block));
+            board.insert(make_pair(k, std::map<int,std::unique_ptr<Object>>()));
+            board[k].insert(make_pair(i, std::move(block_)));
             y += 150;
         }
         x += 101.25;
@@ -56,22 +55,26 @@ int main()
 
                 sf::Vector2i mouse_pos = sf::Mouse::getPosition(game.window_);
                 //std::cout << "Mouse clicked: " << mouse_pos.x << ", " << mouse_pos.y << std::endl;
-                for(auto &bl : blocks){
-                    Object *bl_as_obj = dynamic_cast<Object *>(bl.get());
-                    if(bl->getGlobalBounds().contains(mouse_pos.x,mouse_pos.y)){
+                for(auto &bd : board){
+                    int m = bd.first;
+                    for(auto &bd_el : bd.second){
+                    if(bd_el.second->getGlobalBounds().contains(mouse_pos.x,mouse_pos.y)){
                         if(game.event.mouseButton.button == sf::Mouse::Left){
-                            bl_as_obj->Paint(Object::Color::Player);
+                            std::cerr << m << " " <<bd_el.first << std::endl;
+                            bd_el.second->Paint(Object::Color::Player);
                         }
                         if(game.event.mouseButton.button == sf::Mouse::Right){
-                            bl_as_obj->Paint(Object::Color::Enemy);
+                            bd_el.second->Paint(Object::Color::Enemy);
                         }
                     }
                 }
             }
-        }
+        } }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
-            for(auto &bl :blocks){
-                bl->setColor(sf::Color(124,124,124));
+            for(auto &bd : board){
+                for(auto &bd_el : bd.second){
+                    bd_el.second->setColor(sf::Color(128,128,128));
+                }
             }
         }
         gracz.move(elapsed);
@@ -83,8 +86,10 @@ int main()
         for(const auto &fl: map["floors"]){
             game.window_.draw(*fl);
         }
-        for(const auto &bl: blocks){
-            game.window_.draw(*bl);
+        for(const auto &el : board){
+            for(const auto &v : el.second){
+                game.window_.draw(*v.second);
+            }
         }
         game.window_.draw(gracz);
         game.window_.display();
