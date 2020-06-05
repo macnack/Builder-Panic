@@ -1,7 +1,7 @@
 #include "object.h"
 
 
-Object::Object(sf::Vector2f pos, sf::FloatRect rect, sf::Texture texture): pos_(pos), rect_(rect), texture_(texture){
+Object::Object(const sf::Vector2f &pos, const sf::FloatRect &rect, const sf::Texture &texture): pos_(pos), rect_(rect), texture_(texture){
     this->setPosition(pos_);
     this->setTexture(texture_);
     this->setTextureRect(rect_);
@@ -32,4 +32,5 @@ int Object::getIntColor(){
     case Color::Player:
         return 1;
     }
+    return 0;
 }

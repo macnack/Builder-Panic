@@ -6,7 +6,6 @@ CONFIG -= qt
 SOURCES += \
         coin.cpp \
         enemy.cpp \
-        floor.cpp \
         game.cpp \
         main.cpp \
         object.cpp \
@@ -22,7 +21,6 @@ HEADERS += \
     coin.h \
     common_defs.h \
     enemy.h \
-    floor.h \
     object.h \
     objectmanager.h \
     player.h \

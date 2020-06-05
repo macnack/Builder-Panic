@@ -1,6 +1,6 @@
-
 #include "objectmanager.h"
-using namespace std;
+#include "cmath"
+
 int main()
 {
     float maxHeight = 610.0f;//600
@@ -39,7 +39,15 @@ int main()
         x += 101.25;
         y = 10.0;
     }
-    Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,480));
+    Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,550));
+
+
+
+//    int stage;
+//    float velocity_y = 0;
+    float velocity_x = 100;
+
+
     while (game.getWindow().isOpen())
     {
         sf::Time elapsed = game.clock_.restart();
@@ -53,7 +61,34 @@ int main()
                 obj_manager.Paint(game);
             }
         }
-        gracz.move(elapsed);
+        sf::FloatRect player = gracz.getGlobalBounds();
+        sf::FloatRect platform_down;
+        sf::FloatRect platform_up;
+
+        gracz.setBounds(map["floors"]);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            if(player.top > 10)
+                gracz.move(0, -500 * elapsed.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            if(player.top + player.height < map["floors"][gracz.stage]->getGlobalBounds().top)
+                gracz.move(0, 500 * elapsed.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            if(player.left < 0)
+                gracz.setPosition(800, player.top);
+            velocity_x = -velocity_x;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            if(player.left + player.width > 800)
+                gracz.setPosition(0, player.top);
+            velocity_x = -velocity_x;
+        }
+
         game.window_.clear(sf::Color::Black);
 
         for(const auto &wl: map["walls"]){

@@ -1,7 +1,8 @@
 #include "player.h"
 
-void Player::move(const sf::Time &elapsed)
+void Player::move_(const sf::Time &elapsed)
 {
+
     sf::FloatRect player = sf::RectangleShape::getGlobalBounds();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {

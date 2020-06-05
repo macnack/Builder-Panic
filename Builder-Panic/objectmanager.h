@@ -5,7 +5,7 @@
 class ObjectManager
 {
 public:
-    void add(int m, int n, std::unique_ptr<Object> block_);
+    void add(const int &m,const int &n,std::unique_ptr<Object> block_);
     void Reverse(const int &m,const int &n, const Object::Color &color);
     void Paint(const Game &game);
     std::map<int , std::map<int, std::unique_ptr<Object>>> board_;
