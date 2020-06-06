@@ -41,12 +41,6 @@ int main()
     }
     Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,250));
 
-
-
-//    int stage;
-//    float velocity_y = 0;
-    int poziom = 4;
-
     while (game.getWindow().isOpen())
     {
         sf::Time elapsed = game.clock_.restart();
@@ -60,16 +54,12 @@ int main()
                 obj_manager.Paint(game);
             }
             if (game.event.type == sf::Event::KeyPressed){
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)  && gracz.current_stage < 4){
-                    gracz.current_stage += 1;
-                    poziom = gracz.current_stage;
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
+                    gracz.down();
                     std::cerr << "s: "<< gracz.current_stage << "\n";
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
                     gracz.jump();
-                    if(gracz.current_stage > 1)
-                    gracz.current_stage -= 1;
-                    poziom = gracz.current_stage;
                     std::cerr << "spacja: "<< gracz.current_stage << "\n";
                 }
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
@@ -89,7 +79,7 @@ int main()
             gracz.moveSprite(sf::Vector2f(1.f, 0.f), elapsed.asSeconds());
         }
 
-        gracz.updateCollisions(map["floors"], elapsed.asSeconds(),poziom);
+        gracz.updateCollisions(map["floors"], elapsed.asSeconds());
         game.window_.clear(sf::Color::Black);
 
         for(const auto &wl: map["walls"]){

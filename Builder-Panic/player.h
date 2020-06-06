@@ -24,11 +24,15 @@ public:
         if (this->grounded == true) {
             this->velocity.y -= 1000;
         }
+        if(current_stage > 1)
+        current_stage -= 1;
+        next_stage = current_stage;
     }
     void down(){
         if (this->stage_down == true && current_stage < 4){
             this->velocity.y += 1000;
-            current_stage = current_stage +1;
+            current_stage += 1;
+            next_stage = current_stage;
         }
     }
     void move_(const sf::Time &elapsed);
@@ -43,46 +47,39 @@ public:
     void updateMovement(const float& dt) {
         this->updateGravity(dt);
         if (this->velocity.y > 0.f) {
-
             //Max falling velocity check
             if (this->velocity.y > this->maxFallingVelocity) {
                 this->velocity.y = this->maxFallingVelocity;
             }
         }
-
         if (this->velocity.x > 0.f) { //if going in right diraction
-
             //deceleration
             this->velocity.x -= this->deceleration * dt;
             if (this->velocity.x < 0.f)
                 this->velocity.x = 0.f;
-
             //max velocity check
             if (this->velocity.x > this->maxVelocity)
                 this->velocity.x = maxVelocity;
         }
         else if (this->velocity.x < 0.f) { //if going left
-
             //decelaretion
             this->velocity.x += deceleration * dt;
             if (this->velocity.x > 0.f)
                 this->velocity.x = 0.f;
-
             //max velocity check
             if (this->velocity.x < -this->maxVelocity)
                 this->velocity.x = -this->maxVelocity;
         }
         this->move(this->velocity * dt);
     }
-
-    void updateCollisions(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float& dt, const int &x) {
+    void updateCollisions(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float& dt) {
         grounded = false;
         sf::FloatRect playerBounds = this->getGlobalBounds();
         sf::FloatRect playerBoundsNext = this->getGlobalBounds();
         playerBoundsNext.left = this->getPosition().x + this->velocity.x * dt;
         playerBoundsNext.top = this->getPosition().y + this->velocity.y * dt;
-        setBounds(platforms);
-        sf::FloatRect platformBounds = platforms[x]->getGlobalBounds();
+        current_stage = setBounds(platforms);
+        sf::FloatRect platformBounds = platforms[next_stage]->getGlobalBounds();
         if(platformBounds.intersects(playerBoundsNext)){ //bottom
             if (playerBounds.top < platformBounds.top
                     && playerBounds.top + playerBounds.height < platformBounds.top + platformBounds.height
@@ -96,10 +93,13 @@ public:
                 stage_down = true;
             }
         }
+        if(playerBounds.top + playerBounds.height > 800){
+            this->setPosition(playerBounds.left, platformBounds.top - playerBounds.height);
+        }
         this->updateMovement(dt);
     }
     void paint();
-    int current_stage = 0;
+    int current_stage = 4;
     int next_stage = current_stage;
     bool stage_down = false;
 private:
