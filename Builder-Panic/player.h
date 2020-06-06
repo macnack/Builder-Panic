@@ -10,14 +10,15 @@ public:
         sf::RectangleShape::setPosition(pos);
     }
     Player(){}
-    void setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms){
+    int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms){
         sf::FloatRect bound = this->getGlobalBounds();
         for(unsigned int i = 0; i < platforms.size(); i++){
             if( platforms[i]->getGlobalBounds().top < bound.top
                     && bound.top < platforms[i+1]->getGlobalBounds().top){
-                current_stage = i+1;
+                return current_stage = i+1;
             }
         }
+        return platforms.size()-1;
     }
     void jump() {
         if (this->grounded == true) {
@@ -40,7 +41,7 @@ public:
         this->velocity.y += this->gravity * dt;
     }
     void updateMovement(const float& dt) {
-
+        this->updateGravity(dt);
         if (this->velocity.y > 0.f) {
 
             //Max falling velocity check
@@ -74,17 +75,14 @@ public:
         this->move(this->velocity * dt);
     }
 
-    void updateCollisions(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float& dt) {
+    void updateCollisions(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float& dt, const int &x) {
         grounded = false;
         sf::FloatRect playerBounds = this->getGlobalBounds();
         sf::FloatRect playerBoundsNext = this->getGlobalBounds();
         playerBoundsNext.left = this->getPosition().x + this->velocity.x * dt;
         playerBoundsNext.top = this->getPosition().y + this->velocity.y * dt;
         setBounds(platforms);
-        sf::FloatRect platformBounds = platforms[current_stage]->getGlobalBounds();
-        if( !stage_down && current_stage < 4){
-            platformBounds = platforms[current_stage+1]->getGlobalBounds();
-        }
+        sf::FloatRect platformBounds = platforms[x]->getGlobalBounds();
         if(platformBounds.intersects(playerBoundsNext)){ //bottom
             if (playerBounds.top < platformBounds.top
                     && playerBounds.top + playerBounds.height < platformBounds.top + platformBounds.height
@@ -97,16 +95,8 @@ public:
                 grounded = true;
                 stage_down = true;
             }
-            //            else if (playerBounds.top > platformBounds.top
-            //                && playerBounds.top + playerBounds.height > platformBounds.top + platformBounds.height
-            //                && playerBounds.left < platformBounds.left + platformBounds.width
-            //                && playerBounds.left + playerBounds.width > platformBounds.left
-            //                )
-            //            {
-            //                this->velocity.y = 0;
-            //                this->setPosition(playerBounds.left, platformBounds.top + platformBounds.height);
-            //            }
         }
+        this->updateMovement(dt);
     }
     void paint();
     int current_stage = 0;

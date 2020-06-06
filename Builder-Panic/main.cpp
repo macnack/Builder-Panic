@@ -45,7 +45,7 @@ int main()
 
 //    int stage;
 //    float velocity_y = 0;
-
+    int poziom = 4;
 
     while (game.getWindow().isOpen())
     {
@@ -60,61 +60,36 @@ int main()
                 obj_manager.Paint(game);
             }
             if (game.event.type == sf::Event::KeyPressed){
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)  && gracz.current_stage < 4){
-                    std::cerr << gracz.current_stage << std::endl;
-                    gracz.stage_down = false;
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)  && gracz.current_stage < 4){
+                    gracz.current_stage += 1;
+                    poziom = gracz.current_stage;
+                    std::cerr << "s: "<< gracz.current_stage << "\n";
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+                    gracz.jump();
+                    if(gracz.current_stage > 1)
+                    gracz.current_stage -= 1;
+                    poziom = gracz.current_stage;
+                    std::cerr << "spacja: "<< gracz.current_stage << "\n";
+                }
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+                    std::cerr << "Curr: "<< gracz.current_stage << "\n";
                 }
             }
         }
-        sf::FloatRect player = gracz.getGlobalBounds();
-        sf::FloatRect platform_down;
-        sf::FloatRect platform_up;
-
-        gracz.setBounds(map["floors"]);
-        /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            if(player.top > 10)
-                gracz.move(0, -500 * elapsed.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && gracz.stage < 4)
-        {
-            if(player.top + player.height < map["floors"][gracz.stage+1]->getGlobalBounds().top)
-            gracz.move(0, 500 * elapsed.asSeconds());
-        }
-        if(player.top + player.height > map["floors"][gracz.stage]->getGlobalBounds().top){
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            if(player.left < 0)
-                gracz.setPosition(800, player.top);
-            gracz.move(-100 * elapsed.asSeconds(),0);
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            if(player.left + player.width > 800)
-                gracz.setPosition(0, player.top);
-            gracz.move(100 * elapsed.asSeconds(),0);
-        }
-        }*/
+//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && gracz.current_stage < 4)
+//        {
+//            if(player.top + player.height < map["floors"][gracz.current_stage+1]->getGlobalBounds().top)
+//            gracz.move(0, 500 * elapsed.asSeconds());
+//        }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             gracz.moveSprite(sf::Vector2f(-1.f, 0.f), elapsed.asSeconds());
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             gracz.moveSprite(sf::Vector2f(1.f, 0.f), elapsed.asSeconds());
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-           gracz.moveSprite(sf::Vector2f(0.f, -1.f), elapsed.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            gracz.moveSprite(sf::Vector2f(0.f, 1.f), elapsed.asSeconds());
-            //gracz.down();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            gracz.jump();
-        }
 
-        gracz.updateGravity(elapsed.asSeconds());
-        gracz.updateMovement(elapsed.asSeconds());
-        gracz.updateCollisions(map["floors"], elapsed.asSeconds());
+        gracz.updateCollisions(map["floors"], elapsed.asSeconds(),poziom);
         game.window_.clear(sf::Color::Black);
 
         for(const auto &wl: map["walls"]){
