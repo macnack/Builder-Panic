@@ -54,31 +54,10 @@ int main()
                 obj_manager.Paint(game);
             }
             if (game.event.type == sf::Event::KeyPressed){
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
-                    gracz.down();
-                    std::cerr << "s: "<< gracz.current_stage << "\n";
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-                    gracz.jump();
-                    std::cerr << "spacja: "<< gracz.current_stage << "\n";
-                }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
-                    std::cerr << "Curr: "<< gracz.current_stage << "\n";
-                }
+                gracz.change_platform();
             }
         }
-//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && gracz.current_stage < 4)
-//        {
-//            if(player.top + player.height < map["floors"][gracz.current_stage+1]->getGlobalBounds().top)
-//            gracz.move(0, 500 * elapsed.asSeconds());
-//        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            gracz.moveSprite(sf::Vector2f(-1.f, 0.f), elapsed.asSeconds());
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            gracz.moveSprite(sf::Vector2f(1.f, 0.f), elapsed.asSeconds());
-        }
-        gracz.updateCollisions(map["floors"], elapsed.asSeconds());
+        gracz.loop(map["floors"], elapsed.asSeconds());
         game.window_.clear(sf::Color::Black);
 
         for(const auto &wl: map["walls"]){
