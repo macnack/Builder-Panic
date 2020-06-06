@@ -112,6 +112,9 @@ int main()
             gracz.jump();
         }
 
+        gracz.updateGravity(elapsed.asSeconds());
+        gracz.updateMovement(elapsed.asSeconds());
+        gracz.updateCollisions(map["floors"], elapsed.asSeconds());
         game.window_.clear(sf::Color::Black);
 
         for(const auto &wl: map["walls"]){
@@ -125,9 +128,6 @@ int main()
                 game.window_.draw(*v.second);
             }
         }
-        gracz.updateGravity(elapsed.asSeconds());
-        gracz.updateMovement(elapsed.asSeconds());
-        gracz.updateCollisions(map["floors"], elapsed.asSeconds());
         game.window_.draw(gracz);
         game.window_.display();
     }
