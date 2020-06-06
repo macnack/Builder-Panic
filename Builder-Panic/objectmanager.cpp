@@ -147,3 +147,20 @@ void ObjectManager::Paint(const Game &game){
         }
     }
 }
+//&& bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width,playerBounds.top+playerBounds.height)
+void ObjectManager::Paint(const Player &gracz)
+{
+    sf::FloatRect playerBounds = gracz.getGlobalBounds();
+    for(auto &bd : board_){
+        int m = bd.first;
+        for(auto &bd_el : bd.second){
+            if(bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width, playerBounds.top)
+                    && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top)){
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+                    int n = bd_el.first;
+                    this->Reverse(m, n, Object::Color::Player );
+                }
+            }
+        }
+    }
+}

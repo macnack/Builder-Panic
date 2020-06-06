@@ -10,8 +10,7 @@ int main()
     if (!wall_texture.loadFromFile("Texture/wall.png")) {
         std::cerr << "Could not load texture" << std::endl;
         return 1;
-    }
-    wall_texture.setRepeated(true);
+    }    wall_texture.setRepeated(true);
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
     for(double i = 91.25 ; i <= 800; i += 101.25){ //wall
         std::unique_ptr<sf::Sprite> wall = std::make_unique<Object>
@@ -56,6 +55,10 @@ int main()
             if (game.event.type == sf::Event::KeyPressed){
                 gracz.change_platform();
             }
+        }
+        obj_manager.Paint(gracz);
+        if(obj_manager.full_board()){
+            std::cerr << "koniec" << std::endl;
         }
         gracz.loop(map["floors"], elapsed.asSeconds());
         game.window_.clear(sf::Color::Black);
