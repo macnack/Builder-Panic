@@ -8,6 +8,7 @@ public:
     Player(const sf::Vector2f &size, const sf::Vector2f &pos) : sf::RectangleShape(size)
     {
         sf::RectangleShape::setPosition(pos);
+
     }
     Player(){}
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms){
@@ -98,11 +99,13 @@ public:
         }
         this->updateMovement(dt);
     }
+    void loop(const float& dt,sf::Event event);
     void paint();
     int current_stage = 4;
     int next_stage = current_stage;
     bool stage_down = false;
 private:
+    std::vector<std::unique_ptr<sf::Sprite>> platforms_;
     double attack = 1;
     double healt = 5;
     sf::Vector2f size;

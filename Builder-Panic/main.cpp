@@ -78,7 +78,6 @@ int main()
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             gracz.moveSprite(sf::Vector2f(1.f, 0.f), elapsed.asSeconds());
         }
-
         gracz.updateCollisions(map["floors"], elapsed.asSeconds());
         game.window_.clear(sf::Color::Black);
 
