@@ -10,8 +10,7 @@ SOURCES += \
         main.cpp \
         object.cpp \
         objectmanager.cpp \
-        player.cpp \
-        wall.cpp
+        player.cpp
 
 CONFIG(debug, debug|release){
     LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
@@ -24,8 +23,7 @@ HEADERS += \
     object.h \
     objectmanager.h \
     player.h \
-    game.h \
-    wall.h
+    game.h
 
 DISTFILES += \
     uml.qmodel

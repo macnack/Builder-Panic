@@ -39,13 +39,12 @@ int main()
         x += 101.25;
         y = 10.0;
     }
-    Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,550));
+    Player gracz(sf::Vector2f(50,100),sf::Vector2f(100,250));
 
 
 
 //    int stage;
 //    float velocity_y = 0;
-    float velocity_x = 100;
 
 
     while (game.getWindow().isOpen())
@@ -60,33 +59,57 @@ int main()
             if (game.event.type == sf::Event::MouseButtonPressed) {
                 obj_manager.Paint(game);
             }
+            if (game.event.type == sf::Event::KeyPressed){
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)  && gracz.current_stage < 4){
+                    std::cerr << gracz.current_stage << std::endl;
+                    gracz.stage_down = false;
+                }
+            }
         }
         sf::FloatRect player = gracz.getGlobalBounds();
         sf::FloatRect platform_down;
         sf::FloatRect platform_up;
 
         gracz.setBounds(map["floors"]);
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        /*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
             if(player.top > 10)
                 gracz.move(0, -500 * elapsed.asSeconds());
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && gracz.stage < 4)
         {
-            if(player.top + player.height < map["floors"][gracz.stage]->getGlobalBounds().top)
-                gracz.move(0, 500 * elapsed.asSeconds());
+            if(player.top + player.height < map["floors"][gracz.stage+1]->getGlobalBounds().top)
+            gracz.move(0, 500 * elapsed.asSeconds());
         }
+        if(player.top + player.height > map["floors"][gracz.stage]->getGlobalBounds().top){
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
             if(player.left < 0)
                 gracz.setPosition(800, player.top);
-            velocity_x = -velocity_x;
+            gracz.move(-100 * elapsed.asSeconds(),0);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
             if(player.left + player.width > 800)
                 gracz.setPosition(0, player.top);
-            velocity_x = -velocity_x;
+            gracz.move(100 * elapsed.asSeconds(),0);
+        }
+        }*/
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+            gracz.moveSprite(sf::Vector2f(-1.f, 0.f), elapsed.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+            gracz.moveSprite(sf::Vector2f(1.f, 0.f), elapsed.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+           gracz.moveSprite(sf::Vector2f(0.f, -1.f), elapsed.asSeconds());
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+            gracz.moveSprite(sf::Vector2f(0.f, 1.f), elapsed.asSeconds());
+            //gracz.down();
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            gracz.jump();
         }
 
         game.window_.clear(sf::Color::Black);
@@ -102,6 +125,9 @@ int main()
                 game.window_.draw(*v.second);
             }
         }
+        gracz.updateGravity(elapsed.asSeconds());
+        gracz.updateMovement(elapsed.asSeconds());
+        gracz.updateCollisions(map["floors"], elapsed.asSeconds());
         game.window_.draw(gracz);
         game.window_.display();
     }
