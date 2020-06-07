@@ -11,7 +11,7 @@ public:
 
     }
     Player(){}
-    int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms){
+    int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms){ // whereAm
         sf::FloatRect bound = this->getGlobalBounds();
         for(unsigned int i = 0; i < platforms.size(); i++){
             if( platforms[i]->getGlobalBounds().top < bound.top
@@ -94,7 +94,7 @@ public:
                 stage_down = true;
             }
         }
-        if(playerBounds.top + playerBounds.height > 800){
+        if(playerBounds.top + playerBounds.height > 800){ //zapobiega spadaniu
             this->setPosition(playerBounds.left, platformBounds.top - playerBounds.height);
         }
         this->updateMovement(dt);
