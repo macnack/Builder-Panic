@@ -1,8 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #pragma once
-#include "player.h"
-
+#include "objectmanager.h"
 class Game : public sf::RenderWindow
 {
 public:
@@ -18,7 +17,9 @@ public:
     sf::Event event; //to private
     sf::Clock clock_; // to private
 private:
-    Player gracz;
+    Player *gracz;
+    ObjectManager obj_manager;
+    std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
     std::string title;
     float width_;
     float height_;

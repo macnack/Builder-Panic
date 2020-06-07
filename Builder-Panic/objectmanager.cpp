@@ -129,17 +129,17 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
     }
 }
 
-void ObjectManager::Paint(const Game &game){
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(game.window_);
+void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event){
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
     for(auto &bd : board_){
         int m = bd.first;
         for(auto &bd_el : bd.second){
             if(bd_el.second->getGlobalBounds().contains(mouse_pos.x,mouse_pos.y)){
-                if(game.event.mouseButton.button == sf::Mouse::Left){
+                if(event.mouseButton.button == sf::Mouse::Left){
                     int n = bd_el.first;
                     this->Reverse(m, n, Object::Color::Player );
                 }
-                if(game.event.mouseButton.button == sf::Mouse::Right){
+                if(event.mouseButton.button == sf::Mouse::Right){
                     int n = bd_el.first;
                     this->Reverse(m, n, Object::Color::Enemy);
                 }
