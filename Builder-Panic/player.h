@@ -7,7 +7,6 @@ public:
     Player(const sf::Vector2f &size, const sf::Vector2f &pos) : sf::RectangleShape(size)
     {
         sf::RectangleShape::setPosition(pos);
-
     }
     Player(){}
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms);

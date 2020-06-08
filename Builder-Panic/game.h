@@ -18,7 +18,7 @@ public:
 private:
     Player *gracz;
     ObjectManager obj_manager;
-    Scena scena;
+    Scena *scena;
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
     std::string title;
     float width_;

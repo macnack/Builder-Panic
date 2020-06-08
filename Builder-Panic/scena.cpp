@@ -1,10 +1,6 @@
 #include "scena.h"
 
-Scena::Scena(){
-    sf::Texture wall_texture;
-    if (!wall_texture.loadFromFile("Texture/Dungeons Walls.png")) {
-        throw("Could not load texture 'Dungeons Walls'");
-    }
+Scena::Scena(sf::Texture &wall_texture){
     wall_texture.setRepeated(true);
     for(double i = 91.25 ; i <= 800; i += 101.25){ //wall
         std::unique_ptr<sf::Sprite> wall = std::make_unique<GameObject>
@@ -26,4 +22,8 @@ void Scena::draw(sf::RenderWindow &window){
             window.draw(*v);
         }
     }
+}
+
+const std::vector<std::unique_ptr<sf::Sprite> > &Scena::getVec(const std::string &key){
+    return map[key];
 }

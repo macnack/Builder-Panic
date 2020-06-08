@@ -5,11 +5,9 @@
 class Scena
 {
 public:
-    Scena();
+    Scena(sf::Texture &wall_texture);
     void draw(sf::RenderWindow &window);
-    const std::vector<std::unique_ptr<sf::Sprite>> &getVec(const std::string &key){
-        return map[key];
-    }
+    const std::vector<std::unique_ptr<sf::Sprite>> &getVec(const std::string &key);
 private:
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
 };

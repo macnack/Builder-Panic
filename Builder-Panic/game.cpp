@@ -10,7 +10,7 @@ void Game::draw()
 //    for(const auto &fl: map["floors"]){
 //        window_.draw(*fl);
 //    }
-    scena.draw(window_);
+    scena->draw(window_);
     for(const auto &el : obj_manager.board_){
         for(const auto &v : el.second){
             window_.draw(*v.second);
@@ -36,7 +36,7 @@ void Game::run()
             }
         }
         obj_manager.Paint(*gracz);
-        gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
+        gracz->loop(scena->getVec("floors"), elapsed.asSeconds());
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){ // usun kolory
             for(auto &k : obj_manager.board_){
                 for( auto &obj : k.second){
@@ -62,7 +62,9 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
     sf::Texture wall_texture;
     if (!wall_texture.loadFromFile("Texture/Dungeons Walls.png")) {
         throw("Could not load texture 'Dungeons Walls'");
-    }    wall_texture.setRepeated(true);
+    }
+    wall_texture.setRepeated(true);
+    scena = new Scena(wall_texture);
     double x = 0.f;
     double y = 10.f;
     for(int i = 0 ; i < 8; i++){
