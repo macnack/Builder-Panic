@@ -11,7 +11,8 @@ SOURCES += \
         main.cpp \
         object.cpp \
         objectmanager.cpp \
-        player.cpp
+        player.cpp \
+        scena.cpp
 
 CONFIG(debug, debug|release){
     LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
@@ -25,7 +26,8 @@ HEADERS += \
     object.h \
     objectmanager.h \
     player.h \
-    game.h
+    game.h \
+    scena.h
 
 DISTFILES += \
     model_uml.qmodel

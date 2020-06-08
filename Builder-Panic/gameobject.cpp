@@ -6,3 +6,4 @@ GameObject::GameObject(const sf::Vector2f &pos, const sf::FloatRect &rect, const
     this->setTexture(texture_);
     this->setTextureRect(rect_);
 }
+GameObject::~GameObject(){}

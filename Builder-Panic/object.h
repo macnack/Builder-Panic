@@ -5,7 +5,6 @@
 class Object : public GameObject
 {
 public:
-    //Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture);
     Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture);
     virtual ~Object() = default;
     enum class Color{

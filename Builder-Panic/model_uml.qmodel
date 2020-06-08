@@ -35,7 +35,151 @@
                     <name>model_uml</name>
                    </MObject>
                   </base-MObject>
-                  <last-modified>1591654581993</last-modified>
+                  <elements>
+                   <qlist>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{36aede57-3aeb-44ef-968c-6fbe3af73589}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{de7d5c08-eb7d-4996-9f92-1e8f85836fb2}</object>
+                         <name>Player</name>
+                         <pos>x:95;y:455</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{52d9f638-15d5-4784-874f-232381937a76}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{4317bd93-043b-4ee3-9773-a79a7318ea21}</object>
+                         <name>GameObject</name>
+                         <pos>x:430;y:90</pos>
+                         <rect>x:-45;y:-30;w:90;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{74e83798-59fd-4b80-8017-3a314d447bff}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{8bbd5b37-9b1a-4e4e-a6ff-941583864b41}</object>
+                         <name>ObjectManager</name>
+                         <pos>x:295;y:210</pos>
+                         <rect>x:-50;y:-30;w:100;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{783132bc-8a8d-4b78-83d3-b1156e9e90b3}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{0b3ca094-2b7b-4246-8815-9fdd0b534e28}</object>
+                         <name>Object</name>
+                         <pos>x:285;y:345</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{55ea2668-1dc3-4758-a68e-04fa59034998}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{d8901274-33dd-4c8a-b6fd-48ce217b2c6a}</object>
+                         <name>Enemy</name>
+                         <pos>x:100;y:310</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{31da6c96-d204-4501-aae6-5a0e5ed93bb6}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{50c2f0f2-5a0a-4907-9c11-257a95cf78be}</object>
+                         <name>Coin</name>
+                         <pos>x:105;y:205</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{5c9d6df0-e064-4672-aaba-bc4bcb06bdb5}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{59f3224d-3c61-4eb8-9cce-3cb6b0cf2be4}</object>
+                         <name>Game</name>
+                         <pos>x:240;y:85</pos>
+                         <rect>x:-40;y:-30;w:80;h:60</rect>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                      </DClass>
+                     </instance>
+                    </item>
+                   </qlist>
+                  </elements>
+                  <last-modified>1591655361460</last-modified>
                   <toolbarid>General</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -46,7 +190,7 @@
            </item>
            <item>
             <handle>
-             <uid>{06c38731-9655-45d2-9ac1-97d24b0967ac}</uid>
+             <uid>{de7d5c08-eb7d-4996-9f92-1e8f85836fb2}</uid>
              <target>
               <instance type="MClass">
                <MClass>
@@ -54,10 +198,10 @@
                  <MObject>
                   <base-MElement>
                    <MElement>
-                    <uid>{06c38731-9655-45d2-9ac1-97d24b0967ac}</uid>
+                    <uid>{de7d5c08-eb7d-4996-9f92-1e8f85836fb2}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>ew Class</name>
+                  <name>Player</name>
                  </MObject>
                 </base-MObject>
                </MClass>
@@ -67,7 +211,7 @@
            </item>
            <item>
             <handle>
-             <uid>{2e178dee-080c-41ad-802d-86a841fec44f}</uid>
+             <uid>{4317bd93-043b-4ee3-9773-a79a7318ea21}</uid>
              <target>
               <instance type="MClass">
                <MClass>
@@ -75,7 +219,112 @@
                  <MObject>
                   <base-MElement>
                    <MElement>
-                    <uid>{2e178dee-080c-41ad-802d-86a841fec44f}</uid>
+                    <uid>{4317bd93-043b-4ee3-9773-a79a7318ea21}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>GameObject</name>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{8bbd5b37-9b1a-4e4e-a6ff-941583864b41}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{8bbd5b37-9b1a-4e4e-a6ff-941583864b41}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>ObjectManager</name>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{0b3ca094-2b7b-4246-8815-9fdd0b534e28}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{0b3ca094-2b7b-4246-8815-9fdd0b534e28}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>Object</name>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{d8901274-33dd-4c8a-b6fd-48ce217b2c6a}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{d8901274-33dd-4c8a-b6fd-48ce217b2c6a}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>Enemy</name>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{50c2f0f2-5a0a-4907-9c11-257a95cf78be}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{50c2f0f2-5a0a-4907-9c11-257a95cf78be}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>Coin</name>
+                 </MObject>
+                </base-MObject>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{59f3224d-3c61-4eb8-9cce-3cb6b0cf2be4}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{59f3224d-3c61-4eb8-9cce-3cb6b0cf2be4}</uid>
                    </MElement>
                   </base-MElement>
                   <name>Game</name>

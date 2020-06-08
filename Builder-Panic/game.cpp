@@ -4,12 +4,13 @@
 void Game::draw()
 {
     //draw here
-    for(const auto &wl: map["walls"]){
-        window_.draw(*wl);
-    }
-    for(const auto &fl: map["floors"]){
-        window_.draw(*fl);
-    }
+//    for(const auto &wl: map["walls"]){
+//        window_.draw(*wl);
+//    }
+//    for(const auto &fl: map["floors"]){
+//        window_.draw(*fl);
+//    }
+    scena.draw(window_);
     for(const auto &el : obj_manager.board_){
         for(const auto &v : el.second){
             window_.draw(*v.second);
@@ -35,7 +36,7 @@ void Game::run()
             }
         }
         obj_manager.Paint(*gracz);
-        gracz->loop(map["floors"], elapsed.asSeconds());
+        gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){ // usun kolory
             for(auto &k : obj_manager.board_){
                 for( auto &obj : k.second){
@@ -60,21 +61,8 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
     clock_ = clock;
     sf::Texture wall_texture;
     if (!wall_texture.loadFromFile("Texture/Dungeons Walls.png")) {
-        std::cerr << "Could not load texture" << std::endl;
-        throw 1;
+        throw("Could not load texture 'Dungeons Walls'");
     }    wall_texture.setRepeated(true);
-    for(double i = 91.25 ; i <= 800; i += 101.25){ //wall
-        std::unique_ptr<sf::Sprite> wall = std::make_unique<GameObject>
-                (sf::Vector2f(i,0), sf::FloatRect(0,0,10.0,800.0),wall_texture);
-        wall->setColor(sf::Color(255,0,0));
-        map["walls"].emplace_back(std::move(wall));
-    }
-    for(int i = 0 ; i <= 600; i += 150){ //floor
-        std::unique_ptr<sf::Sprite> floor = std::make_unique<GameObject>
-                (sf::Vector2f(0,i), sf::FloatRect(0,0,800.0,10.0),wall_texture);
-        floor->setColor(sf::Color(255,0,0));
-        map["floors"].emplace_back(std::move(floor));
-    }
     double x = 0.f;
     double y = 10.f;
     for(int i = 0 ; i < 8; i++){
