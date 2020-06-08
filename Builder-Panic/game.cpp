@@ -83,6 +83,8 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91,140),wall_texture);
             //block_->setScale(1,2/3.0);
             //block_->rotate(180);
+
+            //Sceny testowe:
             //wspolrzedne [k][i]
             //scena 1
             //1. lewy  [1][2]
