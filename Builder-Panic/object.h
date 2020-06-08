@@ -13,9 +13,15 @@ public:
         Default,
         Player,
     };
+    enum class Fill{
+        one_third,
+        two_thirds,
+        full,
+    };
     void Paint(Object::Color color);
     int getIntColor();
 private:
+    bool can_change_color =false;
     Object::Color color_;
     sf::Vector2f pos_;
     sf::IntRect rect_;

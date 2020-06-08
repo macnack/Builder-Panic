@@ -14,9 +14,11 @@ public:
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms){ // whereAm
         sf::FloatRect bound = this->getGlobalBounds();
         for(unsigned int i = 0; i < platforms.size(); i++){
-            if( platforms[i]->getGlobalBounds().top < bound.top
-                    && bound.top < platforms[i+1]->getGlobalBounds().top){
-                return current_stage = i+1;
+            if( i+1 < platforms.size()){
+                if( platforms[i]->getGlobalBounds().top < bound.top
+                        && bound.top < platforms[i+1]->getGlobalBounds().top){
+                    return current_stage = i+1;
+                }
             }
         }
         return platforms.size()-1;
@@ -26,7 +28,7 @@ public:
             this->velocity.y -= 1000;
         }
         if(current_stage > 1)
-        current_stage -= 1;
+            current_stage -= 1;
         next_stage = current_stage;
     }
     void down(){

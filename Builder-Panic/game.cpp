@@ -51,7 +51,7 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         sf::Clock clock;
         clock_ = clock;
         sf::Texture wall_texture;
-        if (!wall_texture.loadFromFile("Texture/wall.png")) {
+        if (!wall_texture.loadFromFile("/home/maciek/work/gierka/Resources/Texture/Dungeons Walls.png")) {
             std::cerr << "Could not load texture" << std::endl;
             throw 1;
         }    wall_texture.setRepeated(true);
@@ -72,7 +72,9 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         for(int i = 0 ; i < 8; i++){
             for(int k =0; k < 4; k++){
                 std::unique_ptr<Object> block_ = std::make_unique<Object>
-                        (sf::Vector2f(x,y),sf::FloatRect(0,0,91.25,140),wall_texture);
+                        (sf::Vector2f(x,y),sf::FloatRect(0,0,91,140),wall_texture);
+                //block_->setScale(1,2/3.0);
+                //block_->rotate(180);
                 obj_manager.add(k,i,std::move(block_));
                 y += 150;
             }
