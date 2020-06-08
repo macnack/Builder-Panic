@@ -6,10 +6,7 @@ class Object : public GameObject
 {
 public:
     //Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture);
-    Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture): GameObject(pos,rect,texture){
-        color_ = Color::Default;
-        can_change_color = true;
-    }
+    Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture);
     virtual ~Object() = default;
     enum class Color{
         Enemy = -1,

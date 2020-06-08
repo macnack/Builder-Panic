@@ -28,5 +28,5 @@ HEADERS += \
     game.h
 
 DISTFILES += \
-    uml.qmodel
+    model_uml.qmodel
 

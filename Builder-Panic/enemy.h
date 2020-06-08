@@ -4,14 +4,14 @@
 
 class Enemy
 {
-    //hp 
+    //hp
     //attack
     //speed
     //platform
 public:
     Enemy();
     //move
-    //painting 
+    //painting
     //attack
 
 };
