@@ -83,12 +83,28 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91,140),wall_texture);
             //block_->setScale(1,2/3.0);
             //block_->rotate(180);
-            if( (k == 1 && i == 3) || (k == 2 && i == 4)){
-                block_->Paint(Object::Color::Enemy);
-            }
-            if( (k == 1 && i == 4) || (k == 2 && i == 3)){
-                block_->Paint(Object::Color::Player);
-            }
+            //wspolrzedne [k][i]
+            //scena 1
+            //1. lewy  [1][2]
+            //2. prawy [2][2]
+            //3. lewy  [0][5] : obiekt [2][3] nie powinien zmieniac koloru
+//            if( (k == 1 && i == 3) || (k == 2 && i == 4) || ( k == 0 && i == 2)){
+//                block_->Paint(Object::Color::Enemy);
+//            }
+//            if( (k == 1 && i == 4) || (k == 2 && i == 3) || ( k == 3 && i == 2)){
+//                block_->Paint(Object::Color::Player);
+//            }
+            //scena 2:
+            //1. lewy  [2][2]
+            //2. prawy [1][5]
+            //3. prawy [1][6] : obiekt [1][2] nie powinien zmieniac koloru
+//            if( (k == 0 && i == 2) || ( k == 1 && (i == 0 || i == 4 ))){
+//                block_->Paint(Object::Color::Player);
+//            }
+//            if( k==1 && ( i == 1 || i == 2 || i == 3)){
+//                block_->Paint(Object::Color::Enemy);
+//            }
+
             obj_manager.add(k,i,std::move(block_));
             y += 150;
         }
