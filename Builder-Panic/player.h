@@ -12,7 +12,6 @@ public:
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms);
     void jump();
     void down();
-    void move_(const sf::Time &elapsed);
     void moveSprite(const sf::Vector2f& dir, const float& dt);
     void updateGravity(const float& dt);
     void updateMovement(const float& dt);
