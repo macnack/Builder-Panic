@@ -7,12 +7,12 @@ void Player::move_(const sf::Time &elapsed)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
         if(player.top > 10)
-        sf::RectangleShape::move(0, -500 * elapsed.asSeconds());
+            sf::RectangleShape::move(0, -500 * elapsed.asSeconds());
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
         if(player.top + player.height < 600)
-        sf::RectangleShape::move(0, 500 * elapsed.asSeconds());
+            sf::RectangleShape::move(0, 500 * elapsed.asSeconds());
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {

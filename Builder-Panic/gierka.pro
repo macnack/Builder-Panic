@@ -7,6 +7,7 @@ SOURCES += \
         coin.cpp \
         enemy.cpp \
         game.cpp \
+        gameobject.cpp \
         main.cpp \
         object.cpp \
         objectmanager.cpp \
@@ -20,6 +21,7 @@ HEADERS += \
     coin.h \
     common_defs.h \
     enemy.h \
+    gameobject.h \
     object.h \
     objectmanager.h \
     player.h \

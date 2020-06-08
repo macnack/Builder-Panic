@@ -1,12 +1,15 @@
 #ifndef OBJECT_H
 #define OBJECT_H
-#include "common_defs.h"
+#include "gameobject.h"
 
-class Object : public sf::Sprite
+class Object : public GameObject
 {
 public:
-    Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture);
-    Object(){}
+    //Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture);
+    Object(const sf::Vector2f &pos, const sf::FloatRect &rect,const sf::Texture &texture): GameObject(pos,rect,texture){
+        color_ = Color::Default;
+        can_change_color = true;
+    }
     virtual ~Object() = default;
     enum class Color{
         Enemy = -1,
@@ -23,10 +26,6 @@ public:
 private:
     bool can_change_color =false;
     Object::Color color_;
-    sf::Vector2f pos_;
-    sf::IntRect rect_;
-    //sf::Vector2f size_;
-    sf::Texture texture_;
 };
 
 #endif // OBJECT_H

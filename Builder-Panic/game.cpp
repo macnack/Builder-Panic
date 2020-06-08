@@ -64,13 +64,13 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         throw 1;
     }    wall_texture.setRepeated(true);
     for(double i = 91.25 ; i <= 800; i += 101.25){ //wall
-        std::unique_ptr<sf::Sprite> wall = std::make_unique<Object>
+        std::unique_ptr<sf::Sprite> wall = std::make_unique<GameObject>
                 (sf::Vector2f(i,0), sf::FloatRect(0,0,10.0,800.0),wall_texture);
         wall->setColor(sf::Color(255,0,0));
         map["walls"].emplace_back(std::move(wall));
     }
     for(int i = 0 ; i <= 600; i += 150){ //floor
-        std::unique_ptr<sf::Sprite> floor = std::make_unique<Object>
+        std::unique_ptr<sf::Sprite> floor = std::make_unique<GameObject>
                 (sf::Vector2f(0,i), sf::FloatRect(0,0,800.0,10.0),wall_texture);
         floor->setColor(sf::Color(255,0,0));
         map["floors"].emplace_back(std::move(floor));
@@ -90,22 +90,22 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
             //1. lewy  [1][2]
             //2. prawy [2][2]
             //3. lewy  [0][5] : obiekt [2][3] nie powinien zmieniac koloru
-//            if( (k == 1 && i == 3) || (k == 2 && i == 4) || ( k == 0 && i == 2)){
-//                block_->Paint(Object::Color::Enemy);
-//            }
-//            if( (k == 1 && i == 4) || (k == 2 && i == 3) || ( k == 3 && i == 2)){
-//                block_->Paint(Object::Color::Player);
-//            }
+            //            if( (k == 1 && i == 3) || (k == 2 && i == 4) || ( k == 0 && i == 2)){
+            //                block_->Paint(Object::Color::Enemy);
+            //            }
+            //            if( (k == 1 && i == 4) || (k == 2 && i == 3) || ( k == 3 && i == 2)){
+            //                block_->Paint(Object::Color::Player);
+            //            }
             //scena 2:
             //1. lewy  [2][2]
             //2. prawy [1][5]
             //3. prawy [1][6] : obiekt [1][2] nie powinien zmieniac koloru
-//            if( (k == 0 && i == 2) || ( k == 1 && (i == 0 || i == 4 ))){
-//                block_->Paint(Object::Color::Player);
-//            }
-//            if( k==1 && ( i == 1 || i == 2 || i == 3)){
-//                block_->Paint(Object::Color::Enemy);
-//            }
+            //            if( (k == 0 && i == 2) || ( k == 1 && (i == 0 || i == 4 ))){
+            //                block_->Paint(Object::Color::Player);
+            //            }
+            //            if( k==1 && ( i == 1 || i == 2 || i == 3)){
+            //                block_->Paint(Object::Color::Enemy);
+            //            }
 
             obj_manager.add(k,i,std::move(block_));
             y += 150;
