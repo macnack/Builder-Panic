@@ -1,7 +1,7 @@
 #ifndef OBJECTMANAGER_H
 #define OBJECTMANAGER_H
-#include <object.h>
-#include <player.h>
+#include "object.h"
+#include "player.h"
 class Game;
 class ObjectManager
 {

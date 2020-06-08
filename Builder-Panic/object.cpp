@@ -15,11 +15,11 @@ void Object::Paint(const Object::Color color){
     switch (color) {
     case Color::Enemy:
         this->setColor(sf::Color(0,255,255));
-        this->setTextureRect(sf::IntRect(0,95,91,45));
+        //this->setTextureRect(sf::IntRect(0,95,91,45));
         break;
     case Color::Player:
         this->setColor(sf::Color(0,0,255));
-        this->setTextureRect(sf::IntRect(0,0,91,90));
+        //this->setTextureRect(sf::IntRect(0,0,91,90));
         break;
     case Color::Default:
         this->setColor(sf::Color(124,124,124));

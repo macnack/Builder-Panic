@@ -51,7 +51,7 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         sf::Clock clock;
         clock_ = clock;
         sf::Texture wall_texture;
-        if (!wall_texture.loadFromFile("/home/maciek/work/gierka/Resources/Texture/Dungeons Walls.png")) {
+        if (!wall_texture.loadFromFile("Texture/Dungeons Walls.png")) {
             std::cerr << "Could not load texture" << std::endl;
             throw 1;
         }    wall_texture.setRepeated(true);

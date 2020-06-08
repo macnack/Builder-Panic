@@ -1,6 +1,5 @@
 #ifndef GAME_H
 #define GAME_H
-#pragma once
 #include "objectmanager.h"
 class Game : public sf::RenderWindow
 {

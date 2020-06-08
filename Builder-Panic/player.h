@@ -1,6 +1,5 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#pragma once
 #include "common_defs.h"
 class Player : public sf::RectangleShape
 {
