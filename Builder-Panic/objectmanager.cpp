@@ -14,6 +14,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[m][i]->getIntColor() == 0){
+            reverse = false;
             break;
         }
         if(board_[m][i]->getIntColor() == Intcolor && reverse == true){
@@ -28,6 +29,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[m][i]->getIntColor() == 0){
+            reverse = false;
             break;
         }
         if(board_[m][i]->getIntColor() == Intcolor && reverse == true){
@@ -43,6 +45,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[i][n]->getIntColor() == 0){
+            reverse = false;
             break;
         }
         if(board_[i][n]->getIntColor() == Intcolor && reverse == true){
@@ -58,9 +61,10 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[i][n]->getIntColor() == 0){
+            reverse = false;
             break;
         }
-        if(board_[m][i]->getIntColor() == Intcolor && reverse == true){
+        if(board_[i][n]->getIntColor() == Intcolor && reverse == true){
             for(int k = m; k < i; k++){
                 board_[k][n]->Paint(color);
             }
@@ -73,6 +77,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[i][j]->getIntColor() == 0){
+            reverse = false;
             break;
         }
         if( board_[i][j]->getIntColor() == Intcolor && reverse == true){
@@ -88,6 +93,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[i][j]->getIntColor() == 0){
+            reverse = false;
             break;
         }
         if( board_[i][j]->getIntColor() == Intcolor && reverse == true){
@@ -103,6 +109,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[i][j]->getIntColor() == 0){
+            reverse = false;
             break;
         }
         if( board_[i][j]->getIntColor() == Intcolor && reverse == true){
@@ -118,6 +125,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             reverse = true;
         }
         else if(board_[i][j]->getIntColor() == 0){
+            reverse = false;
             break;
         }
         if( board_[i][j]->getIntColor() == Intcolor && reverse == true){
