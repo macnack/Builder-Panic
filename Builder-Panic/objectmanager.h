@@ -13,20 +13,7 @@ public:
     void Paint(const sf::RenderWindow &window, const sf::Event &event);
     void Paint(const Player &gracz);
     std::map<int , std::map<int, std::unique_ptr<Object>>> board_;
-    bool full_board(){
-        bool is_full = false;
-        for(const auto &el : board_){
-            for(const auto &v : el.second){
-                if(v.second->getIntColor() == 0){
-                    is_full = true;
-                }
-            }
-        }
-        if(is_full){
-            return false;
-        }
-        return true;
-    }
+    bool full_board();
     ObjectManager(){}
     virtual ~ObjectManager(){}
 };

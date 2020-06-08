@@ -22,7 +22,7 @@ void Object::Paint(const Object::Color color){
         //this->setTextureRect(sf::IntRect(0,0,91,90));
         break;
     case Color::Default:
-        this->setColor(sf::Color(124,124,124));
+        this->setColor(sf::Color(255,255,255));
         break;
     }
     }
