@@ -4,9 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        animation.cpp \
         coin.cpp \
         enemy.cpp \
+        entity.cpp \
         game.cpp \
         gameobject.cpp \
         main.cpp \
@@ -20,10 +20,10 @@ CONFIG(debug, debug|release){
 }
 
 HEADERS += \
-    animation.h \
     coin.h \
     common_defs.h \
     enemy.h \
+    entity.h \
     gameobject.h \
     object.h \
     objectmanager.h \
