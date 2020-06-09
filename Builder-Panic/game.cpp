@@ -87,8 +87,7 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     wall_texture.setRepeated(true);
     scena = std::make_unique<Scena>(wall_texture);
     obj_manager = std::make_unique<ObjectManager>(wall_texture);
-    //Coin(const sf::Vector2f &pos, const sf::Texture &texture, const sf::IntRect &frame,
-    //const float &framerate, const int &length): GameObject(pos, texture), framerate_(framerate), frame_(frame)
+
     coin = std::make_unique<Coin>(sf::Vector2f(350, 350), coin_texture, sf::IntRect(0, 0, 16, 16), 7, 4);
     /* Przeniesione konstrukcja  objectmanager */
     {

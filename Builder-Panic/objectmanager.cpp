@@ -140,6 +140,10 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
     }
 }
 
+const std::map<int, std::map<int, std::unique_ptr<Object> > > &ObjectManager::getBoard(){
+    return board_;
+}
+
 void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event){
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
     std::cerr << "XY M : " << mouse_pos.x << " y : " << mouse_pos.y << std::endl;

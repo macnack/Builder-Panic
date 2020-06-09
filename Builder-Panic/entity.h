@@ -18,7 +18,6 @@ public:
         this->setPosition(pos);
     }
     virtual ~Entity() = default;
-
 protected:
     void jump();
     void down();
