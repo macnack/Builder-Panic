@@ -8,7 +8,7 @@ public:
     {
         sf::RectangleShape::setPosition(pos);
     }
-    Player(){}
+    virtual ~Player() = default;
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms);
     void jump();
     void down();

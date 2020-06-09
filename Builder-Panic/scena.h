@@ -6,6 +6,7 @@ class Scena
 {
 public:
     Scena(sf::Texture &wall_texture);
+    virtual ~Scena() = default;
     void draw(sf::RenderWindow &window);
     const std::vector<std::unique_ptr<sf::Sprite>> &getVec(const std::string &key);
 private:
