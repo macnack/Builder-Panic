@@ -3,7 +3,7 @@
 #include "object.h"
 #include "player.h"
 #include "enemy.h"
-
+#include "coin.h"
 class Game;
 class ObjectManager
 {
