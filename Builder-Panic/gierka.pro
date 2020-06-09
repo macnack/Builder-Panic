@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        animation.cpp \
         coin.cpp \
         enemy.cpp \
         entity.cpp \
@@ -20,6 +21,7 @@ CONFIG(debug, debug|release){
 }
 
 HEADERS += \
+    animation.h \
     coin.h \
     common_defs.h \
     enemy.h \

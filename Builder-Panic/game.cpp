@@ -70,7 +70,7 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
     wall_texture.setRepeated(true);
     scena = std::make_unique<Scena>(wall_texture);
     obj_manager = std::make_unique<ObjectManager>(wall_texture);
-    /* Przeniesione do konstruktora objectmanager */
+    /* Przeniesione konstrukcja  objectmanager */
     {
 //    double x = 0.f;
 //    double y = 10.f;
@@ -107,6 +107,7 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
 //        y = 10.0;
 //    }
     }
+
     gracz = std::make_unique<Player>(sf::Vector2f(50,100),sf::Vector2f(100,250));
     enemy = std::make_unique<Enemy>(sf::Vector2f(50,100),sf::Vector2f(250,250));
 
