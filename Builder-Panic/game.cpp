@@ -64,7 +64,7 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         throw("Could not load texture 'Dungeons Walls'");
     }
     wall_texture.setRepeated(true);
-    scena = new Scena(wall_texture);
+    scena = std::make_unique<Scena>(wall_texture);
     double x = 0.f;
     double y = 10.f;
     for(int i = 0 ; i < 8; i++){
@@ -103,7 +103,7 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         x += 101.25;
         y = 10.0;
     }
-    gracz = new Player(sf::Vector2f(50,100),sf::Vector2f(100,250));
+    gracz = std::make_unique<Player>(sf::Vector2f(50,100),sf::Vector2f(100,250));
 }
 
 const sf::RenderWindow &Game::getWindow()
