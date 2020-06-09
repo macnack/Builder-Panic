@@ -1,6 +1,6 @@
 #include "player.h"
 
-int Player::setBounds(const std::vector<std::unique_ptr<sf::Sprite> > &platforms){ // whereAm
+int Entity::setBounds(const std::vector<std::unique_ptr<sf::Sprite> > &platforms){ // whereAm
     sf::FloatRect bound = this->getGlobalBounds();
     for(unsigned int i = 0; i < platforms.size(); i++){
         if( i+1 < platforms.size()){
@@ -13,7 +13,7 @@ int Player::setBounds(const std::vector<std::unique_ptr<sf::Sprite> > &platforms
     return platforms.size()-1;
 }
 
-void Player::jump() {
+void Entity::jump() {
     if (this->grounded == true) {
         this->velocity.y -= 1000;
     }
@@ -22,7 +22,7 @@ void Player::jump() {
     next_stage = current_stage;
 }
 
-void Player::down(){
+void Entity::down(){
     if (this->stage_down == true && current_stage < 4){
         this->velocity.y += 1000;
         current_stage += 1;
@@ -30,17 +30,17 @@ void Player::down(){
     }
 }
 
-void Player::moveSprite(const sf::Vector2f &dir, const float &dt) {
+void Entity::moveSprite(const sf::Vector2f &dir, const float &dt) {
     //incrasing speed in the inputed dirction
     this->velocity += dir * (dt * this->acceleration);
 }
 
-void Player::updateGravity(const float &dt) {
+void Entity::updateGravity(const float &dt) {
     //applying force of gravity
     this->velocity.y += this->gravity * dt;
 }
 
-void Player::updateMovement(const float &dt) {
+void Entity::updateMovement(const float &dt) {
     this->updateGravity(dt);
     if (this->velocity.y > 0.f) {
         //Max falling velocity check
@@ -69,7 +69,7 @@ void Player::updateMovement(const float &dt) {
     this->move(this->velocity * dt);
 }
 
-void Player::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const float &dt) {
+void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const float &dt) {
     grounded = false;
     sf::FloatRect playerBounds = this->getGlobalBounds();
     sf::FloatRect playerBoundsNext = this->getGlobalBounds();
@@ -96,7 +96,7 @@ void Player::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite> > &p
     this->updateMovement(dt);
 }
 
-void Player::loop(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const float &dt){
+/*void Entity::loop(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const float &dt){
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         this->moveSprite(sf::Vector2f(-1.f, 0.f), dt);
     }
@@ -104,14 +104,14 @@ void Player::loop(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, co
         this->moveSprite(sf::Vector2f(1.f, 0.f), dt);
     }
     this->updateCollisions(platforms, dt);
-}
+}*/
 
-void Player::change_platform(){
+/*void Entity::change_platform(){
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
         this->down();
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         this->jump();
     }
-}
+}*/
 

@@ -2,14 +2,14 @@
 #define ENEMY_H
 
 
-class Enemy
+class Player
 {
     //hp
     //attack
     //speed
     //platform
 public:
-    Enemy();
+    Player();
     //move
     //painting
     //attack

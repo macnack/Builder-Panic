@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "common_defs.h"
 
-class Player : public sf::RectangleShape
+class Entity : public sf::RectangleShape
 {
 public:
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms);
@@ -12,13 +12,13 @@ public:
     void updateMovement(const float& dt);
     void updateCollisions(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float& dt);
     void moveSprite(const sf::Vector2f& dir, const float& dt);
-    virtual void loop(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms ,const float& dt);
-    virtual void change_platform();
-    Player(const sf::Vector2f &size, const sf::Vector2f &pos) : sf::RectangleShape(size)
+    //virtual void loop(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms ,const float& dt);
+    //virtual void change_platform();
+    Entity(const sf::Vector2f &size, const sf::Vector2f &pos) : sf::RectangleShape(size)
     {
         this->setPosition(pos);
     }
-    virtual ~Player() = default;
+    virtual ~Entity() = default;
 protected:
     bool stage_down = false;
     int current_stage = 4;
@@ -35,11 +35,13 @@ protected:
     float maxVelocity = 500.f;
 };
 
-class Enemy : public Player{
+
+class Player : public Entity{
 public:
-    Enemy(const sf::Vector2f &size, const sf::Vector2f &pos) : Player(size, pos){
+    Player(const sf::Vector2f &size, const sf::Vector2f &pos) : Entity(size, pos){
         grounded = true;
     }
+
 };
 
 

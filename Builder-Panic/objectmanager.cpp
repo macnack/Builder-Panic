@@ -156,7 +156,7 @@ void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event
     }
 }
 //&& bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width,playerBounds.top+playerBounds.height)
-void ObjectManager::Paint(const Player &gracz)
+void ObjectManager::Paint(const Entity &gracz)
 {
     sf::FloatRect playerBounds = gracz.getGlobalBounds();
     for(auto &bd : board_){
