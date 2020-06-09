@@ -4,12 +4,12 @@
 void Game::draw()
 {
     //draw here
-//    for(const auto &wl: map["walls"]){
-//        window_.draw(*wl);
-//    }
-//    for(const auto &fl: map["floors"]){
-//        window_.draw(*fl);
-//    }
+    //    for(const auto &wl: map["walls"]){
+    //        window_.draw(*wl);
+    //    }
+    //    for(const auto &fl: map["floors"]){
+    //        window_.draw(*fl);
+    //    }
     scena->draw(window_);
     for(const auto &el : obj_manager.board_){
         for(const auto &v : el.second){
