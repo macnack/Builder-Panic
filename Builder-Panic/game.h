@@ -8,7 +8,8 @@ public:
     void draw();
     void update();
     Game(const float &w, const float &h);
-    virtual ~Game() = default;;
+    virtual ~Game() = default;
+
 private:
     sf::RenderWindow window_;
     sf::Event event;

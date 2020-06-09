@@ -8,7 +8,6 @@
 #include <map>
 #include <memory>
 
-
 #include <cstdlib>
 
 #endif // COMMON_DEFS_H

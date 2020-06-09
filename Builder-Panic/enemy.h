@@ -5,12 +5,14 @@
 class Enemy : public Entity
 {
 public:
-    Enemy(const sf::Vector2f &size, const sf::Vector2f &pos) : Entity(size, pos){
+    Enemy(const sf::Vector2f &size, const sf::Vector2f &pos) : Entity(size, pos)
+    {
         grounded = true;
-        rando = rand()%3 - 1;
+        rando = rand() % 3 - 1;
     }
-    void loop(const  std::vector<std::unique_ptr<sf::Sprite>> &platforms ,const float& dt);
+    void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
     void change_platform();
+
 private:
     int rando;
 };

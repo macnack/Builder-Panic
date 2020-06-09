@@ -9,7 +9,8 @@ public:
          const sf::IntRect &frame,
          const float &framerate, const int &length);
     void addAnimation(const int length);
-    void playAnimation(const float& dt);
+    void playAnimation(const float &dt);
+
 private:
     float framerate_ = 0.f;
     sf::IntRect frame_;
