@@ -9,13 +9,10 @@ public:
     void update();
     Game(const float &w, const float &h);
     virtual ~Game() = default;;
-    const sf::RenderWindow &getWindow();
-    const sf::Clock &getClock();
-    const sf::Event &getEvent();
-    sf::RenderWindow window_; //to private
-    sf::Event event; //to private
-    sf::Clock clock_; // to private
 private:
+    sf::RenderWindow window_;
+    sf::Event event;
+    sf::Clock clock_;
     std::unique_ptr<Scena> scena;
     std::unique_ptr<Enemy> enemy;
     std::unique_ptr<Player> gracz;

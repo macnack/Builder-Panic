@@ -71,6 +71,7 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
     scena = std::make_unique<Scena>(wall_texture);
     obj_manager = std::make_unique<ObjectManager>(wall_texture);
     /* Przeniesione do konstruktora objectmanager */
+    {
 //    double x = 0.f;
 //    double y = 10.f;
 //    for(int i = 0 ; i < 8; i++){
@@ -105,23 +106,10 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
 //        x += 101.25;
 //        y = 10.0;
 //    }
+    }
     gracz = std::make_unique<Player>(sf::Vector2f(50,100),sf::Vector2f(100,250));
     enemy = std::make_unique<Enemy>(sf::Vector2f(50,100),sf::Vector2f(250,250));
 
 
 }
 
-const sf::RenderWindow &Game::getWindow()
-{
-    return window_;
-}
-
-const sf::Clock &Game::getClock()
-{
-    return clock_;
-}
-
-const sf::Event &Game::getEvent()
-{
-    return event;
-}

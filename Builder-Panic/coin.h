@@ -1,8 +1,8 @@
 #ifndef COIN_H
 #define COIN_H
+#include "gameobject.h"
 
-
-class Coin
+class Coin : public GameObject
 {
 public:
     Coin();

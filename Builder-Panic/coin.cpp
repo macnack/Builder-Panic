@@ -1,6 +1,6 @@
 #include "coin.h"
 
-Coin::Coin()
-{
+//Coin::Coin()
+//{
 
-}
+//}

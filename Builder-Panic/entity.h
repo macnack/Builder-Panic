@@ -1,8 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-
-#include "common_defs.h"
+#include "gameobject.h"
 
 class Entity : public sf::RectangleShape
 {
