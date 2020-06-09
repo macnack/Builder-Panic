@@ -13,17 +13,16 @@ public:
         Player,
     };
     enum class Fill{
-        none,
-        one_third,//can_change_color = true
-        two_thirds,//can_change_color = true
-        full,//false
+        one_third,
+        two_thirds,
+        full,
     };
     void SetFill();
-    void ChangeFill();
     void Paint(Object::Color color);
+    bool can_change();
     int getIntColor();
 private:
-    bool can_change_color =false;
+    bool can_change_color;
     Object::Color color_;
     Object::Fill fill_;
     int fill = 0;

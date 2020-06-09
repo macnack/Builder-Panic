@@ -36,6 +36,7 @@ void Game::run()
                 gracz->change_platform();
                 enemy->change_platform();
                 obj_manager.Paint(*gracz);
+                obj_manager.Paint(*enemy);
             }
         }
         enemy->loop(scena->getVec("floors"), elapsed.asSeconds());

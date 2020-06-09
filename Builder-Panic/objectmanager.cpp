@@ -7,7 +7,10 @@ void ObjectManager::add(const int &m, const int &n, std::unique_ptr<Object> bloc
 
 void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &color){
     int Intcolor = static_cast<int>(color);
-    board_[m][n]->Paint(color);
+    board_[m][n]->SetFill();
+    if(board_[m][n]->can_change()){
+        board_[m][n]->Paint(color);
+    }
     bool reverse = false;
     for(int i = n; i < 8 ; i++){ // to left
         if(board_[m][i]->getIntColor() == -Intcolor && reverse == false){
@@ -139,6 +142,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
 
 void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event){
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
+    std::cerr << "XY M : " << mouse_pos.x << " y : " << mouse_pos.y << std::endl;
     for(auto &bd : board_){
         int m = bd.first;
         for(auto &bd_el : bd.second){
@@ -162,11 +166,28 @@ void ObjectManager::Paint(const Player &gracz)
     for(auto &bd : board_){
         int m = bd.first;
         for(auto &bd_el : bd.second){
-            if(bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width, playerBounds.top)
-                    && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top)){
+            if(bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width, playerBounds.top+playerBounds.height - 10)
+                    && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top+playerBounds.height - 10)){
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
                     int n = bd_el.first;
                     this->Reverse(m, n, Object::Color::Player );
+                }
+            }
+        }
+    }
+}
+
+void ObjectManager::Paint(const Enemy &enemy)
+{
+    sf::FloatRect playerBounds = enemy.getGlobalBounds();
+    for(auto &bd : board_){
+        int m = bd.first;
+        for(auto &bd_el : bd.second){
+            if(bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width, playerBounds.top+playerBounds.height - 10)
+                    && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top+playerBounds.height - 10)){
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::M)){
+                    int n = bd_el.first;
+                    this->Reverse(m, n, Object::Color::Enemy );
                 }
             }
         }
