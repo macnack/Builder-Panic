@@ -24,8 +24,6 @@ protected:
     bool stage_down = false;
     int current_stage = 4;
     int next_stage = current_stage;
-    double attack = 1;
-    double healt = 5;
     sf::Vector2f size;
     sf::Vector2f velocity;
     float gravity = 2000;

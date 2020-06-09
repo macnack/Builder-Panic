@@ -8,8 +8,8 @@ public:
     Coin(const sf::Vector2f &pos, const sf::Texture &texture,
          const sf::IntRect &frame,
          const float &framerate, const int &length): Animation(pos, texture,frame,framerate, length){
-         value = 100;
-         bound = this->getLocalBounds();
+        value = 100;
+        bound = this->getLocalBounds();
     }
 private:
     int value;
