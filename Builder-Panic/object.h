@@ -16,11 +16,15 @@ public:
         one_third,
         two_thirds,
         full,
+        full_full,
     };
     void SetFill();
     void Paint(Object::Color color);
-    bool can_change();
+    const bool &can_change();
     int getIntColor();
+    const Object::Fill &getFill(){
+        return fill_;
+    }
 private:
     bool can_change_color;
     Object::Color color_;

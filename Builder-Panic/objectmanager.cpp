@@ -10,7 +10,6 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
     board_[m][n]->SetFill();
     if(board_[m][n]->can_change()){
         board_[m][n]->Paint(color);
-    }
     bool reverse = false;
     for(int i = n; i < 8 ; i++){ // to left
         if(board_[m][i]->getIntColor() == -Intcolor && reverse == false){
@@ -137,6 +136,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
             break;
         }
+    }
     }
 }
 

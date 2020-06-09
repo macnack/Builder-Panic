@@ -21,6 +21,10 @@ void Object::SetFill(){
         break;
     case Object::Fill::full:
         this->setTextureRect(sf::IntRect(0,0,91,140));
+        fill_ = Fill::full_full;
+        break;
+    case Object::Fill::full_full:
+        std::cerr << "Can't change color" << std::endl; // do usuniecia!!
         can_change_color = false;
         break;
     }
@@ -40,7 +44,7 @@ void Object::Paint(const Object::Color color){
     }
 }
 
-bool Object::can_change(){
+const bool &Object::can_change(){
     return can_change_color;
 }
 
