@@ -35,9 +35,9 @@ void Game::run()
             if (event.type == sf::Event::KeyPressed){
                 gracz->change_platform();
                 enemy->change_platform();
+                obj_manager.Paint(*gracz);
             }
         }
-        obj_manager.Paint(*gracz);
         enemy->loop(scena->getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena->getVec("floors"), elapsed.asSeconds());
         //enemy->updateCollisions(scena->getVec("floors"), elapsed.asSeconds());
@@ -75,9 +75,6 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         for(int k =0; k < 4; k++){
             std::unique_ptr<Object> block_ = std::make_unique<Object>
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91,140),wall_texture);
-            //block_->setScale(1,2/3.0);
-            //block_->rotate(180);
-
             //Sceny testowe:
             //wspolrzedne [k][i]
             //scena 1

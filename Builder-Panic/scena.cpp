@@ -19,6 +19,8 @@ Scena::Scena(const sf::Texture &wall_texture) : texture(wall_texture){
         for(int k =0; k < 4; k++){
             std::unique_ptr<sf::Sprite> block = std::make_unique<GameObject>
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91,140),wall_texture);
+            block->setOrigin(block->getLocalBounds().left+block->getLocalBounds().width, block->getLocalBounds().top+block->getLocalBounds().height);
+            block->setRotation(180);
             map["p_walls"].emplace_back(std::move(block));
             y += 150;
         }
