@@ -94,5 +94,11 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite> > &p
     if(playerBounds.top + playerBounds.height > 800){ //zapobiega spadaniu
         this->setPosition(playerBounds.left, platformBounds.top - playerBounds.height);
     }
+    if((playerBounds.left+playerBounds.width) < 5){ //zapobiega spadaniu
+        this->setPosition(800-playerBounds.left-playerBounds.width, platformBounds.top - playerBounds.height);
+    }
+    if((playerBounds.left) > 795){ //zapobiega spadaniu
+        this->setPosition(-(50)/2.0, platformBounds.top - playerBounds.height);
+    }
     this->updateMovement(dt);
 }
