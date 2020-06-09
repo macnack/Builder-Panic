@@ -48,7 +48,7 @@ void Player::updateMovement(const float &dt) {
             this->velocity.y = this->maxFallingVelocity;
         }
     }
-    if (this->velocity.x > 0.f) { //if going in right diraction
+    if (this->velocity.x > 0.f) { //right
         //deceleration
         this->velocity.x -= this->deceleration * dt;
         if (this->velocity.x < 0.f)
@@ -114,11 +114,4 @@ void Player::change_platform(){
         this->jump();
     }
 }
-void Player::paint(){
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
-        sf::FloatRect player = sf::RectangleShape::getGlobalBounds();
-        sf::RectangleShape (sf::Vector2f(800.0, 10.0));
-        sf::RectangleShape::setPosition(player.top, player.top);
-        sf::RectangleShape::setFillColor(sf::Color(124, 124, 124));
-    }
-}
+

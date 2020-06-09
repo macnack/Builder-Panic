@@ -15,7 +15,7 @@ public:
     std::map<int , std::map<int, std::unique_ptr<Object>>> board_;
     bool full_board();
     ObjectManager(){}
-    virtual ~ObjectManager(){}
+    virtual ~ObjectManager() = default;
 };
 
 #endif // OBJECTMANAGER_H

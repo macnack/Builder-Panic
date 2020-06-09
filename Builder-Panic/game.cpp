@@ -17,6 +17,7 @@ void Game::draw()
         }
     }
     window_.draw(*gracz);
+    window_.draw(*enemy);
 }
 void Game::run()
 {
@@ -33,10 +34,14 @@ void Game::run()
             }
             if (event.type == sf::Event::KeyPressed){
                 gracz->change_platform();
+                //enemy->change_platform();
             }
         }
         obj_manager.Paint(*gracz);
+        enemy->updateCollisions(scena->getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena->getVec("floors"), elapsed.asSeconds());
+        //enemy->updateCollisions(scena->getVec("floors"), elapsed.asSeconds());
+        //enemy->loop(scena->getVec("floors"), elapsed.asSeconds());
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){ // usun kolory
             for(auto &k : obj_manager.board_){
                 for( auto &obj : k.second){
@@ -96,7 +101,6 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
             //            if( k==1 && ( i == 1 || i == 2 || i == 3)){
             //                block_->Paint(Object::Color::Enemy);
             //            }
-
             obj_manager.add(k,i,std::move(block_));
             y += 150;
         }
@@ -104,6 +108,9 @@ Game::Game(const float &w, const float &h): window_(sf::VideoMode(w,h),"Bulding 
         y = 10.0;
     }
     gracz = std::make_unique<Player>(sf::Vector2f(50,100),sf::Vector2f(100,250));
+    enemy = std::make_unique<Enemy>(sf::Vector2f(50,100),sf::Vector2f(250,250));
+
+
 }
 
 const sf::RenderWindow &Game::getWindow()

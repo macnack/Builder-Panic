@@ -18,6 +18,7 @@ public:
 private:
     ObjectManager obj_manager;
     std::unique_ptr<Scena> scena;
+    std::unique_ptr<Enemy> enemy;
     std::unique_ptr<Player> gracz;
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
     std::string title;
