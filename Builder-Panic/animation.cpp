@@ -58,3 +58,4 @@ void Animation::playAnimation(const float &dt){
         this->setTextureRect(currentRect);
     }
 }
+
