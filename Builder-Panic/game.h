@@ -18,7 +18,7 @@ private:
     std::unique_ptr<Enemy> enemy;
     std::unique_ptr<Player> gracz;
     std::unique_ptr<ObjectManager> obj_manager;
-    std::unique_ptr<Coin> coin;
+    std::vector<std::unique_ptr<Coin>> coins;
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
     std::string title;
     float width_;

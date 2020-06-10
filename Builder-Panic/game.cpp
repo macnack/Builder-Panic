@@ -10,16 +10,18 @@ void Game::draw()
     //        window_.draw(*fl);
     //    }
     scena->draw(window_);
-    for (const auto &el : obj_manager->getBoard())
+    for (const auto &el : obj_manager->getBoard())//obj_mangaer->draw(window_)
     {
         for (const auto &v : el.second)
         {
             window_.draw(*v.second);
         }
     }
-    window_.draw(*gracz);
-    window_.draw(*enemy);
-    window_.draw(*coin);
+    for(const auto &c: coins){
+        window_.draw(*c);
+    }
+    window_.draw(*gracz);//gracz->draw()
+    window_.draw(*enemy);//-||-
 }
 void Game::run()
 {
@@ -45,9 +47,15 @@ void Game::run()
                 obj_manager->Paint(*enemy);
             }
         }
-        coin->playAnimation(elapsed.asSeconds());
         gracz->playAnimation(elapsed.asSeconds());
         enemy->playAnimation(elapsed.asSeconds());
+        for(auto it = coins.begin(); it < coins.end() ; it++ ){
+            (*it)->playAnimation(elapsed.asSeconds());
+            if((*it)->is_collected(*gracz) || (*it)->is_collected(*enemy)){
+                std::cerr << "Collected coin +50" << std::endl;
+                coins.erase(it);
+            }
+        }
 
         enemy->loop(scena->getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena->getVec("floors"), elapsed.asSeconds());
@@ -91,16 +99,24 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     wall_texture.setRepeated(true);
     scena = std::make_unique<Scena>(wall_texture);
     obj_manager = std::make_unique<ObjectManager>(wall_texture);
-    sf::Texture hero_texture;
-    if (!hero_texture.loadFromFile("Texture/engineer character/engineer-idle.png"))
+//    sf::Texture hero_texture;
+//    if (!hero_texture.loadFromFile("Texture/engineer character/engineer.png"))
+//    {
+//        throw("Could not load texture 'Engineer Idle'");
+//    }
+    sf::Texture indle_texture;
+    if (!indle_texture.loadFromFile("Texture/engineer character/engineer-idle.png"))
     {
         throw("Could not load texture 'Engineer Idle'");
     }
     //Animation idles(hero_texture, sf::IntRect(0,0,16,28), 7, 4);
     //          run(..., sf::IntRect(0, 0, 16, 28), 12, 8)
-    gracz = std::make_unique<Player>(sf::Vector2f(100,250), hero_texture, sf::IntRect(0, 0, 16, 28), 12, 9);
-    enemy = std::make_unique<Enemy>(sf::Vector2f(100,250), hero_texture, sf::IntRect(0, 0, 16, 28), 12, 9);
-    coin = std::make_unique<Coin>(sf::Vector2f(350, 350), coin_texture, sf::IntRect(0, 0, 16, 16), 7, 4);
+    gracz = std::make_unique<Player>(sf::Vector2f(100,250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
+    enemy = std::make_unique<Enemy>(sf::Vector2f(100,250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
+    for(int x = 150; x < 800 ; x+=150){
+        std::unique_ptr<Coin> coin = std::make_unique<Coin>(sf::Vector2f(x, 350), coin_texture, sf::IntRect(0, 0, 16, 16), 7, 4);
+        coins.push_back(std::move(coin));
+    }
     /* Przeniesione konstrukcja  objectmanager */
     {
         //    double x = 0.f;

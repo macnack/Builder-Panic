@@ -1,7 +1,7 @@
 #ifndef COIN_H
 #define COIN_H
 #include "animation.h"
-
+#include "entity.h"
 class Coin : public Animation
 {
 public:
@@ -11,6 +11,12 @@ public:
         value = 100;
         this->setScale(3,3);
         bound = this->getLocalBounds();
+    }
+    bool is_collected(Entity &postac){
+        if( this->getGlobalBounds().intersects(postac.getGlobalBounds())){
+            return true;
+        }
+        return false;
     }
 private:
     int value;

@@ -7,6 +7,7 @@ Animation::Animation(const sf::Vector2f &pos, const sf::Texture &texture,
 {
     this->setPosition(pos);
     this->setTexture(texture_);
+    //this->setTextureRect(sf::IntRect(0,0,144,28));
     this->addAnimation(frame,length);
 
 }
@@ -26,8 +27,8 @@ void Animation::addAnimation(const sf::IntRect &frame , const int length){
                                 frame.width,
                                 frame.height);
         currentRect = startRect;
-        endRect = sf::IntRect(frame.top * frame.width + frame.width * (length - 1),
-                              frame.top * frame.height,
+        endRect = sf::IntRect(frame.top * frame.width + frame.width * (length -1),
+                              (frame.top) * frame.height,
                               frame.width,
                               frame.height);
         this->setTextureRect(startRect);
