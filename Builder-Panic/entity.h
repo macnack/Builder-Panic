@@ -22,7 +22,6 @@ public:
          const float &framerate, const int &length): Animation(pos, texture,frame,framerate, length){
         this->setScale(3.5,3.5);
     }
-
     virtual ~Entity() = default;
 protected:
     std::vector<Animation> sprite_;
