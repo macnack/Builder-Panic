@@ -46,8 +46,12 @@ void Game::run()
             }
         }
         coin->playAnimation(elapsed.asSeconds());
+        gracz->playAnimation(elapsed.asSeconds());
+        enemy->playAnimation(elapsed.asSeconds());
+
         enemy->loop(scena->getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena->getVec("floors"), elapsed.asSeconds());
+
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
         { // usun kolory
             for (auto &k : obj_manager->getBoard())
@@ -87,7 +91,14 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     wall_texture.setRepeated(true);
     scena = std::make_unique<Scena>(wall_texture);
     obj_manager = std::make_unique<ObjectManager>(wall_texture);
-
+    sf::Texture hero_texture;
+    if (!hero_texture.loadFromFile("Texture/engineer character/engineer-idle.png"))
+    {
+        throw("Could not load texture 'Engineer Idle'");
+    }
+    //Animation idles(hero_texture, sf::IntRect(0,0,16,28), 7, 4);
+    gracz = std::make_unique<Player>(sf::Vector2f(100,250), hero_texture, sf::IntRect(0, 0, 16, 28), 12, 9);
+    enemy = std::make_unique<Enemy>(sf::Vector2f(100,250), hero_texture, sf::IntRect(0, 0, 16, 28), 12, 9);
     coin = std::make_unique<Coin>(sf::Vector2f(350, 350), coin_texture, sf::IntRect(0, 0, 16, 16), 7, 4);
     /* Przeniesione konstrukcja  objectmanager */
     {
@@ -126,7 +137,4 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
         //        y = 10.0;
         //    }
     }
-
-    gracz = std::make_unique<Player>(sf::Vector2f(50, 100), sf::Vector2f(100, 250));
-    enemy = std::make_unique<Enemy>(sf::Vector2f(50, 100), sf::Vector2f(250, 250));
 }

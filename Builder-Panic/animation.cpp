@@ -3,10 +3,16 @@
 Animation::Animation(const sf::Vector2f &pos, const sf::Texture &texture, const sf::IntRect &frame, const float &framerate, const int &length)
     : framerate_(framerate),  texture_(texture),  frame_(frame)
 {
-    this->setTexture(texture_);
     this->setPosition(pos);
+    this->setTexture(texture_);
     this->addAnimation(length);
-    this->setScale(3, 3);
+}
+
+Animation::Animation(const sf::Texture &texture, const sf::IntRect &frame, const float &framerate, const int &length)
+    : framerate_(framerate),  texture_(texture),  frame_(frame)
+{
+    this->setTexture(texture_);
+    this->addAnimation(length);
 }
 
 void Animation::addAnimation(const int length)
