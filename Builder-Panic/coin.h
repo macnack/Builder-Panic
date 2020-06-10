@@ -9,6 +9,7 @@ public:
          const sf::IntRect &frame,
          const float &framerate, const int &length): Animation(pos, texture,frame,framerate, length){
         value = 100;
+        this->setScale(3,3);
         bound = this->getLocalBounds();
     }
 private:

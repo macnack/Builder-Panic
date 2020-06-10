@@ -97,6 +97,7 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
         throw("Could not load texture 'Engineer Idle'");
     }
     //Animation idles(hero_texture, sf::IntRect(0,0,16,28), 7, 4);
+    //          run(..., sf::IntRect(0, 0, 16, 28), 12, 8)
     gracz = std::make_unique<Player>(sf::Vector2f(100,250), hero_texture, sf::IntRect(0, 0, 16, 28), 12, 9);
     enemy = std::make_unique<Enemy>(sf::Vector2f(100,250), hero_texture, sf::IntRect(0, 0, 16, 28), 12, 9);
     coin = std::make_unique<Coin>(sf::Vector2f(350, 350), coin_texture, sf::IntRect(0, 0, 16, 16), 7, 4);

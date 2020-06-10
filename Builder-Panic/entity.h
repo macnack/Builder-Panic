@@ -20,7 +20,7 @@ public:
     Entity(const sf::Vector2f &pos, const sf::Texture &texture,
          const sf::IntRect &frame,
          const float &framerate, const int &length): Animation(pos, texture,frame,framerate, length){
-        this->setScale(3,3);
+        this->setScale(3.5,3.5);
     }
 
     virtual ~Entity() = default;
