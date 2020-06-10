@@ -17,37 +17,37 @@ Animation::Animation(const sf::Texture &texture, const sf::IntRect &frame, const
 
 void Animation::addAnimation(const int length)
 {
-    this->startRect = sf::IntRect(frame_.top * frame_.width,
+    startRect = sf::IntRect(frame_.top * frame_.width,
                                   frame_.top * frame_.height,
                                   frame_.width,
                                   frame_.height);
 
-    this->currentRect = this->startRect;
+    currentRect = startRect;
 
-    this->endRect = sf::IntRect(frame_.top * frame_.width + frame_.width * (length - 1),
+    endRect = sf::IntRect(frame_.top * frame_.width + frame_.width * (length - 1),
                                 (frame_.top) * frame_.height,
                                 frame_.width,
                                 frame_.height);
 
-    this->setTextureRect(this->startRect);
+    this->setTextureRect(startRect);
 }
 
 void Animation::playAnimation(const float &dt)
 {
     this->timer += dt;
 
-    if (this->timer > 1 / this->framerate_)
+    if (this->timer > 1 / framerate_)
     {
         this->timer = 0.f;
 
-        if (this->currentRect != this->endRect)
+        if (currentRect != endRect)
         {
-            this->currentRect.left += this->frame_.width;
+            currentRect.left += frame_.width;
         }
         else
         {
-            this->currentRect = this->startRect;
+            currentRect = startRect;
         }
-        this->setTextureRect(this->currentRect);
+        this->setTextureRect(currentRect);
     }
 }
