@@ -148,16 +148,13 @@ void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
     std::cerr << "XY M : " << mouse_pos.x << " y : " << mouse_pos.y << std::endl;
     for(auto &bd : board_){
-        int m = bd.first;
         for(auto &bd_el : bd.second){
             if(bd_el.second->getGlobalBounds().contains(mouse_pos.x,mouse_pos.y)){
                 if(event.mouseButton.button == sf::Mouse::Left){
-                    int n = bd_el.first;
-                    this->Reverse(m, n, Object::Color::Player );
+                    bd_el.second->Paint(Object::Color::Player);
                 }
                 if(event.mouseButton.button == sf::Mouse::Right){
-                    int n = bd_el.first;
-                    this->Reverse(m, n, Object::Color::Enemy);
+                    bd_el.second->Paint(Object::Color::Enemy);
                 }
             }
         }
