@@ -18,13 +18,13 @@ int Entity::setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms)
 
 void Entity::jump()
 {
-    if (grounded == true)
+    if (grounded == true && current_stage > 1)
     {
-        velocity.y -= 1000;
-    }
-    if (current_stage > 1)
         current_stage -= 1;
-    next_stage = current_stage;
+        velocity.y -= 1000;
+        next_stage = current_stage;
+        stage_down = false;
+    }
 }
 
 void Entity::down()
@@ -34,6 +34,7 @@ void Entity::down()
         velocity.y += 1000;
         current_stage += 1;
         next_stage = current_stage;
+        grounded = false;
     }
 }
 
@@ -55,7 +56,7 @@ void Entity::updateMovement(const float &dt)
     if (velocity.y > 0.f)
     {
         //Max falling velocity check
-        velocity.y -= 1/5.f * gravity * dt;
+        //velocity.y -= 1/5.f * gravity * dt; // for coin
         if (velocity.y > maxFallingVelocity)
         {
             velocity.y = maxFallingVelocity;
@@ -97,7 +98,7 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
     { //bottom
         if (playerBounds.top < next_stagePlatformBounds.top && playerBounds.top + playerBounds.height < next_stagePlatformBounds.top + next_stagePlatformBounds.height && playerBounds.left < next_stagePlatformBounds.left + next_stagePlatformBounds.width && playerBounds.left + playerBounds.width > next_stagePlatformBounds.left)
         {
-            velocity.y = -std::abs(velocity.y);
+            velocity.y = 0; //velocity.y = -std::abs(velocity.y);
             this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
             grounded = true;
             stage_down = true;
