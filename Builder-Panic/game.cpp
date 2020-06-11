@@ -32,12 +32,22 @@ void Game::run()
                 enemy->change_platform();
                 obj_manager->Paint(*gracz);
                 obj_manager->Paint(*enemy);
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+                { // reset plansz
+                    obj_manager.reset();
+                    obj_manager = std::make_unique<ObjectManager>(&window_);
+                }
+            }
+            if( obj_manager->full_board() ){
+                sf::sleep(sf::microseconds(10000));
+                std::cerr << "Press R to reset" << std::endl;
             }
         }
         gracz->playAnimation(elapsed.asSeconds());
         enemy->playAnimation(elapsed.asSeconds());
         for(auto it = coins.begin(); it < coins.end() ; it++ ){
             (*it)->playAnimation(elapsed.asSeconds());
+            (*it)->updateCollisions(scena.getVec("floors"), elapsed.asSeconds());
             if((*it)->is_collected(*gracz) || (*it)->is_collected(*enemy)){
                 coins.erase(it);
                 std::unique_ptr<Coin> coin = std::make_unique<Coin>();
@@ -47,12 +57,6 @@ void Game::run()
 
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-        { // reset plansz
-            obj_manager.reset();
-            obj_manager = std::make_unique<ObjectManager>(&window_);
-        }
         window_.clear(sf::Color::Black);
         this->draw();
 
@@ -79,11 +83,11 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     //          run(..., sf::IntRect(0, 0, 16, 28), 12, 8)
     gracz = std::make_unique<Player>(sf::Vector2f(100,250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
     enemy = std::make_unique<Enemy>(sf::Vector2f(100,250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
-    for(int x = 160; x < 800 ; x+=150){
+    for(int x = 160; x <= 460 ; x+=150){
         std::unique_ptr<Coin> coin = std::make_unique<Coin>(sf::Vector2f(x, 350));
         coins.push_back(std::move(coin));
     }
-    /* Przeniesione konstrukcja  objectmanager */
+    /* Przeniesione konstrukcja do Objectmanager() */
     {
         //    double x = 0.f;
         //    double y = 10.f;
