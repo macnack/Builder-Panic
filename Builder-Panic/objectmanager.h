@@ -15,11 +15,12 @@ private:
     double y = 10.f;
     sf::Texture texture;
     sf::RenderWindow *window_;
-    void add(const int &m,const int &n,std::unique_ptr<Object> block_);
-    void Reverse(const int &m,const int &n, const Object::Color &color);
-    std::map<int , std::map<int, std::unique_ptr<Object>>> board_;
+    void add(const int &m, const int &n, std::unique_ptr<Object> block_);
+    void Reverse(const int &m, const int &n, const Object::Color &color);
+    std::map<int, std::map<int, std::unique_ptr<Object>>> board_;
+
 public:
-    const std::map<int , std::map<int, std::unique_ptr<Object>>> &getBoard();
+    const std::map<int, std::map<int, std::unique_ptr<Object>>> &getBoard();
     void Paint(const Player &gracz);
     void Paint(const sf::RenderWindow &window, const sf::Event &event);
     void Paint(const Enemy &enemy);

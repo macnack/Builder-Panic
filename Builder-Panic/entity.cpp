@@ -24,7 +24,9 @@ void Entity::jump()
         velocity.y -= 1000;
         next_stage = current_stage;
         stage_down = false;
-    }else if (grounded){
+    }
+    else if (grounded)
+    {
         velocity.y -= 1000;
     }
 }

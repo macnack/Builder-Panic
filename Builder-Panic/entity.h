@@ -14,11 +14,13 @@ public:
     virtual void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt) = 0;
     virtual void change_platform() = 0;
     Entity(const sf::Vector2f &pos, const sf::Texture &texture,
-         const sf::IntRect &frame,
-         const float &framerate, const int &length): Animation(pos, texture,frame,framerate, length){
-        this->setScale(3.5,3.5);
+           const sf::IntRect &frame,
+           const float &framerate, const int &length) : Animation(pos, texture, frame, framerate, length)
+    {
+        this->setScale(3.5, 3.5);
     }
     virtual ~Entity() = default;
+
 protected:
     bool stage_down = false;
     bool grounded = false;

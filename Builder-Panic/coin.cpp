@@ -1,6 +1,6 @@
 #include "coin.h"
 
-int Coin::setBounds(const std::vector<std::unique_ptr<sf::Sprite> > &platforms)
+int Coin::setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms)
 { // whereAm
     sf::FloatRect bound = this->getGlobalBounds();
     for (unsigned int i = 0; i < platforms.size(); i++)
@@ -26,12 +26,14 @@ void Coin::updateGravity(const float &dt)
 {
     //applying force of gravity
     velocity.y += gravity * dt;
-    if(velocity.y > 0.f ){
-        velocity.y -= 1/5.f * gravity * dt; // for coin
+    if (velocity.y > 0.f)
+    {
+        velocity.y -= 1 / 5.f * gravity * dt; // for coin
     }
 }
 
-void Coin::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const float &dt){
+void Coin::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
+{
     sf::FloatRect playerBounds = this->getGlobalBounds();
     sf::FloatRect playerBoundsNext = this->getGlobalBounds();
     playerBoundsNext.left = getPosition().x + velocity.x * dt;
@@ -83,4 +85,3 @@ void Coin::updateMovement(const float &dt)
     }
     this->move(velocity * dt);
 }
-

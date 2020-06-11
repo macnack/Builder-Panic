@@ -9,6 +9,7 @@ public:
     virtual ~Scena() = default;
     void draw();
     const std::vector<std::unique_ptr<sf::Sprite>> &getVec(const std::string &key);
+
 private:
     sf::Texture texture;
     sf::RenderWindow *window_;
