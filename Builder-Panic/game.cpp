@@ -2,13 +2,6 @@
 
 void Game::draw()
 {
-    //draw here
-    //    for(const auto &wl: map["walls"]){
-    //        window_.draw(*wl);
-    //    }
-    //    for(const auto &fl: map["floors"]){
-    //        window_.draw(*fl);
-    //    }
     scena.draw();
     obj_manager->draw();
     for(const auto &c: coins){
@@ -55,15 +48,9 @@ void Game::run()
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-        { // usun kolory
-            for (auto &k : obj_manager->getBoard())
-            {
-                for (auto &obj : k.second)
-                {
-                    Object *as_obj = dynamic_cast<Object *>(obj.second.get());
-                    as_obj->Paint(Object::Color::Default);
-                }
-            }
+        { // reset plansz
+            obj_manager.reset();
+            obj_manager = std::make_unique<ObjectManager>(&window_);
         }
         if (obj_manager->full_board())
         {
