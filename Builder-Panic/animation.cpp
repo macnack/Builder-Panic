@@ -6,9 +6,9 @@ Animation::Animation(const sf::Vector2f &pos, const sf::Texture &texture,
     : framerate_(framerate),  texture_(texture)
 {
     this->setPosition(pos);
-    this->setTexture(texture_);
-    //this->setTextureRect(sf::IntRect(0,0,144,28));
-    this->addAnimation(frame,length);
+    textures_.push_back(texture);
+    frames_.push_back(addAnimation(frame,length));
+    this->setTextureRect(frames_[0][0]);
 
 }
 
@@ -16,36 +16,32 @@ Animation::Animation(const sf::Texture &texture, const sf::IntRect &frame,
                      const float &framerate, const int &length)
     : framerate_(framerate),  texture_(texture)
 {
-    this->setTexture(texture_);
-    this->addAnimation(frame,length);
+    textures_.push_back(texture);
+    frames_.push_back(addAnimation(frame,length));
+    this->setTextureRect(frames_[0][0]);
 }
 
 Animation::Animation(const sf::IntRect &frame, const float &framerate, const int &length)
     : framerate_(framerate)
 {
-    this->addAnimation(frame,length);
+    frames_.push_back(addAnimation(frame,length));
+    this->setTextureRect(frames_[0][0]);
 }
 
-void Animation::addAnimation(const sf::IntRect &frame , const int length){
-    {
-        startRect = sf::IntRect(frame.top * frame.width,
-                                frame.top * frame.height,
-                                frame.width,
-                                frame.height);
-        currentRect = startRect;
-        endRect = sf::IntRect(frame.top * frame.width + frame.width * (length -1),
-                              (frame.top) * frame.height,
-                              frame.width,
-                              frame.height);
-        this->setTextureRect(startRect);
-    }
-}
+std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame , const int length){
+    std::vector<sf::IntRect> frames;
+    sf::IntRect startRect = sf::IntRect(frame.top * frame.width,
+                                        frame.top * frame.height,
+                                        frame.width,
+                                        frame.height);
+    frames.push_back(startRect);
+    frames.push_back(startRect);
+    sf::IntRect endRect = sf::IntRect(frame.top * frame.width + frame.width * (length -1),
+                                      (frame.top) * frame.height,
+                                      frame.width,
+                                      frame.height);
+    frames.push_back(endRect);
+    return frames;
 
-std::vector<sf::IntRect> Animation::addAnimation_frame(const sf::IntRect &frame, const int &length){
-    std::vector<sf::IntRect> tmp;
-    for( int i = frame.left ; i <= frame.width * length; i += frame.width){
-        tmp.push_back(sf::IntRect(i,frame.top,frame.width,frame.height));
-    }
-    return tmp;
 }
 

@@ -39,6 +39,7 @@ void Entity::down()
         current_stage += 1;
         next_stage = current_stage;
         grounded = false;
+
     }
 }
 
@@ -57,6 +58,13 @@ void Entity::updateGravity(const float &dt)
 void Entity::updateMovement(const float &dt)
 {
     this->updateGravity(dt);
+    if( velocity.x != 0 ){
+        switcher = 1;
+    }else{
+        switcher = 0;
+    }
+    this->setTexture(textures_[switcher]);
+    this->playAnimation(dt);
     if (velocity.y > 0.f)
     {
         //Max falling velocity check
@@ -79,6 +87,7 @@ void Entity::updateMovement(const float &dt)
     else if (velocity.x < 0.f)
     { //if going left
         //decelaretion
+
         velocity.x += deceleration * dt;
         if (velocity.x > 0.f)
             velocity.x = 0.f;

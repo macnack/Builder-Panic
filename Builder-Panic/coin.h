@@ -47,7 +47,8 @@ public:
         current_stage = rand() % 4;
         this->setPosition(sf::Vector2f(rand() % 700, rand() % 500));
         this->setScale(3, 3);
-        this->setTexture(texture);
+        textures_.push_back(texture);
+        this->setTexture(textures_[0]);
         bound = this->getLocalBounds();
     }
     bool is_collected(Entity &postac)

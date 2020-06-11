@@ -15,9 +15,27 @@ public:
     virtual void change_platform() = 0;
     Entity(const sf::Vector2f &pos, const sf::Texture &texture,
            const sf::IntRect &frame,
-           const float &framerate, const int &length) : Animation(pos, texture, frame, framerate, length)
+           const float &framerate, const int &length) : Animation(frame, framerate, length)
     {
         this->setScale(3.5, 3.5);
+        this->setPosition(pos);
+        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 8));
+        textures_.push_back(texture);
+        sf::Texture run_texture;
+        if (!run_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
+        {
+            throw("Could not load texture 'Engineer Idle'");
+        }
+        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 7));
+        textures_.push_back(run_texture);
+        sf::Texture jump_texture;
+        if (!jump_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
+        {
+            throw("Could not load texture 'Engineer Idle'");
+        }
+        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 7));
+        textures_.push_back(run_texture);
+        this->setTexture(textures_[0]);
     }
     virtual ~Entity() = default;
 
@@ -34,5 +52,6 @@ protected:
     float deceleration = 750.f;
     float maxFallingVelocity = 1500.f;
     float maxVelocity = 250.f;
+
 };
 #endif // ENTITY_H

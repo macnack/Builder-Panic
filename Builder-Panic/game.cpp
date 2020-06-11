@@ -45,8 +45,6 @@ void Game::run()
                 std::cerr << "Press R to reset" << std::endl;
             }
         }
-        gracz->playAnimation(elapsed.asSeconds());
-        //enemy->playAnimation(elapsed.asSeconds());
         for (auto it = coins.begin(); it < coins.end(); it++)
         {
             (*it)->playAnimation(elapsed.asSeconds());
@@ -88,8 +86,8 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     }
     //Animation idles(hero_texture, sf::IntRect(0,0,16,28), 7, 4);
     //          run(..., sf::IntRect(0, 0, 16, 28), 12, 8)
-    gracz = std::make_unique<Player>(sf::Vector2f(100, 250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
-    enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250), run_texture, sf::IntRect(0, 0, 16, 28), 15, 8);
+    gracz = std::make_unique<Player>(sf::Vector2f(100, 250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 8);
+    enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 8);
     for (int x = 160; x <= 460; x += 150)
     {
         std::unique_ptr<Coin> coin = std::make_unique<Coin>(sf::Vector2f(x, 350));
