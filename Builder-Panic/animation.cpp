@@ -1,25 +1,6 @@
 #include "animation.h"
 
 
-Animation::Animation(const sf::Vector2f &pos, const sf::Texture &texture,
-                     const sf::IntRect &frame, const float &framerate, const int &length)
-    : framerate_(framerate),  texture_(texture)
-{
-    this->setPosition(pos);
-    textures_.push_back(texture);
-    frames_.push_back(addAnimation(frame,length));
-    this->setTextureRect(frames_[0][0]);
-
-}
-
-Animation::Animation(const sf::Texture &texture, const sf::IntRect &frame,
-                     const float &framerate, const int &length)
-    : framerate_(framerate),  texture_(texture)
-{
-    textures_.push_back(texture);
-    frames_.push_back(addAnimation(frame,length));
-    this->setTextureRect(frames_[0][0]);
-}
 
 Animation::Animation(const sf::IntRect &frame, const float &framerate, const int &length)
     : framerate_(framerate), frame_(frame)

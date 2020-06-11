@@ -5,12 +5,6 @@
 class Animation : public sf::Sprite
 {
 public:
-    Animation(const sf::Vector2f &pos, const sf::Texture &texture,
-              const sf::IntRect &frame,
-              const float &framerate, const int &length);
-    Animation(const sf::Texture &texture,
-              const sf::IntRect &frame,
-              const float &framerate, const int &length);
     Animation(const sf::IntRect &frame,
               const float &framerate, const int &length);
     virtual ~Animation() = default;
