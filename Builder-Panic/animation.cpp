@@ -22,7 +22,7 @@ Animation::Animation(const sf::Texture &texture, const sf::IntRect &frame,
 }
 
 Animation::Animation(const sf::IntRect &frame, const float &framerate, const int &length)
-    : framerate_(framerate)
+    : framerate_(framerate), frame_(frame)
 {
     frames_.push_back(addAnimation(frame,length));
     this->setTextureRect(frames_[0][0]);

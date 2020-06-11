@@ -5,9 +5,8 @@
 class Player : public Entity
 {
 public:
-    Player(const sf::Vector2f &pos, const sf::Texture &texture,
-           const sf::IntRect &frame, const float &framerate,
-           const int &length) : Entity(pos, texture, frame, framerate, length)
+    Player(const sf::Vector2f &pos, const sf::IntRect &frame, const float &framerate,
+           const int &length) : Entity(pos, frame, framerate, length)
     {
         grounded = true;
     }
