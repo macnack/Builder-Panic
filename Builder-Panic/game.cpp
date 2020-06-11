@@ -9,7 +9,7 @@ void Game::draw()
     //    for(const auto &fl: map["floors"]){
     //        window_.draw(*fl);
     //    }
-    scena->draw(window_);
+    scena.draw();
     for (const auto &el : obj_manager->getBoard())//obj_mangaer->draw(window_)
     {
         for (const auto &v : el.second)
@@ -57,8 +57,8 @@ void Game::run()
             }
         }
 
-        enemy->loop(scena->getVec("floors"), elapsed.asSeconds());
-        gracz->loop(scena->getVec("floors"), elapsed.asSeconds());
+        enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
+        gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
 
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
         { // usun kolory
@@ -82,7 +82,7 @@ void Game::run()
     }
 }
 
-Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Bulding Panic")
+Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Bulding Panic"), scena(&window_)
 {
     sf::Clock clock;
     clock_ = clock;
@@ -97,7 +97,7 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     {
         throw("Could not load texture 'Coin'");
     }
-    scena = std::make_unique<Scena>();
+    //scena = std::make_unique<Scena>(&window_);
     obj_manager = std::make_unique<ObjectManager>(wall_texture);
 //    sf::Texture hero_texture;
 //    if (!hero_texture.loadFromFile("Texture/engineer character/engineer.png"))

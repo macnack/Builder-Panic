@@ -1,6 +1,6 @@
 #include "scena.h"
 
-Scena::Scena(){
+Scena::Scena(sf::RenderWindow *window) : window_(window){
     if (!texture.loadFromFile("Texture/Dungeons Walls.png"))
     {
         throw("Could not load texture 'Dungeons Walls'");
@@ -34,10 +34,10 @@ Scena::Scena(){
     }
 }
 
-void Scena::draw(sf::RenderWindow &window){
+void Scena::draw(){
     for(const auto &el : map){
         for(const auto &v : el.second){
-            window.draw(*v);
+            window_->draw(*v);
         }
     }
 }

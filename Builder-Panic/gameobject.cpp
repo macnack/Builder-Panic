@@ -15,4 +15,3 @@ GameObject::GameObject(const sf::Vector2f &pos, const sf::Texture &texture)
     this->setTexture(texture_);
 }
 
-GameObject::~GameObject() {}

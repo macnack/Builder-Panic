@@ -14,7 +14,7 @@ private:
     sf::RenderWindow window_;
     sf::Event event;
     sf::Clock clock_;
-    std::unique_ptr<Scena> scena;
+    Scena scena;
     std::unique_ptr<Enemy> enemy;
     std::unique_ptr<Player> gracz;
     std::unique_ptr<ObjectManager> obj_manager;
