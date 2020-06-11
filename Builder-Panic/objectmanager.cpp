@@ -16,6 +16,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
         bool reverse = false;
         for (int i = n; i < columns; i++)
         { // to left
+            std::cerr << i << std::endl;
             if (board_[m][i]->getIntColor() == -Intcolor && reverse == false)
             {
                 reverse = true;
@@ -25,8 +26,9 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            else if (n < columns - 1 && board_[m][i + 1]->getIntColor() == Intcolor && reverse == false)
+            else if ( i+1 != columns && board_[m][i + 1]->getIntColor() == Intcolor && reverse == false)
             {
+                std::cerr << "halo" << std::endl;
                 reverse = false;
                 break;
             }
@@ -38,6 +40,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 }
                 break; //or continue?
             }
+
         }
         for (int i = n; i >= 0; i--)
         { // to right
@@ -50,7 +53,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            else if (n != 0 && board_[m][n - 1]->getIntColor() == Intcolor && reverse == false)
+            else if (i-1 > 0 && board_[m][i - 1]->getIntColor() == Intcolor && reverse == false)
             {
                 reverse = false;
                 break;
@@ -230,7 +233,7 @@ void ObjectManager::Paint(const Player &gracz)
         for (auto &bd_el : bd.second)
         {
             if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10)
-                /*&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top+playerBounds.height - 10)*/)
+                    /*&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top+playerBounds.height - 10)*/)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
                 {
@@ -307,20 +310,20 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
         for (int k = 0; k < rows; k++)
         {
             std::unique_ptr<Object> block_ = std::make_unique<Object>(sf::Vector2f(x, y), sf::FloatRect(0, 0, 91, 140), texture);
-                    //    Sceny testowe:
-                    //        wspolrzedne [k][i]
-                    //        scena 1
-                    //        1. lewy  [1][2]
-                    //        2. prawy [2][2]
-                    //        3. lewy  [0][5] : obiekt [2][3] nie powinien zmieniac koloru
-            // if ((k == 1 && i == 3) || (k == 2 && i == 4) || (k == 0 && i == 2))
-            // {
-            //     block_->Paint(Object::Color::Enemy);
-            // }
-            // if ((k == 1 && i == 4) || (k == 2 && i == 3) || (k == 3 && i == 2))
-            // {
-            //     block_->Paint(Object::Color::Player);
-            // }
+            //    Sceny testowe:
+            //        wspolrzedne [k][i]
+            //        scena 1
+            //        1. lewy  [1][2]
+            //        2. prawy [2][2]
+            //        3. lewy  [0][5] : obiekt [2][3] nie powinien zmieniac koloru
+            //             if ((k == 1 && i == 3) || (k == 2 && i == 4) || (k == 0 && i == 2))
+            //             {
+            //                 block_->Paint(Object::Color::Enemy);
+            //             }
+            //             if ((k == 1 && i == 4) || (k == 2 && i == 3) || (k == 3 && i == 2))
+            //             {
+            //                 block_->Paint(Object::Color::Player);
+            //             }
             //scena 2:
             //1. lewy  [2][2]
             //2. prawy [1][5]
