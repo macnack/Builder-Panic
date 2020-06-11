@@ -59,7 +59,7 @@ public:
         }
         return false;
     }
-    ~Coin()
+    virtual ~Coin()
     {
         std::cerr << "Collected coin +" << value << std::endl;
     }
