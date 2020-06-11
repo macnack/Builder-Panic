@@ -19,22 +19,22 @@ public:
     {
         this->setScale(3.5, 3.5);
         this->setPosition(pos);
-        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 8));
+        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 4));
         textures_.push_back(texture);
         sf::Texture run_texture;
         if (!run_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
         {
-            throw("Could not load texture 'Engineer Idle'");
+            throw("Could not load texture 'Engineer Run'");
         }
-        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 7));
+        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 4));
         textures_.push_back(run_texture);
         sf::Texture jump_texture;
-        if (!jump_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
+        if (!jump_texture.loadFromFile("Texture/engineer character/engineer-jump.png"))
         {
-            throw("Could not load texture 'Engineer Idle'");
+            throw("Could not load texture 'Engineer Jump'");
         }
-        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 7));
-        textures_.push_back(run_texture);
+        frames_.push_back(addAnimation(sf::IntRect(0, 0, 16, 28), 2));
+        textures_.push_back(jump_texture);
         this->setTexture(textures_[0]);
     }
     virtual ~Entity() = default;

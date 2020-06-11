@@ -21,13 +21,13 @@ void Entity::jump()
     if (grounded == true && current_stage > 1)
     {
         current_stage -= 1;
-        velocity.y -= 1000;
         next_stage = current_stage;
         stage_down = false;
     }
-    else if (grounded)
+    if (grounded)
     {
-        velocity.y -= 1000;
+        velocity.y -= 850;
+        switcher = 2;
     }
 }
 
@@ -35,11 +35,11 @@ void Entity::down()
 {
     if (stage_down == true && current_stage < 4)
     {
-        velocity.y += 1000;
+        velocity.y += 200;
         current_stage += 1;
         next_stage = current_stage;
         grounded = false;
-
+        switcher = 2;
     }
 }
 
@@ -58,17 +58,13 @@ void Entity::updateGravity(const float &dt)
 void Entity::updateMovement(const float &dt)
 {
     this->updateGravity(dt);
-    if( velocity.x != 0 ){
+    if(velocity.x != 0){
         switcher = 1;
-    }else{
-        switcher = 0;
     }
-    this->setTexture(textures_[switcher]);
-    this->playAnimation(dt);
     if (velocity.y > 0.f)
     {
         //Max falling velocity check
-        //velocity.y -= 1/5.f * gravity * dt; // for coin
+        velocity.y -= 1/5.f * gravity * dt; // for coin
         if (velocity.y > maxFallingVelocity)
         {
             velocity.y = maxFallingVelocity;
@@ -95,6 +91,8 @@ void Entity::updateMovement(const float &dt)
         if (velocity.x < -maxVelocity)
             velocity.x = -maxVelocity;
     }
+    this->setTexture(textures_[switcher]);
+    this->playAnimation(dt);
     this->move(velocity * dt);
 }
 
@@ -115,6 +113,7 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
             this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
             grounded = true;
             stage_down = true;
+            switcher = 0;
         }
     }
     if (playerBounds.top + playerBounds.height > 800)
