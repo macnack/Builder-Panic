@@ -5,8 +5,7 @@
 class Player : public Entity
 {
 public:
-    Player(const sf::Vector2f &pos, const sf::IntRect &frame, const float &framerate,
-           const int &length) : Entity(pos, frame, framerate, length)
+    Player(const sf::Vector2f &pos) : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 9, 8, 3)
     {
         grounded = true;
     }

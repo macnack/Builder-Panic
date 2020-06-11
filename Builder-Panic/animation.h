@@ -7,6 +7,8 @@ class Animation : public sf::Sprite
 public:
     Animation(const sf::IntRect &frame,
               const float &framerate, const int &length);
+    Animation(const sf::IntRect &frame,
+              const float &framerate);
     virtual ~Animation() = default;
     std::vector<sf::IntRect> addAnimation(const sf::IntRect &frame,const int length);
     void playAnimation(const float &dt){

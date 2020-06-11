@@ -5,8 +5,7 @@
 class Enemy : public Entity
 {
 public:
-    Enemy(const sf::Vector2f &pos, const sf::IntRect &frame, const float &framerate,
-          const int &length) : Entity(pos, frame, framerate, length)
+    Enemy(const sf::Vector2f &pos) : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 9, 8, 2)
     {
         grounded = true;
         rando = rand() % 3 - 1;

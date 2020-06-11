@@ -9,6 +9,12 @@ Animation::Animation(const sf::IntRect &frame, const float &framerate, const int
     this->setTextureRect(frames_[0][0]);
 }
 
+Animation::Animation(const sf::IntRect &frame, const float &framerate)
+    : framerate_(framerate), frame_(frame)
+{
+
+}
+
 std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame , const int length){
     std::vector<sf::IntRect> frames;
     sf::IntRect startRect = sf::IntRect(frame.top * frame.width,
