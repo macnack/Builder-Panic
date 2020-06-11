@@ -10,13 +10,7 @@ void Game::draw()
     //        window_.draw(*fl);
     //    }
     scena.draw();
-    for (const auto &el : obj_manager->getBoard())//obj_mangaer->draw(window_)
-    {
-        for (const auto &v : el.second)
-        {
-            window_.draw(*v.second);
-        }
-    }
+    obj_manager->draw();
     for(const auto &c: coins){
         window_.draw(*c);
     }
@@ -86,19 +80,12 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
 {
     sf::Clock clock;
     clock_ = clock;
-    sf::Texture wall_texture;
-    if (!wall_texture.loadFromFile("Texture/Dungeons Walls.png"))
-    {
-        throw("Could not load texture 'Dungeons Walls'");
-    }
-    wall_texture.setRepeated(true);
     sf::Texture coin_texture;
     if (!coin_texture.loadFromFile("Texture/MonedaD.png"))
     {
         throw("Could not load texture 'Coin'");
     }
-    //scena = std::make_unique<Scena>(&window_);
-    obj_manager = std::make_unique<ObjectManager>(wall_texture);
+    obj_manager = std::make_unique<ObjectManager>(&window_);
 //    sf::Texture hero_texture;
 //    if (!hero_texture.loadFromFile("Texture/engineer character/engineer.png"))
 //    {

@@ -213,7 +213,23 @@ bool ObjectManager::full_board(){
     return true;
 }
 
-ObjectManager::ObjectManager(const sf::Texture &texture){
+void ObjectManager::draw()
+{
+    for (const auto &el : board_)//obj_mangaer->draw(window_)
+    {
+        for (const auto &v : el.second)
+        {
+            window_->draw(*v.second);
+        }
+    }
+}
+
+ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window){
+    if (!texture.loadFromFile("Texture/Dungeons Walls.png"))
+    {
+        throw("Could not load texture 'Dungeons Walls'");
+    }
+    texture.setRepeated(true);
     for(int i = 0 ; i < 8; i++){
         for(int k =0; k < 4; k++){
             std::unique_ptr<Object> block_ = std::make_unique<Object>
