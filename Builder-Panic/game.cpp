@@ -52,10 +52,6 @@ void Game::run()
             obj_manager.reset();
             obj_manager = std::make_unique<ObjectManager>(&window_);
         }
-        if (obj_manager->full_board())
-        {
-            std::cerr << "koniec" << std::endl;
-        }
         window_.clear(sf::Color::Black);
         this->draw();
 
@@ -67,11 +63,6 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
 {
     sf::Clock clock;
     clock_ = clock;
-    sf::Texture coin_texture;
-    if (!coin_texture.loadFromFile("Texture/MonedaD.png"))
-    {
-        throw("Could not load texture 'Coin'");
-    }
     obj_manager = std::make_unique<ObjectManager>(&window_);
 //    sf::Texture hero_texture;
 //    if (!hero_texture.loadFromFile("Texture/engineer character/engineer.png"))
@@ -87,8 +78,8 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     //          run(..., sf::IntRect(0, 0, 16, 28), 12, 8)
     gracz = std::make_unique<Player>(sf::Vector2f(100,250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
     enemy = std::make_unique<Enemy>(sf::Vector2f(100,250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
-    for(int x = 150; x < 800 ; x+=150){
-        std::unique_ptr<Coin> coin = std::make_unique<Coin>(sf::Vector2f(x, 350), coin_texture, sf::IntRect(0, 0, 16, 16), 7, 4);
+    for(int x = 160; x < 800 ; x+=150){
+        std::unique_ptr<Coin> coin = std::make_unique<Coin>(sf::Vector2f(x, 350));
         coins.push_back(std::move(coin));
     }
     /* Przeniesione konstrukcja  objectmanager */

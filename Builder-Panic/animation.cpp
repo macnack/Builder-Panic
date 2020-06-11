@@ -20,6 +20,12 @@ Animation::Animation(const sf::Texture &texture, const sf::IntRect &frame,
     this->addAnimation(frame,length);
 }
 
+Animation::Animation(const sf::IntRect &frame, const float &framerate, const int &length)
+    : framerate_(framerate)
+{
+    this->addAnimation(frame,length);
+}
+
 void Animation::addAnimation(const sf::IntRect &frame , const int length){
     {
         startRect = sf::IntRect(frame.top * frame.width,

@@ -11,6 +11,8 @@ public:
     Animation(const sf::Texture &texture,
               const sf::IntRect &frame,
               const float &framerate, const int &length);
+    Animation(const sf::IntRect &frame,
+              const float &framerate, const int &length);
     virtual ~Animation() = default;
     void addAnimation(const sf::IntRect &frame,const int length);
     void addAnimation_moves(const sf::Texture &texture,const sf::IntRect &frame, const int &length){
