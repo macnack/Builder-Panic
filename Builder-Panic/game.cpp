@@ -91,13 +91,13 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     {
         throw("Could not load texture 'Dungeons Walls'");
     }
+    wall_texture.setRepeated(true);
     sf::Texture coin_texture;
     if (!coin_texture.loadFromFile("Texture/MonedaD.png"))
     {
         throw("Could not load texture 'Coin'");
     }
-    wall_texture.setRepeated(true);
-    scena = std::make_unique<Scena>(wall_texture);
+    scena = std::make_unique<Scena>();
     obj_manager = std::make_unique<ObjectManager>(wall_texture);
 //    sf::Texture hero_texture;
 //    if (!hero_texture.loadFromFile("Texture/engineer character/engineer.png"))
