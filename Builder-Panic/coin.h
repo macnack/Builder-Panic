@@ -5,13 +5,6 @@
 class Coin : public Animation
 {
 public:
-    //    Coin(const sf::Vector2f &pos, const sf::Texture &texture,
-    //         const sf::IntRect &frame,
-    //         const float &framerate, const int &length): Animation(pos, texture,frame,framerate, length){
-    //        value = 100;
-    //        this->setScale(3,3);
-    //        bound = this->getLocalBounds();
-    //    } // old constructor to rm
     void random_coin(const int &x)
     {
         if (x < 9)

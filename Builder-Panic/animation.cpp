@@ -45,24 +45,7 @@ std::vector<sf::IntRect> Animation::addAnimation_frame(const sf::IntRect &frame,
     std::vector<sf::IntRect> tmp;
     for( int i = frame.left ; i <= frame.width * length; i += frame.width){
         tmp.push_back(sf::IntRect(i,frame.top,frame.width,frame.height));
-    };
-    return tmp;
-}
-
-void Animation::playAnimation(const float &dt){
-    timer += dt;
-    if (timer > 1 / framerate_)
-    {
-        timer = 0.f;
-        if (currentRect != endRect)
-        {
-            currentRect.left += startRect.width;
-        }
-        else
-        {
-            currentRect = startRect;
-        }
-        this->setTextureRect(currentRect);
     }
+    return tmp;
 }
 

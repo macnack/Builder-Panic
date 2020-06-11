@@ -28,45 +28,20 @@ public:
         }
     }
     std::vector<sf::IntRect> addAnimation_frame(const sf::IntRect &frame, const int &length);//rm
-    void playAnimation(const float &dt);
-    void playAnimation_idle(const float &dt){
+    void playAnimation(const float &dt){
         timer += dt;
-        for(unsigned int i = 0; i < move_frames.size(); i++){
-            if( timer > 1.0f){
-                timer = 0.0f;
+        if (timer > 1 / framerate_)
+        {
+            timer = 0.f;
+            if (currentRect != endRect)
+            {
+                currentRect.left += startRect.width;
             }
-            if(timer >= i- move_frames.size()/10.0*i){
-                this->setTextureRect(move_frames[i]);
+            else
+            {
+                currentRect = startRect;
             }
-        }
-    }
-    void playAnimation_move(const float &dt){
-        timer += dt;
-        for(unsigned int i = 0; i < move_frames.size(); i++){
-            if( timer > 1.0f){
-                timer = 0.0f;
-            }
-            if(timer >= i- move_frames.size()/10.0*i){
-                this->setTextureRect(move_frames[i]);
-            }
-            if(timer > move_frames.size()/10.0){
-                timer = 0.3f;
-            }
-        }
-    }
-    void playAnimation_jump(const float &dt){
-        timer += dt;
-        this->setTexture(jump_texture);
-        for(unsigned int i = 0; i < jump_frames.size(); i++){
-            if( timer > 1.0f){
-                timer = 0.0f;
-            }
-            if(timer >= i- jump_frames.size()/10.0*i){
-                this->setTextureRect(jump_frames[i]);
-            }
-            if(timer > jump_frames.size()/10.0){
-                timer = 0.3f;
-            }
+            this->setTextureRect(currentRect);
         }
     }
 

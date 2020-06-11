@@ -30,9 +30,9 @@ protected:
     int next_stage = current_stage;
     sf::Vector2f velocity;
     float gravity = 2000;
-    float acceleration = 4800.f;
-    float deceleration = 1500;
+    float acceleration = 2400.f;
+    float deceleration = 750.f;
     float maxFallingVelocity = 1500.f;
-    float maxVelocity = 500.f;
+    float maxVelocity = 250.f;
 };
 #endif // ENTITY_H

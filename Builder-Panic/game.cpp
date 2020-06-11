@@ -46,7 +46,7 @@ void Game::run()
             }
         }
         gracz->playAnimation(elapsed.asSeconds());
-        enemy->playAnimation(elapsed.asSeconds());
+        //enemy->playAnimation(elapsed.asSeconds());
         for (auto it = coins.begin(); it < coins.end(); it++)
         {
             (*it)->playAnimation(elapsed.asSeconds());
@@ -70,10 +70,8 @@ void Game::run()
 
 Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Bulding Panic"), scena(&window_)
 {
-    sf::Clock clock;
-    clock_ = clock;
     obj_manager = std::make_unique<ObjectManager>(&window_);
-    //    sf::Texture hero_texture;
+    //sf::Texture hero_texture;
     //    if (!hero_texture.loadFromFile("Texture/engineer character/engineer.png"))
     //    {
     //        throw("Could not load texture 'Engineer Idle'");
@@ -83,50 +81,18 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     {
         throw("Could not load texture 'Engineer Idle'");
     }
+    sf::Texture run_texture;
+    if (!run_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
+    {
+        throw("Could not load texture 'Engineer Idle'");
+    }
     //Animation idles(hero_texture, sf::IntRect(0,0,16,28), 7, 4);
     //          run(..., sf::IntRect(0, 0, 16, 28), 12, 8)
     gracz = std::make_unique<Player>(sf::Vector2f(100, 250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
-    enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250), indle_texture, sf::IntRect(0, 0, 16, 28), 14, 9);
+    enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250), run_texture, sf::IntRect(0, 0, 16, 28), 15, 8);
     for (int x = 160; x <= 460; x += 150)
     {
         std::unique_ptr<Coin> coin = std::make_unique<Coin>(sf::Vector2f(x, 350));
         coins.push_back(std::move(coin));
-    }
-    /* Przeniesione konstrukcja do Objectmanager() */
-    {
-        //    double x = 0.f;
-        //    double y = 10.f;
-        //    for(int i = 0 ; i < 8; i++){
-        //        for(int k =0; k < 4; k++){
-        //            std::unique_ptr<Object> block_ = std::make_unique<Object>
-        //                    (sf::Vector2f(x,y),sf::FloatRect(0,0,91,140),wall_texture);
-        //            //Sceny testowe:
-        //            //wspolrzedne [k][i]
-        //            //scena 1
-        //            //1. lewy  [1][2]
-        //            //2. prawy [2][2]
-        //            //3. lewy  [0][5] : obiekt [2][3] nie powinien zmieniac koloru
-        //            //            if( (k == 1 && i == 3) || (k == 2 && i == 4) || ( k == 0 && i == 2)){
-        //            //                block_->Paint(Object::Color::Enemy);
-        //            //            }
-        //            //            if( (k == 1 && i == 4) || (k == 2 && i == 3) || ( k == 3 && i == 2)){
-        //            //                block_->Paint(Object::Color::Player);
-        //            //            }
-        //            //scena 2:
-        //            //1. lewy  [2][2]
-        //            //2. prawy [1][5]
-        //            //3. prawy [1][6] : obiekt [1][2] nie powinien zmieniac koloru
-        //            //            if( (k == 0 && i == 2) || ( k == 1 && (i == 0 || i == 4 ))){
-        //            //                block_->Paint(Object::Color::Player);
-        //            //            }
-        //            //            if( k==1 && ( i == 1 || i == 2 || i == 3)){
-        //            //                block_->Paint(Object::Color::Enemy);
-        //            //            }
-        //            obj_manager.add(k,i,std::move(block_));
-        //            y += 150;
-        //        }
-        //        x += 101.25;
-        //        y = 10.0;
-        //    }
     }
 }
