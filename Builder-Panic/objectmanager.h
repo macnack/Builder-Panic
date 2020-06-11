@@ -9,6 +9,8 @@ class ObjectManager
 {
 private:
     float points;
+    int columns = 8;
+    int rows = 4;
     double x = 0.f;
     double y = 10.f;
     sf::Texture texture;

@@ -11,11 +11,15 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
     if(board_[m][n]->can_change()){
         board_[m][n]->Paint(color);
         bool reverse = false;
-        for(int i = n; i < 8 ; i++){ // to left
+        for(int i = n; i < columns ; i++){ // to left
             if(board_[m][i]->getIntColor() == -Intcolor && reverse == false){
                 reverse = true;
             }
             else if(board_[m][i]->getIntColor() == 0){
+                reverse = false;
+                break;
+            }
+            else if(n < columns - 1 && board_[m][i + 1]->getIntColor() == Intcolor && reverse == false){
                 reverse = false;
                 break;
             }
@@ -31,6 +35,10 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = true;
             }
             else if(board_[m][i]->getIntColor() == 0){
+                reverse = false;
+                break;
+            }
+            else if(n != 0 && board_[m][n - 1]->getIntColor() == Intcolor && reverse == false){
                 reverse = false;
                 break;
             }
@@ -58,7 +66,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for(int i = m; i < 4 ; i++){ // down
+        for(int i = m; i < rows ; i++){ // down
             if(board_[i][n]->getIntColor() == -Intcolor && reverse == false){
                 reverse = true;
             }
@@ -74,7 +82,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for(int i = m, j = n; i < 4 && j < 8 ;j++ && i++){ // \ from r to l
+        for(int i = m, j = n; i < rows && j < columns ;j++ && i++){ // \ from r to l
             if( board_[i][j]->getIntColor() == -Intcolor && reverse == false){
                 reverse = true;
             }
@@ -106,7 +114,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for(int i = m, j = n; i < 4 && j >= 0 ;j-- && i++){ // / left to right
+        for(int i = m, j = n; i < rows && j >= 0 ;j-- && i++){ // / left to right
             if( board_[i][j]->getIntColor() == -Intcolor && reverse == false){
                 reverse = true;
             }
@@ -122,7 +130,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for(int i = m, j = n; i >= 0 && j < 8 ;j++ && i--){ // / left to right
+        for(int i = m, j = n; i >= 0 && j < columns ;j++ && i--){ // / left to right
             if( board_[i][j]->getIntColor() == -Intcolor && reverse == false){
                 reverse = true;
             }
@@ -168,7 +176,7 @@ void ObjectManager::Paint(const Player &gracz)
         int m = bd.first;
         for(auto &bd_el : bd.second){
             if(bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width/2.0, playerBounds.top+playerBounds.height - 10)
-/*&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top+playerBounds.height - 10)*/){
+                    /*&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top+playerBounds.height - 10)*/){
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
                     int n = bd_el.first;
                     this->Reverse(m, n, Object::Color::Player );
@@ -227,8 +235,8 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window){
         throw("Could not load texture 'Dungeons Walls'");
     }
     texture.setRepeated(true);
-    for(int i = 0 ; i < 8; i++){
-        for(int k =0; k < 4; k++){
+    for(int i = 0 ; i < columns; i++){
+        for(int k = 0 ; k < rows; k++){
             std::unique_ptr<Object> block_ = std::make_unique<Object>
                     (sf::Vector2f(x,y),sf::FloatRect(0,0,91,140),texture);
             //Sceny testowe:
@@ -258,5 +266,11 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window){
         }
         x += 101.25;
         y = 10.0;
+    }
+    for(auto &m : board_){
+        std::cerr << "m: " << m.first ;
+        for(auto &k : m.second){
+            std::cerr << " n: " << k.first << std::endl;
+        }
     }
 }
