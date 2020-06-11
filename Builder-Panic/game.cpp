@@ -39,8 +39,9 @@ void Game::run()
         for(auto it = coins.begin(); it < coins.end() ; it++ ){
             (*it)->playAnimation(elapsed.asSeconds());
             if((*it)->is_collected(*gracz) || (*it)->is_collected(*enemy)){
-                std::cerr << "Collected coin +50" << std::endl;
                 coins.erase(it);
+                std::unique_ptr<Coin> coin = std::make_unique<Coin>();
+                coins.push_back(std::move(coin));
             }
         }
 
