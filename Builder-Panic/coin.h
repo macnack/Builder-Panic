@@ -1,8 +1,8 @@
 #ifndef COIN_H
 #define COIN_H
 
-#include "player.h"
-#include "scena.h"
+#include "hero.h"
+
 
 class Coin : public Entity
 {
@@ -11,7 +11,7 @@ public:
     {
         bounce = true;
     }
-    bool is_collected(const Player &gracz);
+    bool is_collected(const Hero &gracz);
     virtual ~Coin()
     {
         std::cerr << "Collected coin +" << std::endl;

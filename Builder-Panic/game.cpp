@@ -8,8 +8,8 @@ void Game::draw()
     {
         window_.draw(*c);
     }
-    window_.draw(*gracz); //gracz->draw()
-    //window_.draw(*enemy); //-||-
+    window_.draw(*gracz);
+    window_.draw(*enemy);
 }
 void Game::run()
 {
@@ -30,9 +30,9 @@ void Game::run()
             if (event.type == sf::Event::KeyPressed)
             {
                 gracz->change_platform();
-                //enemy->change_platform();
+                enemy->change_platform();
                 obj_manager->Paint(*gracz);
-                //obj_manager->Paint(*enemy);
+                obj_manager->Paint(*enemy);
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
                 { // reset plansz
                     obj_manager.reset();
@@ -48,14 +48,14 @@ void Game::run()
         for (auto it = coins.begin(); it < coins.end(); it++)
         {
             (*it)->loop(scena.getVec("floors"), elapsed.asSeconds());
-            if ((*it)->is_collected(*gracz) /*|| (*it)->is_collected(*enemy)*/)
+            if ((*it)->is_collected(*gracz) || (*it)->is_collected(*enemy))
             {
                 coins.erase(it);
                 std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
                 coins.push_back(std::move(coin));
             }
         }
-        //enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
+        enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
         window_.clear(sf::Color::Black);
         this->draw();
@@ -67,8 +67,8 @@ void Game::run()
 Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Bulding Panic"), scena(&window_)
 {
     obj_manager = std::make_unique<ObjectManager>(&window_);
-    gracz = std::make_unique<Player>(sf::Vector2f(100, 250),14);
-    //enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250),14);
+    gracz = std::make_unique<Player>(sf::Vector2f(100, 250));
+    enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250));
     for (int x = 160; x <= 460; x += 150)
     {
         std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));

@@ -224,7 +224,7 @@ void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event
     }
 }
 //&& bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width,playerBounds.top+playerBounds.height)
-void ObjectManager::Paint(const Player &gracz)
+void ObjectManager::Paint(const Hero &gracz)
 {
     sf::FloatRect playerBounds = gracz.getGlobalBounds();
     for (auto &bd : board_)
@@ -245,25 +245,25 @@ void ObjectManager::Paint(const Player &gracz)
     }
 }
 
-//void ObjectManager::Paint(const Enemy &enemy)
-//{
-//    sf::FloatRect playerBounds = enemy.getGlobalBounds();
-//    for (auto &bd : board_)
-//    {
-//        int m = bd.first;
-//        for (auto &bd_el : bd.second)
-//        {
-//            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10) && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
-//            {
-//                if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
-//                {
-//                    int n = bd_el.first;
-//                    this->Reverse(m, n, Object::Color::Enemy);
-//                }
-//            }
-//        }
-//    }
-//}
+void ObjectManager::Paint(const Enemy &enemy)
+{
+    sf::FloatRect playerBounds = enemy.getGlobalBounds();
+    for (auto &bd : board_)
+    {
+        int m = bd.first;
+        for (auto &bd_el : bd.second)
+        {
+            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10) && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
+            {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
+                {
+                    int n = bd_el.first;
+                    this->Reverse(m, n, Object::Color::Enemy);
+                }
+            }
+        }
+    }
+}
 
 bool ObjectManager::full_board()
 {
