@@ -18,6 +18,7 @@ bool Coin::is_collected(Hero &gracz)
 
 void Coin::loop(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const float &dt){
     this->updateCollisions(platforms, dt);
+    this->setTexture(textures_[switcher]);
     this->playAnimation(dt);
 }
 

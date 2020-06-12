@@ -119,7 +119,7 @@ protected:
     float acceleration = 2400.f;
     float deceleration = 750.f;
     float maxFallingVelocity = 1500.f;
-    float maxVelocity = 250.f;
+    float maxVelocity = 550.f;
 
 };
 
