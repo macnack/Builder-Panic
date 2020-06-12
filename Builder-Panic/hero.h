@@ -6,16 +6,6 @@
 class Hero : public Entity
 {
 public:
-    Hero(const sf::Vector2f &pos) : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 9, 8, 3)//docelowy konsturkor
-    {
-        grounded = true;
-        bounce = false;
-    }
-    Hero(const sf::Vector2f &pos, const int &framerate)
-        : Entity(pos, sf::IntRect(0, 0, 16, 28), framerate)
-    {
-        grounded = true;
-    }
     void moveSprite(const sf::Vector2f &dir, const float &dt)
     {
         //incrasing speed in the inputed dirction
@@ -23,7 +13,12 @@ public:
     }
     virtual void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt) = 0;
     virtual void change_platform() = 0;
+    Hero(const sf::Vector2f &pos);
     virtual ~Hero() = default;
+    float addScore(const float &value);
+    float getScore();
+private:
+    float score = 1000;
 protected:
     void down(){
         if (stage_down == true && current_stage < 4)
@@ -44,7 +39,7 @@ protected:
         }
         if (grounded)
         {
-            velocity.y -= 850;
+            velocity.y -= 250;
             switcher = 2;
         }
     }

@@ -9,8 +9,9 @@ public:
     void updateGravity(const float &dt);
     void updateMovement(const float &dt);
     void updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
-    Entity(const sf::Vector2f &pos, const sf::IntRect &frame,
-           const float &framerate, const int &len_idle, const int &len_move, const int &len_jump) : Animation(frame, framerate)
+    Entity(const sf::Vector2f &pos, const sf::IntRect &frame, const float &framerate,
+           const int &len_idle, const int &len_move, const int &len_jump)
+        : Animation(frame, framerate)
     {
         this->setScale(3.5, 3.5);
         this->setPosition(pos);
@@ -37,6 +38,7 @@ public:
         textures_.push_back(jump_texture);
         this->setTexture(textures_[0]);
     }
+    //not in usse
     Entity(const sf::Vector2f &pos, const sf::IntRect &frame,
            const float &framerate) : Animation(frame, framerate)
     {
@@ -73,22 +75,25 @@ public:
         {
             if (!texture.loadFromFile("Texture/MonedaR.png"))
             {
-                throw("Could not load texture 'Coin'");
+                throw("Could not load texture 'CoinR'");
             }
+            value = 25;
         }
-        else if (x >= 9 && x < 13)
+        else if (x >= 9 && x <= 13)
         {
             if (!texture.loadFromFile("Texture/MonedaP.png"))
             {
-                throw("Could not load texture 'Coin'");
+                throw("Could not load texture 'CoinP'");
             }
+            value = 50;
         }
         else
         {
             if (!texture.loadFromFile("Texture/MonedaD.png"))
             {
-                throw("Could not load texture 'Coin'");
+                throw("Could not load texture 'CoinD'");
             }
+            value = 100;
         }
         textures_.push_back(texture);
         this->setTexture(texture);
@@ -103,7 +108,7 @@ public:
     }
     virtual ~Entity() = default;
 protected:
-
+    int value;
     bool bounce = false;
     bool stage_down = false;
     bool grounded = false;

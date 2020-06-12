@@ -1,7 +1,7 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 #include "gameobject.h"
-//bosz ale bajzel
+
 class Animation : public sf::Sprite
 {
 public:

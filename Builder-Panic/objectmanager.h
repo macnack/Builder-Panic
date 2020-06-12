@@ -1,10 +1,7 @@
 #ifndef OBJECTMANAGER_H
 #define OBJECTMANAGER_H
-#include "object.h"
-#include "player.h"
 #include "enemy.h"
-#include "coin.h"
-class Game;
+
 class ObjectManager
 {
 private:
@@ -20,10 +17,27 @@ private:
     std::map<int, std::map<int, std::unique_ptr<Object>>> board_;
 
 public:
+    void addScore(Player &gracz, Enemy &enemy){
+        for (const auto &el : board_)
+        {
+
+            for (const auto &v : el.second)
+            {
+                if (v.second->getColor() == gracz.getColor() )
+                {
+                    gracz.addScore(150);
+                }
+                if (v.second->getColor() == gracz.getColor() )
+                {
+                    enemy.addScore(150);
+                }
+            }
+        }
+    }
     const std::map<int, std::map<int, std::unique_ptr<Object>>> &getBoard();
-    void Paint(const Hero &gracz);
+    void Paint(Player &gracz);
+    void Paint(Enemy &enemy);
     void Paint(const sf::RenderWindow &window, const sf::Event &event); //inspekt
-    void Paint(const Enemy &enemy);
     bool full_board();
     void draw();
     ObjectManager(sf::RenderWindow *window);

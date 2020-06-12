@@ -16,7 +16,6 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
         bool reverse = false;
         for (int i = n; i < columns; i++)
         { // to left
-            std::cerr << i << std::endl;
             if (board_[m][i]->getIntColor() == -Intcolor && reverse == false)
             {
                 reverse = true;
@@ -28,7 +27,6 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
             else if ( i+1 != columns && board_[m][i + 1]->getIntColor() == Intcolor && reverse == false)
             {
-                std::cerr << "halo" << std::endl;
                 reverse = false;
                 break;
             }
@@ -223,8 +221,7 @@ void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event
         }
     }
 }
-//&& bd_el.second->getGlobalBounds().contains(playerBounds.left+playerBounds.width,playerBounds.top+playerBounds.height)
-void ObjectManager::Paint(const Hero &gracz)
+void ObjectManager::Paint(Player &gracz)
 {
     sf::FloatRect playerBounds = gracz.getGlobalBounds();
     for (auto &bd : board_)
@@ -238,14 +235,14 @@ void ObjectManager::Paint(const Hero &gracz)
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
                 {
                     int n = bd_el.first;
-                    this->Reverse(m, n, Object::Color::Player);
+                    this->Reverse(m, n, gracz.getColor());
                 }
             }
         }
     }
 }
 
-void ObjectManager::Paint(const Enemy &enemy)
+void ObjectManager::Paint(Enemy &enemy)
 {
     sf::FloatRect playerBounds = enemy.getGlobalBounds();
     for (auto &bd : board_)
@@ -258,7 +255,7 @@ void ObjectManager::Paint(const Enemy &enemy)
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
                 {
                     int n = bd_el.first;
-                    this->Reverse(m, n, Object::Color::Enemy);
+                    this->Reverse(m, n, enemy.getColor());
                 }
             }
         }
@@ -267,22 +264,23 @@ void ObjectManager::Paint(const Enemy &enemy)
 
 bool ObjectManager::full_board()
 {
-    bool is_full = false;
+    bool is_full = true;
     for (const auto &el : board_)
     {
+
         for (const auto &v : el.second)
         {
             if (v.second->getIntColor() == 0)
             {
-                is_full = true;
+                is_full = false;
             }
         }
     }
     if (is_full)
     {
-        return false;
+        return true;
     }
-    return true;
+    return false;
 }
 
 void ObjectManager::draw()
@@ -309,33 +307,7 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
     {
         for (int k = 0; k < rows; k++)
         {
-            std::unique_ptr<Object> block_ = std::make_unique<Object>(sf::Vector2f(x, y), sf::FloatRect(0, 0, 91, 140), texture);
-            //    Sceny testowe:
-            //        wspolrzedne [k][i]
-            //        scena 1
-            //        1. lewy  [1][2]
-            //        2. prawy [2][2]
-            //        3. lewy  [0][5] : obiekt [2][3] nie powinien zmieniac koloru
-            //             if ((k == 1 && i == 3) || (k == 2 && i == 4) || (k == 0 && i == 2))
-            //             {
-            //                 block_->Paint(Object::Color::Enemy);
-            //             }
-            //             if ((k == 1 && i == 4) || (k == 2 && i == 3) || (k == 3 && i == 2))
-            //             {
-            //                 block_->Paint(Object::Color::Player);
-            //             }
-            //scena 2:
-            //1. lewy  [2][2]
-            //2. prawy [1][5]
-            // //3. prawy [1][6] : obiekt [1][2] nie powinien zmieniac koloru
-            // if ((k == 0 && i == 2) || (k == 1 && (i == 0 || i == 4)))
-            // {
-            //     block_->Paint(Object::Color::Player);
-            // }
-            // if (k == 1 && (i == 1 || i == 2 || i == 3))
-            // {
-            //     block_->Paint(Object::Color::Enemy);
-            // }
+            std::unique_ptr<Object> block_ = std::make_unique<Object>(sf::Vector2f(x, y), texture);
             this->add(k, i, std::move(block_));
             y += 150;
         }

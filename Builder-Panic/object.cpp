@@ -1,7 +1,7 @@
 #include "object.h"
 
-Object::Object(const sf::Vector2f &pos, const sf::FloatRect &rect, const sf::Texture &texture)
-    : GameObject(pos, rect, texture)
+Object::Object(const sf::Vector2f &pos, const sf::Texture &texture)
+    : GameObject(pos, sf::FloatRect(0, 0, 91, 140), texture)
 {
     color_ = Color::Default;
     fill_ = Fill::one_third;
@@ -27,7 +27,6 @@ void Object::SetFill()
         fill_ = Fill::full_full;
         break;
     case Object::Fill::full_full:
-        std::cerr << "Can't change color" << std::endl; // do usuniecia!!
         can_change_color = false;
         break;
     }
@@ -66,4 +65,12 @@ int Object::getIntColor()
         return 1;
     }
     return 0;
+}
+
+const Object::Color &Object::getColor(){
+    return color_;
+}
+
+const Object::Fill &Object::getFill(){
+    return fill_;
 }
