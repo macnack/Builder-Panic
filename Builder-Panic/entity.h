@@ -65,9 +65,8 @@ public:
         textures_.push_back(jump_texture);
         this->setTexture(textures_[0]);
     }
-    Entity(const int &x, const sf::IntRect &frame,
+    Entity(const std::vector<std::unique_ptr<sf::Sprite>> &platforms,const int &x, const sf::IntRect &frame,
            const float &framerate, const float &lenght) :   Animation(frame, framerate, lenght){
-        this->setPosition(sf::Vector2f(rand() % 700, rand() % 500));
         this->setScale(3, 3);
         sf::Texture texture;
         if (x < 9)
@@ -93,6 +92,14 @@ public:
         }
         textures_.push_back(texture);
         this->setTexture(texture);
+        this->setPosition(sf::Vector2f(rand() % 700, rand() % 550));
+        current_stage = setBounds(platforms);
+        next_stage = current_stage;
+        for(auto &pl : platforms){
+            while(pl->getGlobalBounds().intersects(this->getGlobalBounds()) ){
+                this->setPosition(sf::Vector2f(rand() % 700, rand() % 550));
+            }
+        }
     }
     virtual ~Entity() = default;
 protected:

@@ -7,7 +7,7 @@
 class Coin : public Entity
 {
 public:
-    Coin() : Entity(rand() % 15,sf::IntRect(0, 0, 16, 16), 7, 4)
+    Coin(const std::vector<std::unique_ptr<sf::Sprite>> &platforms) : Entity(platforms,rand() % 15,sf::IntRect(0, 0, 16, 16), 7, 4)
     {
         bounce = true;
     }
@@ -21,7 +21,6 @@ public:
         this->playAnimation(dt);
     }
 private:
-    std::vector<std::unique_ptr<sf::Sprite>> platforms;
     int value;
 
 };

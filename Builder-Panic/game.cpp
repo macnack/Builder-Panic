@@ -51,7 +51,7 @@ void Game::run()
             if ((*it)->is_collected(*gracz) /*|| (*it)->is_collected(*enemy)*/)
             {
                 coins.erase(it);
-                std::unique_ptr<Coin> coin = std::make_unique<Coin>();
+                std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
                 coins.push_back(std::move(coin));
             }
         }
@@ -71,7 +71,7 @@ Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Buldi
     //enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250),14);
     for (int x = 160; x <= 460; x += 150)
     {
-        std::unique_ptr<Coin> coin = std::make_unique<Coin>();
+        std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
         coins.push_back(std::move(coin));
     }
 }

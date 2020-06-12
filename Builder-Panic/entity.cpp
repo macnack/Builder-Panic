@@ -75,6 +75,9 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
     playerBoundsNext.top = getPosition().y + velocity.y * dt;
     current_stage = setBounds(platforms);
     sf::FloatRect next_stagePlatformBounds = platforms[next_stage]->getGlobalBounds();
+    if(bounce){
+        next_stagePlatformBounds = platforms[current_stage]->getGlobalBounds();
+    }
     if (next_stagePlatformBounds.intersects(playerBoundsNext))
     { //bottom
         if (playerBounds.top < next_stagePlatformBounds.top && playerBounds.top + playerBounds.height < next_stagePlatformBounds.top + next_stagePlatformBounds.height && playerBounds.left < next_stagePlatformBounds.left + next_stagePlatformBounds.width && playerBounds.left + playerBounds.width > next_stagePlatformBounds.left)
@@ -90,19 +93,17 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
             this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
         }
     }
-    if(!bounce){
-        if (playerBounds.top + playerBounds.height > 800)
-        { //zapobiega spadaniu
-            this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
-        }
-        if ((playerBounds.left + playerBounds.width) < 5)
-        { //przejsce w lewo
-            this->setPosition(800 - playerBounds.left - playerBounds.width, next_stagePlatformBounds.top - playerBounds.height);
-        }
-        if ((playerBounds.left) > 795)
-        { //przejscie w prawo
-            this->setPosition(-(50) / 2.0, next_stagePlatformBounds.top - playerBounds.height);
-        }
+    if (playerBounds.top + playerBounds.height > 800)
+    { //zapobiega spadaniu
+        this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
+    }
+    if ((playerBounds.left + playerBounds.width) < 5)
+    { //przejsce w lewo
+        this->setPosition(800 - playerBounds.left - playerBounds.width, next_stagePlatformBounds.top - playerBounds.height);
+    }
+    if ((playerBounds.left) > 795)
+    { //przejscie w prawo
+        this->setPosition(-(50) / 2.0, next_stagePlatformBounds.top - playerBounds.height);
     }
     this->updateMovement(dt);
 }
