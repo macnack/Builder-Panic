@@ -48,40 +48,7 @@ void Coin::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &plat
             this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
         }
     }
-    this->updateMovement(dt);
-}
-
-void Coin::updateMovement(const float &dt)
-{
     this->updateGravity(dt);
-    if (velocity.y > 0.f)
-    {
-        //Max falling velocity check
-        //velocity.y -= 1/5.f * gravity * dt; // for coin
-        if (velocity.y > maxFallingVelocity)
-        {
-            velocity.y = maxFallingVelocity;
-        }
-    }
-    if (velocity.x > 0.f)
-    { //right
-        //deceleration
-        velocity.x -= deceleration * dt;
-        if (velocity.x < 0.f)
-            velocity.x = 0.f;
-        //max velocity check
-        if (velocity.x > maxVelocity)
-            velocity.x = maxVelocity;
-    }
-    else if (velocity.x < 0.f)
-    { //if going left
-        //decelaretion
-        velocity.x += deceleration * dt;
-        if (velocity.x > 0.f)
-            velocity.x = 0.f;
-        //max velocity check
-        if (velocity.x < -maxVelocity)
-            velocity.x = -maxVelocity;
-    }
     this->move(velocity * dt);
 }
+

@@ -62,6 +62,16 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "hash_set": "cpp",
+        "strstream": "cpp",
+        "codecvt": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "future": "cpp",
+        "ranges": "cpp",
+        "stop_token": "cpp",
+        "cfenv": "cpp",
+        "valarray": "cpp"
     }
 }

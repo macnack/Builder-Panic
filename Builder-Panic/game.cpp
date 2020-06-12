@@ -56,7 +56,6 @@ void Game::run()
                 coins.push_back(std::move(coin));
             }
         }
-
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
         window_.clear(sf::Color::Black);
@@ -69,18 +68,6 @@ void Game::run()
 Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Bulding Panic"), scena(&window_)
 {
     obj_manager = std::make_unique<ObjectManager>(&window_);
-    //sf::Texture hero_texture;
-    //    if (!hero_texture.loadFromFile("Texture/engineer character/engineer.png"))
-    //    {
-    //        throw("Could not load texture 'Engineer Idle'");
-    //    }
-    sf::Texture run_texture;
-    if (!run_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
-    {
-        throw("Could not load texture 'Engineer Idle'");
-    }
-    //Animation idles(hero_texture, sf::IntRect(0,0,16,28), 7, 4);
-    //          run(..., sf::IntRect(0, 0, 16, 28), 12, 8)
     gracz = std::make_unique<Player>(sf::Vector2f(100, 250),14);
     enemy = std::make_unique<Enemy>(sf::Vector2f(100, 250),14);
     for (int x = 160; x <= 460; x += 150)

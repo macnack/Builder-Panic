@@ -25,6 +25,7 @@ public:
     const Object::Fill &getFill(){
         return fill_;
     }
+
 private:
     bool can_change_color;
     Object::Color color_;

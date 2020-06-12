@@ -121,11 +121,11 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
         this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
     }
     if ((playerBounds.left + playerBounds.width) < 5)
-    { //zapobiega spadaniu
+    { //przejsce w lewo
         this->setPosition(800 - playerBounds.left - playerBounds.width, next_stagePlatformBounds.top - playerBounds.height);
     }
     if ((playerBounds.left) > 795)
-    { //zapobiega spadaniu
+    { //przejscie w prawo
         this->setPosition(-(50) / 2.0, next_stagePlatformBounds.top - playerBounds.height);
     }
     this->updateMovement(dt);

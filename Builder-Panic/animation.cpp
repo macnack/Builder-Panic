@@ -32,3 +32,20 @@ std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame , cons
 
 }
 
+void Animation::playAnimation(const float &dt){
+    timer += dt;
+    if (timer > 1 / framerate_)
+    {
+        timer = 0.f;
+        if (frames_[switcher][1] != frames_[switcher][2])
+        {
+            frames_[switcher][1].left += frames_[switcher][0].width;
+        }
+        else
+        {
+            frames_[switcher][1] = frames_[switcher][0];
+        }
+        this->setTextureRect(frames_[switcher][1]);
+    }
+}
+

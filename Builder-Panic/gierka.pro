@@ -10,6 +10,7 @@ SOURCES += \
         entity.cpp \
         game.cpp \
         gameobject.cpp \
+        hero.cpp \
         main.cpp \
         object.cpp \
         objectmanager.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     enemy.h \
     entity.h \
     gameobject.h \
+    hero.h \
     object.h \
     objectmanager.h \
     player.h \
