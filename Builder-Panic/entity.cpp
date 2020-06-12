@@ -16,38 +16,8 @@ int Entity::setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms)
     return platforms.size() - 1;
 }
 
-void Entity::jump()
-{
-    if (grounded == true && current_stage > 1)
-    {
-        current_stage -= 1;
-        next_stage = current_stage;
-        stage_down = false;
-    }
-    if (grounded)
-    {
-        velocity.y -= 850;
-        switcher = 2;
-    }
-}
 
-void Entity::down()
-{
-    if (stage_down == true && current_stage < 4)
-    {
-        velocity.y += 200;
-        current_stage += 1;
-        next_stage = current_stage;
-        grounded = false;
-        switcher = 2;
-    }
-}
 
-void Entity::moveSprite(const sf::Vector2f &dir, const float &dt)
-{
-    //incrasing speed in the inputed dirction
-    velocity += dir * (dt * acceleration);
-}
 
 void Entity::updateGravity(const float &dt)
 {
@@ -109,24 +79,30 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
     { //bottom
         if (playerBounds.top < next_stagePlatformBounds.top && playerBounds.top + playerBounds.height < next_stagePlatformBounds.top + next_stagePlatformBounds.height && playerBounds.left < next_stagePlatformBounds.left + next_stagePlatformBounds.width && playerBounds.left + playerBounds.width > next_stagePlatformBounds.left)
         {
-            velocity.y = 0; //velocity.y = -std::abs(velocity.y);
-            this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
+            if(!bounce){
+                velocity.y = 0;
+            }else{
+                velocity.y = -std::abs(velocity.y);
+            }
+            switcher = 0;
             grounded = true;
             stage_down = true;
-            switcher = 0;
+            this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
         }
     }
-    if (playerBounds.top + playerBounds.height > 800)
-    { //zapobiega spadaniu
-        this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
-    }
-    if ((playerBounds.left + playerBounds.width) < 5)
-    { //przejsce w lewo
-        this->setPosition(800 - playerBounds.left - playerBounds.width, next_stagePlatformBounds.top - playerBounds.height);
-    }
-    if ((playerBounds.left) > 795)
-    { //przejscie w prawo
-        this->setPosition(-(50) / 2.0, next_stagePlatformBounds.top - playerBounds.height);
+    if(!bounce){
+        if (playerBounds.top + playerBounds.height > 800)
+        { //zapobiega spadaniu
+            this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
+        }
+        if ((playerBounds.left + playerBounds.width) < 5)
+        { //przejsce w lewo
+            this->setPosition(800 - playerBounds.left - playerBounds.width, next_stagePlatformBounds.top - playerBounds.height);
+        }
+        if ((playerBounds.left) > 795)
+        { //przejscie w prawo
+            this->setPosition(-(50) / 2.0, next_stagePlatformBounds.top - playerBounds.height);
+        }
     }
     this->updateMovement(dt);
 }

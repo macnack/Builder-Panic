@@ -23,7 +23,7 @@ public:
     const std::map<int, std::map<int, std::unique_ptr<Object>>> &getBoard();
     void Paint(const Player &gracz);
     void Paint(const sf::RenderWindow &window, const sf::Event &event); //inspekt
-    void Paint(const Enemy &enemy);
+    //void Paint(const Enemy &enemy);
     bool full_board();
     void draw();
     ObjectManager(sf::RenderWindow *window);
