@@ -39,7 +39,7 @@ protected:
         }
         if (grounded)
         {
-            velocity.y -= 250;
+            velocity.y -= 850;
             switcher = 2;
         }
     }
