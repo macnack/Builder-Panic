@@ -23,7 +23,7 @@ void Entity::updateGravity(const float &dt)
 {
     //applying force of gravity
     velocity.y += gravity * dt;
-    velocity.y -= 1/5.f * gravity * dt; // for coin
+    velocity.y -= 2/3.f * gravity * dt; // for coin
 }
 
 void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)

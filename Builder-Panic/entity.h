@@ -7,7 +7,6 @@ class Entity : public Animation
 public:
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms);
     void updateGravity(const float &dt);
-    void updateMovement(const float &dt);
     void updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
     Entity(const sf::Vector2f &pos, const sf::IntRect &frame, const float &framerate,
            const int &len_idle, const int &len_move, const int &len_jump)

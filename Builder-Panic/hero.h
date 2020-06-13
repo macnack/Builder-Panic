@@ -15,11 +15,16 @@ public:
     void getHurt(Hero &hero){
         if(hero.getGlobalBounds().intersects(this->getGlobalBounds())){
             if(attack == true){
-                hero.velocity.y -= 250;
+                if(!untouchable){
+                    hero.velocity.y -= 250;
+                    std::cerr << "dostaje bencki" << std::endl;
+                    untouchable = true;
+                }
             }
         }
     }
     Hero(const sf::Vector2f &pos);
+    void untouchable_cooldown(const float &dt);
     virtual ~Hero() = default;
 private:
     float score = 1000;
@@ -35,9 +40,10 @@ protected:
     float maxVelocity = 250.f;
     float attackVelocity = 800.f;
     float timer = 0.f;
+    float untouchable_timer = 0.f;
     bool attack_cooldown = true;
     bool attack = false;
-    bool hurt = false;
+    bool untouchable = false;
 };
 
 #endif // HERO_H

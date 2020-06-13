@@ -21,6 +21,19 @@ void Hero::cooldown(const float &dt){
     }
 }
 
+void Hero::untouchable_cooldown(const float &dt)
+{
+    untouchable_timer += dt;
+    if(untouchable){
+        if(untouchable_timer > 1.25f){
+            untouchable_timer = 0.f;
+            untouchable = false;
+        }
+    }else{
+        untouchable_timer = 0.f;
+    }
+}
+
 void Hero::attack_move(){
     attack_cooldown = false;
     attack = true;
@@ -104,7 +117,6 @@ void Hero::updateMovement(const float &dt)
     else if (velocity.x < 0.f)
     { //if going left
         //decelaretion
-
         velocity.x += deceleration * dt;
         if (velocity.x > 0.f){
             velocity.x = 0.f;

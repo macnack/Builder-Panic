@@ -24,8 +24,6 @@ void Game::run()
             if (event.type == sf::Event::Closed)
                 window_.close();
 
-            gracz->getHurt(*enemy);
-            enemy->getHurt(*gracz);
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 obj_manager->Paint(window_, event);
@@ -62,6 +60,10 @@ void Game::run()
                 coins.push_back(std::move(coin));
             }
         }
+        gracz->getHurt(*enemy);
+        gracz->untouchable_cooldown(elapsed.asSeconds());
+        enemy->getHurt(*gracz);
+        enemy->untouchable_cooldown(elapsed.asSeconds());
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
         window_.clear(sf::Color::Black);
