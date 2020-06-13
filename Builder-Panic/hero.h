@@ -37,8 +37,12 @@ public:
             if (velocity.x < 0.f)
                 velocity.x = 0.f;
             //max velocity check
-            if (velocity.x > maxVelocity)
+            if (velocity.x > maxVelocity ){
                 velocity.x = maxVelocity;
+            }
+            if (attack == false && timer < 0.1 ){
+                velocity.x = attackVelocity;
+            }
         }
         else if (velocity.x < 0.f)
         { //if going left
@@ -48,8 +52,12 @@ public:
             if (velocity.x > 0.f)
                 velocity.x = 0.f;
             //max velocity check
-            if (velocity.x < -maxVelocity)
+            if (velocity.x < -maxVelocity ){
                 velocity.x = -maxVelocity;
+            }
+            if (attack == false && timer < 0.1 ){
+                velocity.x = -std::abs(attackVelocity);
+            }
         }
         this->setTexture(textures_[switcher]);
         this->playAnimation(dt);
@@ -57,6 +65,20 @@ public:
 private:
     float score = 1000;
 protected:
+    void cooldown(const float &dt){
+        timer += dt;
+        if(!attack){
+            if(timer > 1){
+                timer = 0.f;
+                attack = true;
+            }
+        }else{
+            timer = 0.f;
+        }
+    }
+    void attack_move(){
+        attack = false;
+    }
     void down(){
         if (stage_down == true && current_stage < 4)
         {
@@ -80,6 +102,14 @@ protected:
             switcher = 2;
         }
     }
+protected:
+    float acceleration = 2400.f;
+    float deceleration = 750.f;
+    float maxFallingVelocity = 1500.f;
+    float maxVelocity = 250.f;
+    float attackVelocity = 800.f;
+    float timer = 0.f;
+    bool attack = true;
 };
 
 #endif // HERO_H

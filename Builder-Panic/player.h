@@ -16,11 +16,7 @@ public:
     const Object::Color &getColor(){
         return color;
     }
-    void attack(const float &dt);
 private:
-    float timer = 0.f;
-    bool attak = true;
-    int rando;
     Object::Color color = Object::Color::Player;
 };
 

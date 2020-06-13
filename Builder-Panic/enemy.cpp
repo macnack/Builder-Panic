@@ -5,12 +5,10 @@ void Enemy::loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, cons
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
         this->moveSprite(sf::Vector2f(-1.f, 0.f), dt);
-        //this->playAnimation(dt);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         this->moveSprite(sf::Vector2f(1.f, 0.f), dt);
-        //this->playAnimation(dt);
     }
     this->updateMovement(dt);
     this->updateCollisions(platforms, dt);
