@@ -45,7 +45,7 @@ void Game::run()
                 std::cerr << "Press R to reset" << std::endl;
                 sf::sleep(sf::microseconds(1000));
                 window_.close();
-                obj_manager->addScore(*gracz,*enemy);
+                obj_manager->addScore(*gracz, *enemy);
                 std::cerr << "Wynik dla gracza 1: " << gracz->getScore() << std::endl;
                 std::cerr << "Wynik dla gracza 2: " << enemy->getScore() << std::endl;
             }
@@ -60,8 +60,8 @@ void Game::run()
                 coins.push_back(std::move(coin));
             }
         }
-        gracz->getHurt(*enemy,elapsed.asSeconds());
-        enemy->getHurt(*gracz,elapsed.asSeconds());
+        gracz->getHurt(*enemy, elapsed.asSeconds());
+        enemy->getHurt(*gracz, elapsed.asSeconds());
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
         window_.clear(sf::Color::Black);

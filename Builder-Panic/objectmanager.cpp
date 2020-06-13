@@ -199,6 +199,24 @@ const std::map<int, std::map<int, std::unique_ptr<Object>>> &ObjectManager::getB
     return board_;
 }
 
+void ObjectManager::addScore(Player &gracz, Enemy &enemy){
+    for (const auto &el : board_)
+    {
+
+        for (const auto &v : el.second)
+        {
+            if (v.second->getColor() == gracz.getColor() )
+            {
+                gracz.addScore(150);
+            }
+            if (v.second->getColor() == gracz.getColor() )
+            {
+                enemy.addScore(150);
+            }
+        }
+    }
+}
+
 void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event)
 {
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);

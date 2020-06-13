@@ -10,7 +10,8 @@ void Enemy::loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, cons
     {
         this->moveSprite(sf::Vector2f(1.f, 0.f), dt);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::N)){
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
+    {
         this->attack_move();
     }
     this->cooldown(dt);

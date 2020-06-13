@@ -16,14 +16,11 @@ int Entity::setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms)
     return platforms.size() - 1;
 }
 
-
-
-
 void Entity::updateGravity(const float &dt)
 {
     //applying force of gravity
     velocity.y += gravity * dt;
-    velocity.y -= 2/3.f * gravity * dt; // for coin
+    velocity.y -= 1 / 5.f * gravity * dt; // for coin
 }
 
 void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
@@ -35,17 +32,22 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
     playerBoundsNext.top = getPosition().y + velocity.y * dt;
     current_stage = setBounds(platforms);
     sf::FloatRect next_stagePlatformBounds = platforms[next_stage]->getGlobalBounds();
-    if(bounce){
+    if (bounce)
+    {
         next_stagePlatformBounds = platforms[current_stage]->getGlobalBounds();
     }
     if (next_stagePlatformBounds.intersects(playerBoundsNext))
     { //bottom
         if (playerBounds.top < next_stagePlatformBounds.top && playerBounds.top + playerBounds.height < next_stagePlatformBounds.top + next_stagePlatformBounds.height && playerBounds.left < next_stagePlatformBounds.left + next_stagePlatformBounds.width && playerBounds.left + playerBounds.width > next_stagePlatformBounds.left)
         {
-            if(!bounce){
+            if (!bounce)
+            {
                 velocity.y = 0;
-            }else{
+            }
+            else
+            {
                 velocity.y = -std::abs(velocity.y);
+                velocity.y += 3;
             }
             switcher = 0;
             grounded = true;

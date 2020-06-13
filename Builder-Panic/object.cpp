@@ -31,7 +31,7 @@ void Object::SetFill()
         break;
     }
 }
-void Object::Paint(const Object::Color color)
+void Object::Paint(const Object::Color &color)
 {
     color_ = color;
     switch (color)
@@ -67,10 +67,12 @@ int Object::getIntColor()
     return 0;
 }
 
-const Object::Color &Object::getColor(){
+const Object::Color &Object::getColor()
+{
     return color_;
 }
 
-const Object::Fill &Object::getFill(){
+const Object::Fill &Object::getFill()
+{
     return fill_;
 }

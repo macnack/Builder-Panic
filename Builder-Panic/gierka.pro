@@ -15,7 +15,8 @@ SOURCES += \
         object.cpp \
         objectmanager.cpp \
         player.cpp \
-        scena.cpp
+        scena.cpp \
+        smartenemy.cpp
 
 CONFIG(debug, debug|release){
     LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
@@ -33,7 +34,8 @@ HEADERS += \
     objectmanager.h \
     player.h \
     game.h \
-    scena.h
+    scena.h \
+    smartenemy.h
 
 DISTFILES += \
     model_uml.qmodel
