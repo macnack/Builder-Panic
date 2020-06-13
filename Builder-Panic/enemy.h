@@ -11,6 +11,7 @@ public:
     }
     void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
     void change_platform();
+    bool painting();
     virtual ~Enemy() = default;
 
 private:

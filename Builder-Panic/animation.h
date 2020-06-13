@@ -5,7 +5,7 @@
 class Animation : public sf::Sprite
 {
 public:
-    std::vector<sf::IntRect> addAnimation(const sf::IntRect &frame, const int length);
+    std::vector<sf::IntRect> addAnimation(const sf::IntRect &frame, const int &length);
     void playAnimation(const float &dt);
     Animation(const sf::IntRect &frame,
               const float &framerate, const int &length);

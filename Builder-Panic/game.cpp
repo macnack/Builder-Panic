@@ -30,8 +30,6 @@ void Game::run()
             }
             if (event.type == sf::Event::KeyPressed)
             {
-                gracz->change_platform();
-                enemy->change_platform();
                 obj_manager->Paint(*gracz);
                 obj_manager->Paint(*enemy);
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
@@ -53,7 +51,7 @@ void Game::run()
         for (auto it = coins.begin(); it < coins.end(); it++)
         {
             (*it)->loop(scena.getVec("floors"), elapsed.asSeconds());
-            if ((*it)->is_collected(*gracz) || (*it)->is_collected(*enemy))
+            if ((*it)->is_collected(*gracz,*enemy))
             {
                 coins.erase(it);
                 std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));

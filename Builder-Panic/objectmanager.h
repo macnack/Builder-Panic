@@ -8,8 +8,9 @@ public:
     bool full_board();
     const std::map<int, std::map<int, std::unique_ptr<Object>>> &getBoard();
     void draw();
-    void Paint(Player &gracz);
-    void Paint(Enemy &enemy);
+//    void Paint(Player &gracz);
+//    void Paint(Enemy &enemy);
+    void Paint(Hero &hero);
     void Paint(const sf::RenderWindow &window, const sf::Event &event); //inspekt
     void addScore(Player &gracz, Enemy &enemy);
     ObjectManager(sf::RenderWindow *window);

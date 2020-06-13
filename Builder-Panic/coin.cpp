@@ -16,6 +16,23 @@ bool Coin::is_collected(Hero &gracz)
     return false;
 }
 
+bool Coin::is_collected(Hero &gracz1, Hero &gracz2)
+{
+    sf::FloatRect playerBounds1 = gracz1.getGlobalBounds();
+    sf::FloatRect playerBounds2 = gracz2.getGlobalBounds();
+    if (this->getGlobalBounds().intersects(playerBounds1))
+    {
+        gracz1.addScore(value);
+        return true;
+    }
+    if (this->getGlobalBounds().intersects(playerBounds2))
+    {
+        gracz2.addScore(value);
+        return true;
+    }
+    return false;
+}
+
 void Coin::loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
 {
     this->updateCollisions(platforms, dt);

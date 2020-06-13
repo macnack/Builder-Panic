@@ -24,6 +24,22 @@ void Hero::cooldown(const float &dt)
     }
 }
 
+void Hero::change_platform_cooldown(const float &dt){
+    change_platform_timer += dt;
+    if (!can_change)
+    {
+        if (change_platform_timer > 1)
+        {
+            change_platform_timer = 0.f;
+            can_change = true;
+        }
+    }
+    else
+    {
+        change_platform_timer = 0.f;
+    }
+}
+
 void Hero::getHurt(Hero &hero, const float &dt)
 {
     this->untouchable_cooldown(dt);
@@ -32,7 +48,7 @@ void Hero::getHurt(Hero &hero, const float &dt)
         if (attack == true)
         {
             if (!hero.untouchable)
-            { //jesli dostaje bencki velocity.x = 0???
+            {
                 hero.velocity.y -= 250;
                 hero.untouchable = true;
                 if (hero.attack == true)
@@ -70,28 +86,30 @@ void Hero::attack_move()
 
 void Hero::down()
 {
-    if (stage_down == true && current_stage < 4)
+    if (can_change == true && stage_down == true && current_stage < 4)
     {
         velocity.y += 200;
         current_stage += 1;
         next_stage = current_stage;
         grounded = false;
+        can_change = false;
         switcher = 2;
     }
 }
 
 void Hero::jump()
 {
-    if (grounded == true && current_stage > 1)
-    {
-        current_stage -= 1;
-        next_stage = current_stage;
-        stage_down = false;
-    }
-    if (grounded)
+    if (can_change == true && grounded == true)
     {
         velocity.y -= 850;
         switcher = 2;
+        if(current_stage > 1)
+        {
+            current_stage -= 1;
+            next_stage = current_stage;
+            stage_down = false;
+            can_change = false;
+        }
     }
 }
 
@@ -176,6 +194,21 @@ void Hero::updateMovement(const float &dt)
 void Hero::setColor(Object::Color color)
 {
     color_ = color;
+}
+
+bool Hero::stunned()
+{
+    return untouchable;
+}
+
+bool Hero::can_paint()
+{
+    return paint;
+}
+
+void Hero::is_painting()
+{
+    paint = true;
 }
 
 const Object::Color &Hero::getColor()

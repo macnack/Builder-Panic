@@ -12,7 +12,7 @@ Animation::Animation(const sf::IntRect &frame, const float &framerate)
 {
 }
 
-std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame, const int length)
+std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame, const int &length)
 {
     std::vector<sf::IntRect> frames;
     sf::IntRect startRect = sf::IntRect(frame.top * frame.width,

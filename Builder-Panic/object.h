@@ -18,7 +18,6 @@ public:
 
 private:
     bool can_change_color;
-    int fill = 0;
     Object::Color color_;
     Object::Fill fill_;
 };
