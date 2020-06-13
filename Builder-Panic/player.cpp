@@ -1,6 +1,6 @@
 #include "player.h"
 
-void Player::loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
+void Player::loop( const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {

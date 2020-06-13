@@ -23,6 +23,9 @@ void Game::run()
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window_.close();
+
+            gracz->getHurt(*enemy);
+            enemy->getHurt(*gracz);
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 obj_manager->Paint(window_, event);
