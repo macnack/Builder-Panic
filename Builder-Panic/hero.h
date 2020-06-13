@@ -12,13 +12,18 @@ public:
     void updateMovement(const float &dt);
     virtual void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt) = 0;
     virtual void change_platform() = 0;
-    void getHurt(Hero &hero){
+    void getHurt(Hero &hero,const float &dt){
+        this->untouchable_cooldown(dt);
         if(hero.getGlobalBounds().intersects(this->getGlobalBounds())){
             if(attack == true){
-                if(!untouchable){
+                if(!hero.untouchable){ //jesli dostaje bencki velocity.x = 0???
                     hero.velocity.y -= 250;
-                    std::cerr << "dostaje bencki" << std::endl;
-                    untouchable = true;
+                    hero.untouchable = true;
+                    if( hero.attack == true){
+                        this->untouchable = true; //jezeli kolizja nie dziala sprawiedliwie usunac...
+                        hero.velocity.y -= 50;
+                        this->velocity.y -= 50;
+                    }
                 }
             }
         }

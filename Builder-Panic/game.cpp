@@ -60,10 +60,8 @@ void Game::run()
                 coins.push_back(std::move(coin));
             }
         }
-        gracz->getHurt(*enemy);
-        gracz->untouchable_cooldown(elapsed.asSeconds());
-        enemy->getHurt(*gracz);
-        enemy->untouchable_cooldown(elapsed.asSeconds());
+        gracz->getHurt(*enemy,elapsed.asSeconds());
+        enemy->getHurt(*gracz,elapsed.asSeconds());
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
         window_.clear(sf::Color::Black);
