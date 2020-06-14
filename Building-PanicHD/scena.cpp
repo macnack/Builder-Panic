@@ -47,6 +47,12 @@ Scena::Scena(sf::RenderWindow *window) : window_(window)
         wall->setScale(8,6);
         wall2->setScale(8,6);
         wall3->setScale(8,6);
+//        std::unique_ptr<sf::Sprite> wall = std::make_unique<GameObject>(sf::Vector2f(-5, i), sf::FloatRect(0, 80, 96, 32), texture);
+//        std::unique_ptr<sf::Sprite> wall2 = std::make_unique<GameObject>(sf::Vector2f(-5+96*7.25, i), sf::FloatRect(0, 80, 96, 32), texture);
+//        std::unique_ptr<sf::Sprite> wall3 = std::make_unique<GameObject>(sf::Vector2f(-5+96*7.25*2.0, i), sf::FloatRect(0, 80, 96, 32), texture);
+//        wall->setScale(7.25,6);
+//        wall2->setScale(7.25,6);
+//        wall3->setScale(7.25,6);
         map["walls"].emplace_back(std::move(wall));
         map["walls"].emplace_back(std::move(wall2));
         map["walls"].emplace_back(std::move(wall3));

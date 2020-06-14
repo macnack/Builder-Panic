@@ -6,6 +6,13 @@ Hero::Hero(const sf::Vector2f &pos) : Entity(pos, sf::IntRect(0, 0, 16, 28), 14,
     bounce = false;
 }
 
+Hero::Hero(const sf::Vector2f &pos, bool czy_enemy): Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 9, 8, 3, czy_enemy)
+{
+    grounded = true;
+    bounce = false;
+
+}
+
 void Hero::cooldown(const float &dt)
 {
     timer += dt;
@@ -29,11 +36,11 @@ void Hero::wall_painting(const float &dt){
         painting_timer -= dt;
         paint = false;
     }else {
-        painting_timer = 1.f;
+        painting_timer = 0.5f;
         paint = false;
     }
     if(painting_timer < 0.f){
-        painting_timer = 1.f;
+        painting_timer = 0.5f;
         paint = true;
     }
 }
@@ -42,7 +49,7 @@ void Hero::change_platform_cooldown(const float &dt){
     change_platform_timer += dt;
     if (!can_change)
     {
-        if (change_platform_timer > 1)
+        if (change_platform_timer > 0.6)
         {
             change_platform_timer = 0.f;
             can_change = true;
@@ -63,12 +70,12 @@ void Hero::getHurt(Hero &hero, const float &dt)
         {
             if (!hero.untouchable)
             {
-                hero.velocity.y -= 250;
+                hero.velocity.y -= 450;
                 hero.untouchable = true;
                 if (hero.attack == true)
                 {
-                    hero.velocity.y -= 50;
-                    this->velocity.y -= 50;
+                    hero.velocity.y -= 100;
+                    this->velocity.y -= 100;
                 }
             }
         }
@@ -80,7 +87,7 @@ void Hero::untouchable_cooldown(const float &dt)
     untouchable_timer += dt;
     if (untouchable)
     {
-        if (untouchable_timer > 1.25f)
+        if (untouchable_timer > 2.0f)
         {
             untouchable_timer = 0.f;
             untouchable = false;
@@ -108,7 +115,7 @@ void Hero::down()
 {
     if (can_change == true && stage_down == true && current_stage < 4)
     {
-        velocity.y += 200;
+        velocity.y += 450;
         current_stage += 1;
         next_stage = current_stage;
         grounded = false;

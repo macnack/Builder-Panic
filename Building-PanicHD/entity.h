@@ -37,6 +37,38 @@ public:
         textures_.push_back(jump_texture);
         this->setTexture(textures_[0]);
     }
+    Entity(const sf::Vector2f &pos, const sf::IntRect &frame, const float &framerate,
+           const int &len_idle, const int &len_move, const int &len_jump, bool czy_enemy)
+        : Animation(frame, framerate)
+    {
+        this->setScale(6, 6);
+        this->setPosition(pos);
+        sf::Texture indle_texture;
+        if (!indle_texture.loadFromFile("Texture/engineer character/engineer-idle.png"))
+        {
+            throw("Could not load texture 'Engineer Idle'");
+        }
+        frames_.push_back(addAnimation(frame, len_idle));
+        textures_.push_back(indle_texture);
+        sf::Texture run_texture;
+        if (!run_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
+        {
+            throw("Could not load texture 'Engineer Run'");
+        }
+        frames_.push_back(addAnimation(frame, len_move));
+        textures_.push_back(run_texture);
+        sf::Texture jump_texture;
+        if (!jump_texture.loadFromFile("Texture/engineer character/engineer-jump.png"))
+        {
+            throw("Could not load texture 'Engineer Jump'");
+        }
+        frames_.push_back(addAnimation(frame, len_jump));
+        textures_.push_back(jump_texture);
+        if(czy_enemy){
+            this->setColor(sf::Color(255, 0, 0));
+        }
+        this->setTexture(textures_[0]);
+    }
     //not in usse
     Entity(const sf::Vector2f &pos, const sf::IntRect &frame,
            const float &framerate) : Animation(frame, framerate)

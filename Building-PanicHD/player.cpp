@@ -55,7 +55,7 @@ bool Player::right_move()
 
 bool Player::jump_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !stunned() && !painting() ;
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !stunned() && !painting() ;
 }
 
 bool Player::down_move()

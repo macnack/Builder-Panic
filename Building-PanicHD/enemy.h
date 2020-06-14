@@ -7,8 +7,9 @@ class Enemy : public Hero
 public:
     void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
     void change_platform();
-    Enemy(const sf::Vector2f &pos) : Hero(pos)
+    Enemy(const sf::Vector2f &pos) : Hero(pos, 1)
     {
+
         this->setColor(Object::Color::Enemy);
     }
     virtual ~Enemy() = default;

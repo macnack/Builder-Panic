@@ -20,6 +20,7 @@ public:
     virtual void change_platform() = 0;
     virtual bool painting() = 0;
     Hero(const sf::Vector2f &pos);
+    Hero(const sf::Vector2f &pos, bool czy_enemy);
     virtual ~Hero() = default;
 
 private:
@@ -33,12 +34,12 @@ private:
     float acceleration = 2400.f;
     float deceleration = 750.f;
     float attackVelocity = 1200.f;
-    float maxVelocity = 350.f;
+    float maxVelocity = 450.f;
     float maxFallingVelocity = 1200.f;
     float timer = 0.f;
     float untouchable_timer = 0.f;
     float change_platform_timer = 0.f;
-    float painting_timer = 1.f;
+    float painting_timer = 0.5f;
     Object::Color color_;
 
 protected:

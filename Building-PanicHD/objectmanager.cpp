@@ -289,8 +289,8 @@ void ObjectManager::Paint(Hero &hero)
         for (auto &bd_el : bd.second)
         {
 
-            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10)
-                    && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
+            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10))
+                    //&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
             {
                 if( hero.painting() && hero.can_paint())
                 {
