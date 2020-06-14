@@ -18,15 +18,15 @@ void Hero::cooldown(const float &dt)
     timer += dt;
     if (!attack_cooldown)
     {
-        if (timer > 1)
+        if (timer > timer_elapsed)
         {
-            timer = 0.f;
+            timer = timer_reset;
             attack_cooldown = true;
         }
     }
     else
     {
-        timer = 0.f;
+        timer = timer_reset;
         attack = false;
     }
 }
@@ -36,11 +36,11 @@ void Hero::wall_painting(const float &dt){
         painting_timer -= dt;
         paint = false;
     }else {
-        painting_timer = 0.5f;
+        painting_timer = painting_start;
         paint = false;
     }
-    if(painting_timer < 0.f){
-        painting_timer = 0.5f;
+    if(painting_timer < painting_stop){
+        painting_timer = painting_start;
         paint = true;
     }
 }
@@ -49,15 +49,15 @@ void Hero::change_platform_cooldown(const float &dt){
     change_platform_timer += dt;
     if (!can_change)
     {
-        if (change_platform_timer > 0.6)
+        if (change_platform_timer > change_platform_elapsed)
         {
-            change_platform_timer = 0.f;
+            change_platform_timer = change_platform_reset;
             can_change = true;
         }
     }
     else
     {
-        change_platform_timer = 0.f;
+        change_platform_timer = change_platform_reset;
     }
 }
 
@@ -80,6 +80,9 @@ void Hero::getHurt(Hero &hero, const float &dt)
             }
         }
     }
+    if(untouchable){
+        switcher = 3;
+    }
 }
 
 void Hero::untouchable_cooldown(const float &dt)
@@ -87,15 +90,34 @@ void Hero::untouchable_cooldown(const float &dt)
     untouchable_timer += dt;
     if (untouchable)
     {
-        if (untouchable_timer > 2.0f)
+        std::cerr << int(this->getColor().r) << " " << int(this->getColor().g) << " " << int(this->getColor().b) << std::endl;
+        if(untouchable_timer > 0.1){
+            this->setColor(sf::Color::Red);
+        }
+        if(untouchable_timer > snapshot_color){
+            this->setColor(sf::Color(255,255,255));
+        }
+        if(untouchable_timer > snapshot_color*2){
+            this->setColor(sf::Color::Red);
+        }
+        if(untouchable_timer > snapshot_color*3){
+            this->setColor(sf::Color(255,255,255));
+        }
+        if(untouchable_timer > snapshot_color*4){
+            this->setColor(sf::Color::Red);
+        }
+        if(untouchable_timer > snapshot_color*5){
+            this->setColor(sf::Color(255,255,255));
+        }
+        if (untouchable_timer > untouchable_elapsed )
         {
-            untouchable_timer = 0.f;
+            untouchable_timer = untouchable_reset;
             untouchable = false;
         }
     }
     else
     {
-        untouchable_timer = 0.f;
+        untouchable_timer = untouchable_reset;
     }
 }
 
@@ -194,6 +216,9 @@ void Hero::updateMovement(const float &dt)
         if (attack_cooldown == false && timer < 0.1)
         {
             velocity.x = attackVelocity;
+            this->setColor(sf::Color(128, 128, 128));
+        }else{
+            this->setColor(sf::Color(255, 255, 255));
         }
     }
     else if (velocity.x < 0.f)
@@ -212,13 +237,16 @@ void Hero::updateMovement(const float &dt)
         if (attack_cooldown == false && timer < 0.1)
         {
             velocity.x = -std::abs(attackVelocity);
+            this->setColor(sf::Color(128, 128, 128));
+        }else{
+            this->setColor(sf::Color(255, 255, 255));
         }
     }
     this->setTexture(textures_[switcher]);
     this->playAnimation(dt);
 }
 
-void Hero::setColor(Object::Color color)
+void Hero::setColor_flag(Object::Color color)
 {
     color_ = color;
 }
@@ -234,7 +262,7 @@ bool Hero::can_paint()
 }
 
 
-const Object::Color &Hero::getColor()
+const Object::Color &Hero::getColor_Object()
 {
     return color_;
 }

@@ -69,7 +69,7 @@ int Object::getIntColor()
     return 0;
 }
 
-const Object::Color &Object::getColor()
+const Object::Color &Object::getColor_Object()
 {
     return color_;
 }

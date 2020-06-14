@@ -7,7 +7,7 @@ class Object : public GameObject
 public:
     enum class Color{Enemy = -1, Default ,Player };
     enum class Fill{one_third, two_thirds, full, full_full};
-    const Object::Color &getColor();
+    const Object::Color &getColor_Object();
     const Object::Fill &getFill();
     bool is_visible();
     int getIntColor();

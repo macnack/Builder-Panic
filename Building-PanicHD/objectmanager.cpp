@@ -205,11 +205,11 @@ void ObjectManager::addScore(Player &gracz, Enemy &enemy){
 
         for (const auto &v : el.second)
         {
-            if (v.second->getColor() == gracz.getColor() )
+            if (v.second->getColor_Object() == gracz.getColor_Object())
             {
                 gracz.addScore(150);
             }
-            if (v.second->getColor() == gracz.getColor() )
+            if (v.second->getColor_Object() == gracz.getColor_Object() )
             {
                 enemy.addScore(150);
             }
@@ -301,7 +301,7 @@ void ObjectManager::Paint(Hero &hero)
                     else
                     {
                         int n = bd_el.first;
-                        this->Reverse(m, n, hero.getColor());
+                        this->Reverse(m, n, hero.getColor_Object());
                     }
                 }
             }

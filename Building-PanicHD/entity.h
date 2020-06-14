@@ -35,6 +35,9 @@ public:
         }
         frames_.push_back(addAnimation(frame, len_jump));
         textures_.push_back(jump_texture);
+        //animacja otrzymania obrazen
+        frames_.push_back(addAnimation(sf::IntRect(frame.left,frame.top,frame.width,frame.height - 5), len_idle));
+        textures_.push_back(indle_texture);
         this->setTexture(textures_[0]);
     }
     Entity(const sf::Vector2f &pos, const sf::IntRect &frame, const float &framerate,
@@ -65,8 +68,10 @@ public:
         frames_.push_back(addAnimation(frame, len_jump));
         textures_.push_back(jump_texture);
         if(czy_enemy){
-            this->setColor(sf::Color(255, 0, 0));
+            this->setColor(sf::Color(128, 128, 128));
         }
+        frames_.push_back(addAnimation(sf::IntRect(frame.left,frame.top,frame.width,frame.height - 5), len_idle));
+        textures_.push_back(indle_texture);
         this->setTexture(textures_[0]);
     }
     //not in usse

@@ -9,13 +9,13 @@ class Hero : public Entity
 public:
     bool stunned();
     bool can_paint();
-    const Object::Color &getColor();
+    const Object::Color &getColor_Object();
     float addScore(const float &value);
     float getScore();
     void moveSprite(const sf::Vector2f &dir, const float &dt);
     void updateMovement(const float &dt);
     void getHurt(Hero &hero, const float &dt);
-    void setColor(Object::Color color);
+    void setColor_flag(Object::Color color);
     virtual void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt) = 0;
     virtual void change_platform() = 0;
     virtual bool painting() = 0;
@@ -37,9 +37,18 @@ private:
     float maxVelocity = 450.f;
     float maxFallingVelocity = 1200.f;
     float timer = 0.f;
+    float timer_elapsed = 1.f;
+    float timer_reset = 0.f;
     float untouchable_timer = 0.f;
+    float untouchable_reset = 0.f;
+    float untouchable_elapsed = 2.0f;
+    float snapshot_color = 0.4f;
     float change_platform_timer = 0.f;
+    float change_platform_reset = 0.f;
+    float change_platform_elapsed = 0.6;
     float painting_timer = 0.5f;
+    float painting_stop = 0.f;
+    float painting_start = 0.5f;
     Object::Color color_;
 
 protected:

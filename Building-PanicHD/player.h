@@ -10,7 +10,7 @@ public:
     void change_platform();
     Player(const sf::Vector2f &pos) : Hero(pos)
     {
-        this->setColor(Object::Color::Player);
+        this->setColor_flag(Object::Color::Player);
     }
     virtual ~Player() = default;
 

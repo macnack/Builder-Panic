@@ -13,7 +13,7 @@ public:
     virtual ~SmartEnemy() = default;
     SmartEnemy(const sf::Vector2f &pos) : Hero(pos)
     {
-        this->setColor(Object::Color::Enemy);
+        this->setColor_flag(Object::Color::Enemy);
     }
 
 private:

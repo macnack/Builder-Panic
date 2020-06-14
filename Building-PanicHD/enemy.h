@@ -10,7 +10,7 @@ public:
     Enemy(const sf::Vector2f &pos) : Hero(pos, 1)
     {
 
-        this->setColor(Object::Color::Enemy);
+        this->setColor_flag(Object::Color::Enemy);
     }
     virtual ~Enemy() = default;
 
