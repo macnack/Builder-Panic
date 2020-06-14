@@ -22,21 +22,20 @@ CONFIG(debug, debug|release){
     LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window
 }
 
+DISTFILES += \
+    Building-PanicHD.pro.user
+
 HEADERS += \
     animation.h \
     coin.h \
     common_defs.h \
     enemy.h \
     entity.h \
+    game.h \
     gameobject.h \
     hero.h \
     object.h \
     objectmanager.h \
     player.h \
-    game.h \
     scena.h \
     smartenemy.h
-
-DISTFILES += \
-    model_uml.qmodel
-

@@ -1,9 +1,6 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
-gierka
-build-Building-PanicHD-Desktop-Debug/
 
-.qmake.stash
 *~
 *.autosave
 *.a

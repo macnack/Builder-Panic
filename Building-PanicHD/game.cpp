@@ -14,12 +14,15 @@ void Game::draw()
 void Game::run()
 {
     //game loop
+    sf::View view( gracz->view(), sf::Vector2f(800,600));
     while (window_.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Time elapsed = clock_.restart();
         while (window_.pollEvent(event))
         {
+            view.setCenter(gracz->view());
+            window_.setView(view);
             // "close requested" event: we close the window
             if (event.type == sf::Event::Closed)
                 window_.close();
@@ -63,6 +66,7 @@ void Game::run()
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
         window_.clear(sf::Color::Black);
+
         this->draw();
 
         window_.display();

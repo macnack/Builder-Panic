@@ -109,7 +109,10 @@ public:
         }
     }
     virtual ~Entity() = default;
-
+    sf::Vector2f view()
+    {
+        return sf::Vector2f(  this->getGlobalBounds().left, this->getGlobalBounds().top);
+    }
 protected:
     int value;
     bool bounce = false;
