@@ -9,7 +9,6 @@ class Hero : public Entity
 public:
     bool stunned();
     bool can_paint();
-    void is_painting();
     const Object::Color &getColor();
     float addScore(const float &value);
     float getScore();

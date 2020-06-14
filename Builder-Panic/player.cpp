@@ -2,20 +2,17 @@
 
 void Player::loop( const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
 {
-    if( !stunned() && !painting() )
+    if ( this->left_move() )
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        {
-            this->moveSprite(sf::Vector2f(-1.f, 0.f), dt);
-        }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        {
-            this->moveSprite(sf::Vector2f(1.f, 0.f), dt);
-        }
-        if( sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-        {
-            this->attack_move();
-        }
+        this->moveSprite(sf::Vector2f(-1.f, 0.f), dt);
+    }
+    else if ( this->right_move() )
+    {
+        this->moveSprite(sf::Vector2f(1.f, 0.f), dt);
+    }
+    if( this->charge_move() )
+    {
+        this->attack_move();
     }
     //if painting...
     this->wall_painting(dt);
@@ -31,22 +28,44 @@ void Player::loop( const std::vector<std::unique_ptr<sf::Sprite>> &platforms, co
 
 void Player::change_platform()
 {
-    if( !stunned() && painting() == false )
+    if ( this->down_move() )
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        {
-            this->down();
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-        {
-            this->jump();
-        }
+        this->down();
+    }
+    if ( this->jump_move() )
+    {
+        this->jump();
     }
 }
 
 bool Player::painting()
 {
     return sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !stunned();
+}
+
+bool Player::left_move()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !stunned() && !painting() ;
+}
+
+bool Player::right_move()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::D) && !stunned() && !painting() ;
+}
+
+bool Player::jump_move()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !stunned() && !painting() ;
+}
+
+bool Player::down_move()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::S) && !stunned() && !painting() ;
+}
+
+bool Player::charge_move()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !stunned() && !painting();
 }
 
 

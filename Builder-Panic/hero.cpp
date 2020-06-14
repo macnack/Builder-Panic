@@ -36,9 +36,6 @@ void Hero::wall_painting(const float &dt){
         painting_timer = 1.f;
         paint = true;
     }
-    if(this->can_paint()){
-        std::cerr << "teraz" << std::endl;
-    }
 }
 
 void Hero::change_platform_cooldown(const float &dt){

@@ -288,14 +288,21 @@ void ObjectManager::Paint(Hero &hero)
         int m = bd.first;
         for (auto &bd_el : bd.second)
         {
-            if( hero.painting() && hero.can_paint())
+
+            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10)
+                    && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
             {
-                if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10)
-                        && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
+                if( hero.painting() && hero.can_paint())
                 {
-                    int n = bd_el.first;
-                    std::cerr << "maluje se"<< hero.can_paint() << std::endl;
-                    this->Reverse(m, n, hero.getColor());
+                    if(bd_el.second->getFill() ==  Object::Fill::full_full)
+                    {
+                        std::cerr << "nie maluje mozesz sie ruszac" << std::endl;
+                    }
+                    else
+                    {
+                        int n = bd_el.first;
+                        this->Reverse(m, n, hero.getColor());
+                    }
                 }
             }
         }
