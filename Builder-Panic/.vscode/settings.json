@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "memory": "cpp"
+        "memory": "cpp",
+        "*.tcc": "cpp",
+        "algorithm": "cpp",
+        "mutex": "cpp",
+        "stop_token": "cpp",
+        "condition_variable": "cpp"
     }
 }

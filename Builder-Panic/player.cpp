@@ -2,23 +2,26 @@
 
 void Player::loop( const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
 {
-    if( !stunned() && painting() == false )
+    if( !stunned() && !painting() )
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
         {
             this->moveSprite(sf::Vector2f(-1.f, 0.f), dt);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         {
             this->moveSprite(sf::Vector2f(1.f, 0.f), dt);
         }
         if( sf::Keyboard::isKeyPressed(sf::Keyboard::E))
         {
-            attack_move();
+            this->attack_move();
         }
     }
+    //if painting...
+    this->wall_painting(dt);
+
+
     this->change_platform_cooldown(dt);
-    this->painting_cooldown(dt);
     this->change_platform();
     this->cooldown(dt);
     this->updateMovement(dt);

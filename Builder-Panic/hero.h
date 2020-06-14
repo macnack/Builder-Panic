@@ -22,10 +22,14 @@ public:
     virtual bool painting() = 0;
     Hero(const sf::Vector2f &pos);
     virtual ~Hero() = default;
-    bool paint = true;
+
+    bool paint = false;
+    bool paint_cooldown = true;
+    float painting_timer = 1.f;
 private:
     bool attack = false;
     bool attack_cooldown = true;
+
     bool untouchable = false;
     bool can_change = true;
     float score = 1000;
@@ -37,31 +41,19 @@ private:
     float timer = 0.f;
     float untouchable_timer = 0.f;
     float change_platform_timer = 0.f;
-    float painting_timer = 0.f;
+
+
+
     Object::Color color_;
 protected:
     void attack_move();
+    void painting_move();
     void down();
     void jump();
     void cooldown(const float &dt);
+    void wall_painting(const float &dt);
     void change_platform_cooldown(const float &dt);
     void untouchable_cooldown(const float &dt);
-    void painting_cooldown(const float &dt){
-        painting_timer += dt;
-        if (!paint)
-        {
-            if (painting_timer > 1.f)
-            {
-                painting_timer = 0.f;
-                std::cerr << "nie moge malowac" << std::endl;
-                paint = true;
-            }
-        }
-        else
-        {
-            paint = 0.f;
-        }
-    }
 };
 
 #endif // HERO_H

@@ -24,6 +24,23 @@ void Hero::cooldown(const float &dt)
     }
 }
 
+void Hero::wall_painting(const float &dt){
+    if( this->painting() ){
+        painting_timer -= dt;
+        paint = false;
+    }else {
+        painting_timer = 1.f;
+        paint = false;
+    }
+    if(painting_timer < 0.f){
+        painting_timer = 1.f;
+        paint = true;
+    }
+    if(this->can_paint()){
+        std::cerr << "teraz" << std::endl;
+    }
+}
+
 void Hero::change_platform_cooldown(const float &dt){
     change_platform_timer += dt;
     if (!can_change)
@@ -82,6 +99,12 @@ void Hero::attack_move()
 {
     attack_cooldown = false;
     attack = true;
+}
+
+void Hero::painting_move()
+{
+    paint_cooldown = false;
+    paint = true;
 }
 
 void Hero::down()
@@ -206,10 +229,6 @@ bool Hero::can_paint()
     return paint;
 }
 
-void Hero::is_painting()
-{
-    paint = true;
-}
 
 const Object::Color &Hero::getColor()
 {

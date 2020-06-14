@@ -30,8 +30,6 @@ void Game::run()
             }
             if (event.type == sf::Event::KeyPressed)
             {
-                obj_manager->Paint(*gracz);
-                obj_manager->Paint(*enemy);
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
                 { // reset plansz
                     obj_manager.reset();
@@ -58,6 +56,8 @@ void Game::run()
                 coins.push_back(std::move(coin));
             }
         }
+        obj_manager->Paint(*gracz);
+        obj_manager->Paint(*enemy);
         gracz->getHurt(*enemy, elapsed.asSeconds());
         enemy->getHurt(*gracz, elapsed.asSeconds());
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
