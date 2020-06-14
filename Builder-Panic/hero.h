@@ -22,13 +22,11 @@ public:
     Hero(const sf::Vector2f &pos);
     virtual ~Hero() = default;
 
-    bool paint = false;
-    bool paint_cooldown = true;
-    float painting_timer = 1.f;
 private:
     bool attack = false;
     bool attack_cooldown = true;
-
+    bool paint = false;
+    bool paint_cooldown = true;
     bool untouchable = false;
     bool can_change = true;
     float score = 1000;
@@ -40,10 +38,9 @@ private:
     float timer = 0.f;
     float untouchable_timer = 0.f;
     float change_platform_timer = 0.f;
-
-
-
+    float painting_timer = 1.f;
     Object::Color color_;
+
 protected:
     void attack_move();
     void painting_move();
