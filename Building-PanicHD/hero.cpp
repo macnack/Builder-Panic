@@ -90,7 +90,6 @@ void Hero::untouchable_cooldown(const float &dt)
     untouchable_timer += dt;
     if (untouchable)
     {
-        std::cerr << int(this->getColor().r) << " " << int(this->getColor().g) << " " << int(this->getColor().b) << std::endl;
         if(untouchable_timer > 0.1){
             this->setColor(sf::Color::Red);
         }
@@ -135,7 +134,7 @@ void Hero::painting_move()
 
 void Hero::down()
 {
-    if (can_change == true && stage_down == true && current_stage < 4)
+    if (can_change && stage_down && current_stage < 4)
     {
         velocity.y += 450;
         current_stage += 1;
@@ -148,11 +147,11 @@ void Hero::down()
 
 void Hero::jump()
 {
-    if (can_change == true && grounded == true)
+    if ( can_change && grounded )
     {
         velocity.y -= 1000;
         switcher = 2;
-        if(current_stage > 1)
+        if( current_stage > 1)
         {
             current_stage -= 1;
             next_stage = current_stage;
