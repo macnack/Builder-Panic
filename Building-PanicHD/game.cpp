@@ -15,6 +15,15 @@ void Game::run()
 {
     //game loop
 //    sf::View view( gracz->view(), sf::Vector2f(800,600));
+//    sf::Font font;
+//    font.loadFromFile("Font/FjallaOne-Regular.ttf");
+//    sf::Text tekst;
+//    tekst.setString("Player 1 ");
+//    tekst.setPosition(0,0);
+//    tekst.setFont(font);
+//    tekst.setCharacterSize(100);
+//    tekst.setStyle(sf::Text::Bold);
+//    tekst.setFillColor(sf::Color::White);
     while (window_.isOpen())
     {
 //        view.setCenter(gracz->view());
@@ -61,6 +70,7 @@ void Game::run()
             std::cerr << "Wynik dla gracza 1: " << gracz->getScore() << std::endl;
             std::cerr << "Wynik dla gracza 2: " << enemy->getScore() << std::endl;
         }
+//        tekst.setString("Player 1 "+std::to_string(int(gracz->getScore())));
         obj_manager->Paint(*gracz);
         obj_manager->Paint(*enemy);
         gracz->getHurt(*enemy, elapsed.asSeconds());
@@ -69,8 +79,8 @@ void Game::run()
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
 
         window_.clear(sf::Color::Black);
-
         this->draw();
+//        window_.draw(tekst);
 
         window_.display();
     }

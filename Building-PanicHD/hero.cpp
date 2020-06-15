@@ -72,8 +72,8 @@ void Hero::getHurt(Hero &hero, const float &dt)
                 hero.untouchable = true;
                 if (hero.attack == true)
                 {
-                    hero.velocity.y -= 100;
-                    this->velocity.y -= 100;
+                    hero.velocity.y -= 50;
+                    this->velocity.y -= 50;
                 }
             }
         }
@@ -204,10 +204,6 @@ void Hero::updateMovement(const float &dt)
         if (velocity.y < -maxFallingVelocity)
         {
             velocity.y = -maxFallingVelocity;
-        }
-        if (attack_cooldown == false && timer < 0.1)// attack dash
-        {
-            velocity.y = -std::abs(attackVelocity);
         }
     }
     if (velocity.x > 0.f)

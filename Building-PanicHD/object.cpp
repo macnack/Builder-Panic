@@ -39,7 +39,7 @@ void Object::Paint(const Object::Color &color)
     switch (color)
     {
     case Color::Enemy:
-        this->setColor(sf::Color(204, 102, 255)); // (0, 255, 255)
+        this->setColor(sf::Color(150, 41, 56)); // (0, 255, 255)
         break;
     case Color::Player:
         this->setColor(sf::Color(102, 51, 0)); // (0, 0, 255)

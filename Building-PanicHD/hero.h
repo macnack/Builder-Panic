@@ -29,7 +29,7 @@ private:
     bool paint_cooldown = true;
     bool untouchable = false;
     bool can_change = true;
-    float score = 1000;
+    int score = 1000;
     float acceleration = 2400.f;
     float deceleration = 750.f;
     float attackVelocity = 1200.f;
