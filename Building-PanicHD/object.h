@@ -5,15 +5,15 @@
 class Object : public GameObject
 {
 public:
-    enum class Color{Enemy = -1, Default ,Player };
-    enum class Fill{one_third, two_thirds, full, full_full};
-    const Object::Color &getColor_Object();
-    const Object::Fill &getFill();
     bool is_visible();
+    const bool &can_change();
     int getIntColor();
+    enum class Color{Enemy = -1, Default ,Player };
+    const Object::Color &getColor_Object();
+    enum class Fill{one_third, two_thirds, full, full_full};
+    const Object::Fill &getFill();
     void SetFill();
     void Paint(const Object::Color &color);
-    const bool &can_change();
     Object(const sf::Vector2f &pos, const sf::Texture &texture);
     virtual ~Object() = default;
 

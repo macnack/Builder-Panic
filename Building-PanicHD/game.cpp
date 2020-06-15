@@ -14,24 +14,21 @@ void Game::draw()
 void Game::run()
 {
     //game loop
-    //sf::View view( gracz->view(), sf::Vector2f(800,600));
+    sf::View view( gracz->view(), sf::Vector2f(800,600));
     while (window_.isOpen())
     {
+        view.setCenter(gracz->view());
+        window_.setView(view);
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Time elapsed = clock_.restart();
-//        view.setCenter(gracz->view());
-//        window_.setView(view);
         while (window_.pollEvent(event))
         {
 
             // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 window_.close();
-
-            if (event.type == sf::Event::MouseButtonPressed)
-            {
-                obj_manager->Paint(window_, event);
             }
+
             if (event.type == sf::Event::KeyPressed)
             {
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
@@ -66,6 +63,7 @@ void Game::run()
         enemy->getHurt(*gracz, elapsed.asSeconds());
         enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
         gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
+
         window_.clear(sf::Color::Black);
 
         this->draw();

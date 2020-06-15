@@ -8,10 +8,7 @@ class Player : public Hero
 public:
     void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
     void change_platform();
-    Player(const sf::Vector2f &pos) : Hero(pos)
-    {
-        this->setColor_flag(Object::Color::Player);
-    }
+    Player(const sf::Vector2f &pos);
     virtual ~Player() = default;
 
 private:

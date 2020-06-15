@@ -38,6 +38,11 @@ void Enemy::change_platform()
     }
 }
 
+Enemy::Enemy(const sf::Vector2f &pos) : Hero(pos, Object::Color::Enemy)
+{
+
+}
+
 bool Enemy::painting()
 {
     return sf::Keyboard::isKeyPressed(sf::Keyboard::N) && !stunned();

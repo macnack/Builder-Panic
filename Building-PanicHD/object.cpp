@@ -6,7 +6,8 @@ Object::Object(const sf::Vector2f &pos, const sf::Texture &texture)
     color_ = Color::Default;
     fill_ = Fill::one_third;
     can_change_color = true;
-    this->setOrigin(this->getLocalBounds().left + this->getLocalBounds().width, this->getLocalBounds().top + this->getLocalBounds().height);
+    this->setOrigin(this->getLocalBounds().left + this->getLocalBounds().width,
+                    this->getLocalBounds().top + this->getLocalBounds().height);
     this->setRotation(180);
 }
 

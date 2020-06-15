@@ -239,46 +239,6 @@ void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event
         }
     }
 }
-//void ObjectManager::Paint(Player &gracz)
-//{
-//    sf::FloatRect playerBounds = gracz.getGlobalBounds();
-//    for (auto &bd : board_)
-//    {
-//        int m = bd.first;
-//        for (auto &bd_el : bd.second)
-//        {
-//            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10)
-//                    /*&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top+playerBounds.height - 10)*/)
-//            {
-//                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-//                {
-//                    int n = bd_el.first;
-//                    this->Reverse(m, n, gracz.getColor());
-//                }
-//            }
-//        }
-//    }
-//}
-
-//void ObjectManager::Paint(Enemy &enemy)
-//{
-//    sf::FloatRect playerBounds = enemy.getGlobalBounds();
-//    for (auto &bd : board_)
-//    {
-//        int m = bd.first;
-//        for (auto &bd_el : bd.second)
-//        {
-//            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10) && bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
-//            {
-//                if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
-//                {
-//                    int n = bd_el.first;
-//                    this->Reverse(m, n, enemy.getColor());
-//                }
-//            }
-//        }
-//    }
-//}
 
 void ObjectManager::Paint(Hero &hero)
 {

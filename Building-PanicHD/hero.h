@@ -15,12 +15,11 @@ public:
     void moveSprite(const sf::Vector2f &dir, const float &dt);
     void updateMovement(const float &dt);
     void getHurt(Hero &hero, const float &dt);
-    void setColor_flag(Object::Color color);
     virtual void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt) = 0;
     virtual void change_platform() = 0;
     virtual bool painting() = 0;
-    Hero(const sf::Vector2f &pos);
-    Hero(const sf::Vector2f &pos, bool czy_enemy);
+    sf::Vector2f view(); // not in use right now
+    Hero(const sf::Vector2f &pos, const Object::Color &color);
     virtual ~Hero() = default;
 
 private:
@@ -56,6 +55,7 @@ protected:
     void painting_move();
     void down();
     void jump();
+    void setColor_flag(Object::Color color); // not in use right now
     void cooldown(const float &dt);
     void wall_painting(const float &dt);
     void change_platform_cooldown(const float &dt);

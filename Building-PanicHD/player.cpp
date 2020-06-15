@@ -38,6 +38,11 @@ void Player::change_platform()
     }
 }
 
+Player::Player(const sf::Vector2f &pos) : Hero(pos, Object::Color::Player)
+{
+
+}
+
 bool Player::painting()
 {
     return sf::Keyboard::isKeyPressed(sf::Keyboard::Q) && !stunned();

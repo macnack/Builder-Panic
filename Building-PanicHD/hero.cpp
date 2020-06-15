@@ -1,16 +1,10 @@
 #include "hero.h"
 
-Hero::Hero(const sf::Vector2f &pos) : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3) //docelowy konsturkor
+Hero::Hero(const sf::Vector2f &pos, const Object::Color &color)
+    : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3), color_(color)
 {
     grounded = true;
     bounce = false;
-}
-
-Hero::Hero(const sf::Vector2f &pos, bool czy_enemy): Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3, czy_enemy)
-{
-    grounded = true;
-    bounce = false;
-
 }
 
 void Hero::cooldown(const float &dt)
@@ -83,6 +77,11 @@ void Hero::getHurt(Hero &hero, const float &dt)
     if(untouchable){
         switcher = 3;
     }
+}
+
+sf::Vector2f Hero::view()
+{
+    return sf::Vector2f(  this->getGlobalBounds().left, this->getGlobalBounds().top);
 }
 
 void Hero::untouchable_cooldown(const float &dt)
@@ -190,6 +189,10 @@ void Hero::updateMovement(const float &dt)
         {
             velocity.y = maxFallingVelocity;
         }
+        if (attack_cooldown == false && timer < 0.1)// attack dash
+        {
+            velocity.y = std::abs(attackVelocity);
+        }
     }
     if (velocity.y < 0.f)
     {
@@ -197,6 +200,10 @@ void Hero::updateMovement(const float &dt)
         if (velocity.y < -maxFallingVelocity)
         {
             velocity.y = -maxFallingVelocity;
+        }
+        if (attack_cooldown == false && timer < 0.1)// attack dash
+        {
+            velocity.y = -std::abs(attackVelocity);
         }
     }
     if (velocity.x > 0.f)
@@ -213,7 +220,7 @@ void Hero::updateMovement(const float &dt)
         {
             velocity.x = maxVelocity;
         }
-        if (attack_cooldown == false && timer < 0.1)
+        if (attack_cooldown == false && timer < 0.1)// attack dash
         {
             velocity.x = attackVelocity;
             this->setColor(sf::Color(128, 128, 128));
@@ -235,7 +242,7 @@ void Hero::updateMovement(const float &dt)
         {
             velocity.x = -maxVelocity;
         }
-        if (attack_cooldown == false && timer < 0.1)
+        if (attack_cooldown == false && timer < 0.1) // attack dash
         {
             velocity.x = -std::abs(attackVelocity);
             this->setColor(sf::Color(128, 128, 128));
@@ -261,7 +268,6 @@ bool Hero::can_paint()
 {
     return paint;
 }
-
 
 const Object::Color &Hero::getColor_Object()
 {

@@ -11,15 +11,13 @@ public:
     void change_platform();
     bool painting();
     virtual ~SmartEnemy() = default;
-    SmartEnemy(const sf::Vector2f &pos) : Hero(pos)
+    SmartEnemy(const sf::Vector2f &pos) : Hero(pos, Object::Color::Enemy)
     {
-        this->setColor_flag(Object::Color::Enemy);
+
     }
 
 private:
-    void attack_move();
-    void down();
-    void jump();
+
 };
 
 #endif // SMARTENEMY_H
