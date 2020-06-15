@@ -254,11 +254,7 @@ void ObjectManager::Paint(Hero &hero)
             {
                 if( hero.painting() && hero.can_paint())
                 {
-                    if(bd_el.second->getFill() ==  Object::Fill::full_full)
-                    {
-                        std::cerr << "nie maluje mozesz sie ruszac" << std::endl;
-                    }
-                    else
+                    if(bd_el.second->getFill() !=  Object::Fill::full_full)
                     {
                         int n = bd_el.first;
                         this->Reverse(m, n, hero.getColor_Object());
@@ -293,7 +289,7 @@ bool ObjectManager::full_board()
 
 void ObjectManager::draw()
 {
-    for (const auto &el : board_) //obj_mangaer->draw(window_)
+    for (const auto &el : board_)
     {
         for (const auto &v : el.second)
         {
@@ -311,9 +307,6 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
     {
         throw("Could not load texture 'Dungeons Walls'");
     }
-    //    window_->getSize().x zamiast petli col row x+= y+=...
-    //    window_->getSize().y
-
     texture.setRepeated(true);
     for (int i = 0; i < columns; i++)
     {
@@ -323,7 +316,7 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
             this->add(k, i, std::move(block_));
             y += 247;
         }
-        x+= 7.25 * 32;//x += 256.3;
+        x+= 7.25 * 32;
         y = 25.0 ;
         }
 }

@@ -49,6 +49,7 @@ private:
     float painting_stop = 0.f;
     float painting_start = 0.5f;
     Object::Color color_;
+    sf::Color RGB;
 
 protected:
     void attack_move();

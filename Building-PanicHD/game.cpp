@@ -14,11 +14,11 @@ void Game::draw()
 void Game::run()
 {
     //game loop
-    sf::View view( gracz->view(), sf::Vector2f(800,600));
+//    sf::View view( gracz->view(), sf::Vector2f(800,600));
     while (window_.isOpen())
     {
-        view.setCenter(gracz->view());
-        window_.setView(view);
+//        view.setCenter(gracz->view());
+//        window_.setView(view);
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Time elapsed = clock_.restart();
         while (window_.pollEvent(event))
@@ -57,6 +57,10 @@ void Game::run()
                 coins.push_back(std::move(coin));
             }
         }
+        if( sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
+            std::cerr << "Wynik dla gracza 1: " << gracz->getScore() << std::endl;
+            std::cerr << "Wynik dla gracza 2: " << enemy->getScore() << std::endl;
+        }
         obj_manager->Paint(*gracz);
         obj_manager->Paint(*enemy);
         gracz->getHurt(*enemy, elapsed.asSeconds());
@@ -72,7 +76,8 @@ void Game::run()
     }
 }
 
-Game::Game(const float &w, const float &h) : window_(sf::VideoMode(w, h), "Bulding Panic"), scena(&window_)
+Game::Game(const float &w, const float &h)
+    : window_(sf::VideoMode(w, h), "Bulding Panic"), scena(&window_)
 {
     obj_manager = std::make_unique<ObjectManager>(&window_);
     gracz = std::make_unique<Player>(sf::Vector2f(100, 250));

@@ -20,7 +20,6 @@ Scena::Scena(sf::RenderWindow *window) : window_(window)
     texture.setRepeated(true);
     for (double i = 25; i < 1080; i += 247)
     { //wall
-        std::cerr << i << std::endl;
         std::unique_ptr<sf::Sprite> wall = std::make_unique<GameObject>(sf::Vector2f(0, i), sf::FloatRect(0, 80, 96, 32), texture);
         std::unique_ptr<sf::Sprite> wall2 = std::make_unique<GameObject>(sf::Vector2f(96*7.25, i), sf::FloatRect(0, 80, 96, 32), texture);
         std::unique_ptr<sf::Sprite> wall3 = std::make_unique<GameObject>(sf::Vector2f(96*7.25*2.0, i), sf::FloatRect(0, 80, 96, 32), texture);

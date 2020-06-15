@@ -3,6 +3,10 @@
 Hero::Hero(const sf::Vector2f &pos, const Object::Color &color)
     : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3), color_(color)
 {
+    if(color_ == Object::Color::Enemy){
+        this->setColor(sf::Color(178, 102, 255));
+    }
+    RGB = this->getColor();
     grounded = true;
     bounce = false;
 }
@@ -93,19 +97,19 @@ void Hero::untouchable_cooldown(const float &dt)
             this->setColor(sf::Color::Red);
         }
         if(untouchable_timer > snapshot_color){
-            this->setColor(sf::Color(255,255,255));
+            this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
         }
         if(untouchable_timer > snapshot_color*2){
             this->setColor(sf::Color::Red);
         }
         if(untouchable_timer > snapshot_color*3){
-            this->setColor(sf::Color(255,255,255));
+            this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
         }
         if(untouchable_timer > snapshot_color*4){
             this->setColor(sf::Color::Red);
         }
         if(untouchable_timer > snapshot_color*5){
-            this->setColor(sf::Color(255,255,255));
+            this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
         }
         if (untouchable_timer > untouchable_elapsed )
         {
@@ -225,7 +229,7 @@ void Hero::updateMovement(const float &dt)
             velocity.x = attackVelocity;
             this->setColor(sf::Color(128, 128, 128));
         }else{
-            this->setColor(sf::Color(255, 255, 255));
+            this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
         }
     }
     else if (velocity.x < 0.f)
@@ -247,7 +251,7 @@ void Hero::updateMovement(const float &dt)
             velocity.x = -std::abs(attackVelocity);
             this->setColor(sf::Color(128, 128, 128));
         }else{
-            this->setColor(sf::Color(255, 255, 255));
+            this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
         }
     }
     this->setTexture(textures_[switcher]);
