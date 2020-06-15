@@ -70,6 +70,7 @@ void Hero::getHurt(Hero &hero, const float &dt)
             {
                 hero.velocity.y -= 450;
                 hero.untouchable = true;
+                hero.is_stunned = true;
                 if (hero.attack == true)
                 {
                     hero.velocity.y -= 50;
@@ -78,7 +79,7 @@ void Hero::getHurt(Hero &hero, const float &dt)
             }
         }
     }
-    if(untouchable){
+    if(is_stunned){
         switcher = 3;
     }
 }
@@ -110,6 +111,9 @@ void Hero::untouchable_cooldown(const float &dt)
         }
         if(untouchable_timer > snapshot_color*5){
             this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
+        }
+        if(untouchable_timer > stunned_elapsed){
+            is_stunned = false;
         }
         if (untouchable_timer > untouchable_elapsed )
         {
@@ -261,7 +265,7 @@ void Hero::setColor_flag(Object::Color color)
 
 bool Hero::stunned()
 {
-    return untouchable;
+    return is_stunned;
 }
 
 bool Hero::can_paint()

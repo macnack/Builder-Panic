@@ -28,6 +28,7 @@ private:
     bool paint = false;
     bool paint_cooldown = true;
     bool untouchable = false;
+    bool is_stunned = false;
     bool can_change = true;
     int score = 1000;
     float acceleration = 2400.f;
@@ -41,7 +42,8 @@ private:
     float untouchable_timer = 0.f;
     float untouchable_reset = 0.f;
     float untouchable_elapsed = 2.0f;
-    float snapshot_color = 0.4f;
+    float stunned_elapsed = 1.5f;
+    float snapshot_color = 0.3f;
     float change_platform_timer = 0.f;
     float change_platform_reset = 0.f;
     float change_platform_elapsed = 0.6;
