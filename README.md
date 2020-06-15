@@ -11,13 +11,13 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 * :arrow_down: - skok o jedną platformę do dołu
 * :arrow_left: i :arrow_right: poruszanie się lewo i prawo
 * "**N**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
-* "**M**" malowanie
+* "**M**" malowanie - przytrzymac
 <br/> Dla drugiego gracza <br/>
 * "**W**" - skok o jedną platformę do góry
 * "**S**" - skok o jedną platformę do dołu
 * "**A**" i "**D**" poruszanie się lewo i prawo
 * "**E**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
-* "**Q**" malowanie
+* "**Q**" malowanie - przytrzymac
 ## Planowane do wykorzystania biblioteki:
 
 * SFML : Window.hpp, Graphics.hpp , *Audio.hpp*
