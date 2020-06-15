@@ -1,12 +1,12 @@
 #include "hero.h"
 
-Hero::Hero(const sf::Vector2f &pos) : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 9, 8, 3) //docelowy konsturkor
+Hero::Hero(const sf::Vector2f &pos) : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3) //docelowy konsturkor
 {
     grounded = true;
     bounce = false;
 }
 
-Hero::Hero(const sf::Vector2f &pos, bool czy_enemy): Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 9, 8, 3, czy_enemy)
+Hero::Hero(const sf::Vector2f &pos, bool czy_enemy): Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3, czy_enemy)
 {
     grounded = true;
     bounce = false;
@@ -202,6 +202,7 @@ void Hero::updateMovement(const float &dt)
     if (velocity.x > 0.f)
     { //right
         //deceleration
+        this->setFaceRight(true);
         velocity.x -= deceleration * dt;
         if (velocity.x < 0.f)
         {
@@ -223,6 +224,7 @@ void Hero::updateMovement(const float &dt)
     else if (velocity.x < 0.f)
     { //if going left
         //decelaretion
+        this->setFaceRight(false);
         velocity.x += deceleration * dt;
         if (velocity.x > 0.f)
         {

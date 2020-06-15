@@ -26,23 +26,35 @@ std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame, const
                                       frame.width,
                                       frame.height);
     frames.push_back(endRect);
+    startRect.left = frame.width;
+    startRect.width = -std::abs(startRect.width);
+    frames.push_back(startRect);
+    frames.push_back(startRect);
+    endRect.width = -std::abs(endRect.width);
+    frames.push_back(endRect);
     return frames;
 }
 
 void Animation::playAnimation(const float &dt)
 {
     timer += dt;
+    int startRect;
+    if(faceRight){
+        startRect = 0;
+    }else{
+        startRect = 3;
+    }
     if (timer > 1 / framerate_)
     {
         timer = 0.f;
-        if (frames_[switcher][1] != frames_[switcher][2])
+        if (frames_[switcher][startRect + 1] != frames_[switcher][startRect + 2])
         {
-            frames_[switcher][1].left += frames_[switcher][0].width;
+            frames_[switcher][startRect + 1].left += std::abs(frames_[switcher][startRect].width);
         }
         else
         {
-            frames_[switcher][1] = frames_[switcher][0];
+            frames_[switcher][startRect + 1] = frames_[switcher][startRect];
         }
-        this->setTextureRect(frames_[switcher][1]);
+        this->setTextureRect(frames_[switcher][startRect + 1]);
     }
 }

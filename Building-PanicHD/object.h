@@ -19,7 +19,7 @@ public:
 
 private:
     bool can_change_color;
-    bool invisible = true;
+    bool invisible = false;
     Object::Color color_;
     Object::Fill fill_;
 };

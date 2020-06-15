@@ -5,6 +5,9 @@
 class Entity : public Animation
 {
 public:
+    void setFaceRight(const bool &face){
+        faceRight = face;
+    }
     int setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms);
     void updateGravity(const float &dt);
     void updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);

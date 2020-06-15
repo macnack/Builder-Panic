@@ -5,7 +5,6 @@ Object::Object(const sf::Vector2f &pos, const sf::Texture &texture)
 {
     color_ = Color::Default;
     fill_ = Fill::one_third;
-    invisible = false;
     can_change_color = true;
     this->setOrigin(this->getLocalBounds().left + this->getLocalBounds().width, this->getLocalBounds().top + this->getLocalBounds().height);
     this->setRotation(180);
@@ -16,16 +15,16 @@ void Object::SetFill()
     switch (fill_)
     {
     case Object::Fill::one_third:
-        this->setTextureRect(sf::IntRect(0, 0, 187, 64));
+        this->setTextureRect(sf::IntRect(rect_.left, rect_.top, rect_.width, rect_.height/3));
         invisible = true;
         fill_ = Fill::two_thirds;
         break;
     case Object::Fill::two_thirds:
-        this->setTextureRect(sf::IntRect(0, 0, 187, 128));
+        this->setTextureRect(sf::IntRect(rect_.left, rect_.top, rect_.width, rect_.height * 2/3));
         fill_ = Fill::full;
         break;
     case Object::Fill::full:
-        this->setTextureRect(sf::IntRect(0, 0, 187, 192));
+        this->setTextureRect(sf::IntRect(rect_.left, rect_.top, rect_.width, rect_.height));
         fill_ = Fill::full_full;
         break;
     case Object::Fill::full_full:

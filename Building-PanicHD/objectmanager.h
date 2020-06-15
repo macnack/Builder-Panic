@@ -17,7 +17,7 @@ public:
     virtual ~ObjectManager() = default;
 
 private:
-    double x = 0.;
+    double x = 65.25;
     double y = 25.0;
     int rows = 4;
     int columns = 8;

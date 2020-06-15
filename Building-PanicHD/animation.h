@@ -18,6 +18,7 @@ private:
     float timer = 0.f;
 
 protected:
+    bool faceRight = true;
     int switcher = 0;
     sf::IntRect frame_;
     sf::Texture texture_;

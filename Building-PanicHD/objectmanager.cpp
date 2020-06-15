@@ -363,7 +363,7 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
             this->add(k, i, std::move(block_));
             y += 247;
         }
-        x += 256.3;
+        x+= 7.25 * 32;//x += 256.3;
         y = 25.0 ;
         }
 }
