@@ -1,9 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
-#include "scena.h"
+#include "menu.h"
 class Game : public sf::RenderWindow
 {
 public:
+    friend class Menu;
     void run();
     void draw();
     void update();
@@ -11,18 +12,19 @@ public:
     virtual ~Game() = default;
 
 private:
+    bool pause = false;
     sf::RenderWindow window_;
-    sf::Event event;
-    sf::Clock clock_;
+    float height_;
+    float width_;
     Scena scena;
+    Menu menu;
+    std::string title;
     std::unique_ptr<Enemy> enemy;
     std::unique_ptr<Player> gracz;
     std::unique_ptr<ObjectManager> obj_manager;
     std::vector<std::unique_ptr<Coin>> coins;
-    std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
-    std::string title;
-    float width_;
-    float height_;
+    sf::Clock clock_;
+    sf::Event event;
 };
 
 #endif // GAME_H

@@ -250,7 +250,7 @@ void ObjectManager::Paint(Hero &hero)
         {
 
             if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10))
-                    //&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
+                //&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
             {
                 if( hero.painting() && hero.can_paint())
                 {
@@ -318,5 +318,5 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
         }
         x+= 7.25 * 32;
         y = 25.0 ;
-        }
+    }
 }

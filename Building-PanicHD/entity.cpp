@@ -59,15 +59,15 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
             this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
         }
     }
-    if (playerBounds.top + playerBounds.height > 1080)
+    if (playerBounds.top + playerBounds.height > height_screen)
     { //zapobiega spadaniu
         this->setPosition(playerBounds.left, next_stagePlatformBounds.top - playerBounds.height);
     }
     if ((playerBounds.left + playerBounds.width) < 5)
     { //przejsce w lewo
-        this->setPosition(1920 - playerBounds.left - playerBounds.width, next_stagePlatformBounds.top - playerBounds.height);
+        this->setPosition(width_screen - playerBounds.left - playerBounds.width, next_stagePlatformBounds.top - playerBounds.height);
     }
-    if ((playerBounds.left) > 1920)
+    if ((playerBounds.left) > width_screen)
     { //przejscie w prawo
         this->setPosition(-(50) / 2.0, next_stagePlatformBounds.top - playerBounds.height);
     }

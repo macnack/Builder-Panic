@@ -19,10 +19,12 @@ protected:
     bool bounce = false;
     bool stage_down = false;
     bool grounded = false;
-    int current_stage = 4; //define?
+    int current_stage = 3; //define?
     int next_stage = current_stage;
-    sf::Vector2f velocity;
     float gravity = 2000;
+    float height_screen = 1080;
+    float width_screen = 1920;
+    sf::Vector2f velocity;
 };
 
 #endif // ENTITY_H
