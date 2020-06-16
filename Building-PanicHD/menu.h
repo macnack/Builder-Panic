@@ -19,25 +19,108 @@ public:
         background = std::make_unique<Scena>(window_);
         pause_window();
         start_window();
+        credits_window();
     }
     void start_window(){
         auto start = std::make_unique<sf::Text>("START GAME",font,140);
         start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
         start->setPosition(960,20);
-        start_win_.emplace_back(std::move(start));
+        map["START"].emplace_back(std::move(start));
         start = std::make_unique<sf::Text>("CREDITS",font,140);
         start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
         start->setPosition(960,170);
-        start_win_.emplace_back(std::move(start));
+        map["START"].emplace_back(std::move(start));
         start = std::make_unique<sf::Text>("EXIT",font,140);
         start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
         start->setPosition(960,320);
-        start->setOutlineThickness(5);
-        start->setOutlineColor(sf::Color::Black);
-        start_win_.emplace_back(std::move(start));
+        map["START"].emplace_back(std::move(start));
+
     }
-    void start_loop(){
+    void credits_window(){
+        auto start = std::make_unique<sf::Text>("GAME",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,10);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("MADE BY",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,60);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("Macnack",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,110);
+        start->setFillColor(sf::Color(178, 102, 255));
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("ENGINEER CHARACTER",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,170);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("MADE BY",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,220);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("OllieBerzs",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,270);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("COINS",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,330);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("MADE BY",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,380);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("La Red Games",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,430);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("CASTLE TILESET",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,490);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("MADE BY",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,540);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("RottingPixels",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,590);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("Dungeons Walls",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,640);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("MADE BY",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,690);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("Evil_PoisonBR",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,740);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("FONT Fjalla One",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,790);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("Designed by",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,840);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("Sorkin Type ",font,40);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,890);
+        map["CREDITS"].emplace_back(std::move(start));
+        start = std::make_unique<sf::Text>("BACK",font,60);
+        start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
+        start->setPosition(960,940);
+
+        //Sorkin Type //
+        map["CREDITS"].emplace_back(std::move(start));
+    }
+
+    bool start_loop(){
         bool start = false;
+        std::string key = "START";
         while ( window_->isOpen())
         {
             sf::Event event;
@@ -51,7 +134,7 @@ public:
                 {
                     window_->close();
                 }
-                for( auto &win : start_win_ ){
+                for( auto &win : map[key] ){
                     if( win->getGlobalBounds().contains(mouse_position) ){
                         win->setOutlineThickness(5);
                         win->setOutlineColor(sf::Color::Black);
@@ -64,6 +147,15 @@ public:
                             if ( s == "START GAME")
                             {
                                 start = true;
+                                key = "START";
+                            }
+                            if( s == "CREDITS")
+                            {
+                                key = "CREDITS";
+                            }
+                            if( s == "BACK" )
+                            {
+                                key = "START";
                             }
                         }
                     }else{
@@ -73,12 +165,13 @@ public:
             }
 
             background->draw();
-
-            for( const auto &win : start_win_){
-                window_->draw(*win);
+            for(const auto &m : map[key] )
+            {
+                window_->draw(*m);
             }
             window_->display();
         }
+        return true;
     }
     void pause_window(){
         auto board  = std::make_unique<sf::Sprite>(texture,sf::IntRect(0,0,740,300));
@@ -127,6 +220,8 @@ private:
     sf::RenderWindow *window_;
     std::vector<std::unique_ptr<sf::Drawable>> pause_win_;
     std::vector<std::unique_ptr<sf::Text>> start_win_;
+    std::map<std::string,std::vector<std::unique_ptr<sf::Text>>> map;
+    std::vector<std::unique_ptr<sf::Text>> credits_win_;
     std::unique_ptr<Scena> background;
     sf::Text tekst;
     sf::Font font;

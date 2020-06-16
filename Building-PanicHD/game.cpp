@@ -53,11 +53,13 @@ void Game::run()
 {
     //game loop
     //    sf::View view( gracz->view(), sf::Vector2f(800,600));
-    menu.start_loop();
-    for (int i = 0; i < 3; i++)
+    if( menu.start_loop() )
     {
-        std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
-        coins.push_back(std::move(coin));
+        for (int i = 0; i < 3; i++)
+        {
+            std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
+            coins.push_back(std::move(coin));
+        }
     }
     while (window_.isOpen())
     {
