@@ -11,25 +11,47 @@ void Game::draw()
     window_.draw(*gracz);
     window_.draw(*enemy);
 }
+
+void Game::update()
+{
+    sf::Time elapsed = clock_.restart();
+    for (auto it = coins.begin(); it < coins.end(); it++)
+    {
+        (*it)->loop(scena.getVec("floors"), elapsed.asSeconds());
+        if ((*it)->is_collected(*gracz,*enemy))
+        {
+            coins.erase(it);
+            std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
+            coins.push_back(std::move(coin));
+        }
+    }
+    obj_manager->Paint(*gracz);
+    obj_manager->Paint(*enemy);
+    gracz->getHurt(*enemy, elapsed.asSeconds());
+    enemy->getHurt(*gracz, elapsed.asSeconds());
+    enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
+    gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
+
+}
 void Game::run()
 {
     //game loop
-//    sf::View view( gracz->view(), sf::Vector2f(800,600));
-//    sf::Font font;
-//    font.loadFromFile("Font/FjallaOne-Regular.ttf");
-//    sf::Text tekst;
-//    tekst.setString("Player 1 ");
-//    tekst.setPosition(0,0);
-//    tekst.setFont(font);
-//    tekst.setCharacterSize(100);
-//    tekst.setStyle(sf::Text::Bold);
-//    tekst.setFillColor(sf::Color::White);
+    //    sf::View view( gracz->view(), sf::Vector2f(800,600));
+    //    sf::Font font;
+    //    font.loadFromFile("Font/FjallaOne-Regular.ttf");
+    //    sf::Text tekst;
+    //    tekst.setString("Player 1 ");
+    //    tekst.setPosition(0,0);
+    //    tekst.setFont(font);
+    //    tekst.setCharacterSize(100);
+    //    tekst.setStyle(sf::Text::Bold);
+    //    tekst.setFillColor(sf::Color::White);
     while (window_.isOpen())
     {
-//        view.setCenter(gracz->view());
-//        window_.setView(view);
+        //        view.setCenter(gracz->view());
+        //        window_.setView(view);
         // check all the window's events that were triggered since the last iteration of the loop
-        sf::Time elapsed = clock_.restart();
+
         while (window_.pollEvent(event))
         {
 
@@ -56,31 +78,16 @@ void Game::run()
                 std::cerr << "Wynik dla gracza 2: " << enemy->getScore() << std::endl;
             }
         }
-        for (auto it = coins.begin(); it < coins.end(); it++)
-        {
-            (*it)->loop(scena.getVec("floors"), elapsed.asSeconds());
-            if ((*it)->is_collected(*gracz,*enemy))
-            {
-                coins.erase(it);
-                std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
-                coins.push_back(std::move(coin));
-            }
-        }
+
         if( sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){
             std::cerr << "Wynik dla gracza 1: " << gracz->getScore() << std::endl;
             std::cerr << "Wynik dla gracza 2: " << enemy->getScore() << std::endl;
         }
-//        tekst.setString("Player 1 "+std::to_string(int(gracz->getScore())));
-        obj_manager->Paint(*gracz);
-        obj_manager->Paint(*enemy);
-        gracz->getHurt(*enemy, elapsed.asSeconds());
-        enemy->getHurt(*gracz, elapsed.asSeconds());
-        enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
-        gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
-
+        //        tekst.setString("Player 1 "+std::to_string(int(gracz->getScore())));
+        this->update();
         window_.clear(sf::Color::Black);
         this->draw();
-//        window_.draw(tekst);
+        //        window_.draw(tekst);
 
         window_.display();
     }

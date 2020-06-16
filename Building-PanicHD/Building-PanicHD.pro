@@ -11,6 +11,7 @@ SOURCES += \
         gameobject.cpp \
         hero.cpp \
         main.cpp \
+        menu.cpp \
         object.cpp \
         objectmanager.cpp \
         player.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     game.h \
     gameobject.h \
     hero.h \
+    menu.h \
     object.h \
     objectmanager.h \
     player.h \
