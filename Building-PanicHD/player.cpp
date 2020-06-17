@@ -5,6 +5,7 @@ void Player::loop( const std::vector<std::unique_ptr<sf::Sprite>> &platforms, co
     if ( this->left_move() )
     {
         this->moveSprite(sf::Vector2f(-1.f, 0.f), dt);
+        std::cerr << "Ruszam sie w lewo" << std::endl;
     }
     else if ( this->right_move() )
     {
@@ -12,6 +13,7 @@ void Player::loop( const std::vector<std::unique_ptr<sf::Sprite>> &platforms, co
     }
     if( this->charge_move() )
     {
+        std::cerr << "attak" << std::endl;
         this->attack_move();
     }
     //if painting...

@@ -7,12 +7,11 @@ public:
     friend class Menu;
     void run();
     void draw();
-    void update();
+    void update(const float &dt);
     Game(const float &w, const float &h);
     virtual ~Game() = default;
 
 private:
-    bool pause = false;
     sf::RenderWindow window_;
     float height_;
     float width_;

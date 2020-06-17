@@ -10,27 +10,22 @@ void Game::draw()
     }
     window_.draw(*gracz);
     window_.draw(*enemy);
-    if(pause)
-    {
-        menu.game_pause(*gracz,*enemy);
-    }
+    menu.Draw();
 }
 
-void Game::update()
+void Game::update(const float &dt)
 {
-    sf::Time elapsed = clock_.restart();
     if (obj_manager->full_board())
     {
         std::cerr << "Press R to reset" << std::endl;
         sf::sleep(sf::microseconds(1000));
-        //window_.close();
         obj_manager->addScore(*gracz, *enemy);
         std::cerr << "Wynik dla gracza 1: " << gracz->getScore() << std::endl;
         std::cerr << "Wynik dla gracza 2: " << enemy->getScore() << std::endl;
     }
     for (auto it = coins.begin(); it < coins.end(); it++)
     {
-        (*it)->loop(scena.getVec("floors"), elapsed.asSeconds());
+        (*it)->loop(scena.getVec("floors"), dt);
         if ((*it)->is_collected(*gracz,*enemy))
         {
             coins.erase(it);
@@ -38,36 +33,32 @@ void Game::update()
             coins.push_back(std::move(coin));
         }
     }
-    if(!pause)
+    if(menu.paused() == false)
     {
         obj_manager->Paint(*gracz);
         obj_manager->Paint(*enemy);
-        gracz->getHurt(*enemy, elapsed.asSeconds());
-        enemy->getHurt(*gracz, elapsed.asSeconds());
-        enemy->loop(scena.getVec("floors"), elapsed.asSeconds());
-        gracz->loop(scena.getVec("floors"), elapsed.asSeconds());
+        gracz->getHurt(*enemy, dt);
+        enemy->getHurt(*gracz, dt);
+        enemy->loop(scena.getVec("floors"), dt);
+        gracz->loop(scena.getVec("floors"), dt);
     }
-
 }
 void Game::run()
 {
     //game loop
     //    sf::View view( gracz->view(), sf::Vector2f(800,600));
-    if( menu.start_loop() )
+    for (int i = 0; i < 3; i++)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
-            coins.push_back(std::move(coin));
-        }
+        std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
+        coins.push_back(std::move(coin));
     }
     while (window_.isOpen())
     {
+        sf::Time elapsed = clock_.restart();
         //        view.setCenter(gracz->view());
         //        window_.setView(view);
 
         // check all the window's events that were triggered since the last iteration of the loop
-
         while (window_.pollEvent(event))
         {
 
@@ -75,21 +66,21 @@ void Game::run()
             if (event.type == sf::Event::Closed){
                 window_.close();
             }
-
             if (event.type == sf::Event::KeyPressed)
             {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::R) && pause)
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
                 { // reset plansz
                     obj_manager.reset();
                     obj_manager = std::make_unique<ObjectManager>(&window_);
                 }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-                { // pauza
-                    pause = !pause;
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::C)){
+                    std::cerr << gracz->getScore() << std::endl;
+                    std::cerr << enemy->getScore() << std::endl;
                 }
             }
+            menu.menu_event(event,*gracz,*enemy);
         }
-        this->update();
+        this->update(elapsed.asSeconds());
         window_.clear(sf::Color::Black);
         this->draw();
         window_.display();
@@ -102,4 +93,5 @@ Game::Game(const float &w, const float &h)
     obj_manager = std::make_unique<ObjectManager>(&window_);
     gracz = std::make_unique<Player>(sf::Vector2f(825, 250));
     enemy = std::make_unique<Enemy>(sf::Vector2f(1025, 250));
+    menu.pause_update(*gracz,*enemy);
 }

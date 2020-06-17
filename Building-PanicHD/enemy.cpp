@@ -45,30 +45,30 @@ Enemy::Enemy(const sf::Vector2f &pos) : Hero(pos, Object::Color::Enemy)
 
 bool Enemy::painting()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::U) && !stunned();
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::N) && !stunned();
 }
 
 bool Enemy::left_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::J) && !stunned() && !painting() ;
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !stunned() && !painting() ;
 }
 
 bool Enemy::right_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::L) && !stunned() && !painting() ;
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !stunned() && !painting() ;
 }
 
 bool Enemy::jump_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::I) && !stunned() && !painting() ;
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !stunned() && !painting() ;
 }
 
 bool Enemy::down_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::K) && !stunned() && !painting() ;
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !stunned() && !painting() ;
 }
 
 bool Enemy::charge_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::O) && !stunned() && !painting();
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::M) && !stunned() && !painting();
 }

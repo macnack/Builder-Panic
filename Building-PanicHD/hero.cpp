@@ -179,8 +179,7 @@ float Hero::getScore()
 }
 
 void Hero::moveSprite(const sf::Vector2f &dir, const float &dt)
-{
-    //incrasing speed in the inputed dirction
+{ //incrasing speed in the inputed dirction
     velocity += dir * (dt * acceleration);
 }
 
@@ -230,7 +229,7 @@ void Hero::updateMovement(const float &dt)
             this->setColor(sf::Color(128, 128, 128));
         }else{
             this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
-            attack = false;
+            //attack = false;
         }
     }
     else if (velocity.x < 0.f)
