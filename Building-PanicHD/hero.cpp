@@ -230,6 +230,7 @@ void Hero::updateMovement(const float &dt)
             this->setColor(sf::Color(128, 128, 128));
         }else{
             this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
+            attack = false;
         }
     }
     else if (velocity.x < 0.f)
