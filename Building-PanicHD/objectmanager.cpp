@@ -10,10 +10,9 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
 {
     int Intcolor = static_cast<int>(color);
     board_[m][n]->SetFill();
-    if (board_[m][n]->can_change())
-    {
-        board_[m][n]->Paint(color);
-        bool reverse = false;
+    board_[m][n]->Paint(color);
+    bool reverse = false;
+    if( board_[m][n]->getFill() == Object::Fill::full_full){
         for (int i = n; i < columns; i++)
         { // to left
             if (board_[m][i]->getIntColor() == -Intcolor && reverse == false)
