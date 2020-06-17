@@ -1,5 +1,8 @@
 #include "menu.h"
 
+const bool &Menu::paused(){
+    return pause;
+}
 
 void Menu::start_window(){
     auto start = std::make_unique<sf::Text>("START GAME",font,140);
@@ -203,4 +206,18 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
             win->setOutlineColor(sf::Color::Black);
         }
     }
+}
+
+Menu::Menu(sf::RenderWindow *window)
+    : window_(window)
+{
+    font.loadFromFile("Font/FjallaOne-Regular.ttf");
+    if (!texture.loadFromFile("Texture/Dungeons Walls.png"))
+    {
+        throw("Could not load texture 'Dungeons Walls'");
+    }
+    texture.setRepeated(true);
+    pause_window();
+    start_window();
+    credits_window();
 }
