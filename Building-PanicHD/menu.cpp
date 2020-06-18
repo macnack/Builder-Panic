@@ -1,7 +1,18 @@
 #include "menu.h"
 
-const bool &Menu::paused(){
+const bool &Menu::paused()
+{
     return pause;
+}
+
+const bool &Menu::started()
+{
+    return start;
+}
+
+const bool &Menu::restared()
+{
+    return restart;
 }
 
 void Menu::start_window(){
@@ -195,10 +206,20 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
                 {
                     key = "CREDITS";
                 }
-                if( s == "HOME" || s == "BACK")
+                if( s == "BACK")
                 {
-                    start = true;
                     key = "START";
+                }
+                if( s == "HOME" )
+                {
+                    key = "START";
+                    restart = true;
+                    pause = false;
+                    start = true;
+                }
+                else
+                {
+                    restart = false;
                 }
             }
         }else{

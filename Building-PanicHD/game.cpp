@@ -79,6 +79,11 @@ void Game::run()
                 }
             }
             menu.menu_event(event,*gracz,*enemy);
+            if(menu.restared() )
+            {
+                obj_manager.reset();
+                obj_manager = std::make_unique<ObjectManager>(&window_);
+            }
         }
         this->update(elapsed.asSeconds());
         window_.clear(sf::Color::Black);
@@ -91,7 +96,6 @@ Game::Game(const float &w, const float &h)
     : window_(sf::VideoMode(w, h), "Bulding Panic"), scena(&window_), menu(&window_)
 {
     obj_manager = std::make_unique<ObjectManager>(&window_);
-    gracz = std::make_unique<Player>(sf::Vector2f(825, 250));
-    enemy = std::make_unique<Enemy>(sf::Vector2f(1025, 250));
-    menu.pause_update(*gracz,*enemy);
+    gracz = std::make_unique<Player>();
+    enemy = std::make_unique<Enemy>();
 }

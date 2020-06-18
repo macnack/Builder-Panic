@@ -3,11 +3,12 @@
 
 #include "scena.h"
 
-class Game;
 class Menu : public sf::RenderWindow
 {
 public:
     const bool &paused();
+    const bool &started();
+    const bool &restared();
     void start_window();
     void credits_window();
     void pause_window();
@@ -19,6 +20,7 @@ private:
     std::string key = "START";
     bool pause = false;
     bool start = true;
+    bool restart = false;
     sf::Text tekst;
     sf::Font font;
     sf::Texture texture;
