@@ -9,18 +9,19 @@ public:
     const bool &paused();
     const bool &started();
     const bool &restared();
+    bool game_view();
     void start_window();
     void credits_window();
     void pause_window();
     void pause_update(Hero &en1, Hero &en2);
     void Draw();
+    bool restart = false;
     void menu_event(const sf::Event &event, Hero &en1, Hero &en2);
     Menu(sf::RenderWindow *window);
 private:
     std::string key = "START";
     bool pause = false;
     bool start = true;
-    bool restart = false;
     sf::Text tekst;
     sf::Font font;
     sf::Texture texture;

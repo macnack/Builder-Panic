@@ -84,6 +84,10 @@ void Hero::getHurt(Hero &hero, const float &dt)
     }
 }
 
+void Hero::resetScore(){
+    score = 1000;
+}
+
 sf::Vector2f Hero::view()
 {
     return sf::Vector2f(  this->getGlobalBounds().left, this->getGlobalBounds().top);

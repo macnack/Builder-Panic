@@ -8,6 +8,7 @@ public:
     void run();
     void draw();
     void update(const float &dt);
+    void restart();
     Game(const float &w, const float &h);
     virtual ~Game() = default;
 

@@ -15,6 +15,11 @@ const bool &Menu::restared()
     return restart;
 }
 
+bool Menu::game_view()
+{
+    return key == "PAUSE";
+}
+
 void Menu::start_window(){
     auto start = std::make_unique<sf::Text>("START GAME",font,140);
     start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
@@ -183,7 +188,6 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
         pause = !pause;
         start = !start;
         pause_update(en1,en2);
-        key = "PAUSE";
     }
     sf::Vector2f mouse_position = window_->mapPixelToCoords(sf::Mouse::getPosition(*window_));
     for( auto &win : map[key] ){
@@ -197,11 +201,6 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
                 {
                     window_->close();
                 }
-                if ( s == "START GAME")
-                {
-                    start = false;
-                    pause = false;
-                }
                 if( s == "CREDITS")
                 {
                     key = "CREDITS";
@@ -210,7 +209,14 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
                 {
                     key = "START";
                 }
-                if( s == "HOME" )
+                if ( s == "START GAME")
+                {
+                    key = "PAUSE";
+                    start = false;
+                    pause = false;
+                    restart = true;
+                }
+                else if( s == "HOME" )
                 {
                     key = "START";
                     restart = true;

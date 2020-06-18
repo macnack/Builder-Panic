@@ -43,15 +43,36 @@ void Game::update(const float &dt)
         gracz->loop(scena.getVec("floors"), dt);
     }
 }
+
+void Game::restart()
+{
+    if(menu.restared() )
+    {
+        obj_manager.reset();
+        obj_manager = std::make_unique<ObjectManager>(&window_);
+        sf::milliseconds(10);
+        gracz->resetScore();
+        enemy->resetScore();
+        menu.restart = false;
+    }
+    if( menu.game_view() )
+    {
+        coins.clear();
+    }
+    else
+    {
+        while ( coins.size() < 10)
+        {
+            std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
+            coins.push_back(std::move(coin));
+        }
+    }
+}
 void Game::run()
 {
     //game loop
     //    sf::View view( gracz->view(), sf::Vector2f(800,600));
-    for (int i = 0; i < 3; i++)
-    {
-        std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
-        coins.push_back(std::move(coin));
-    }
+
     while (window_.isOpen())
     {
         sf::Time elapsed = clock_.restart();
@@ -78,12 +99,10 @@ void Game::run()
                     std::cerr << enemy->getScore() << std::endl;
                 }
             }
+
             menu.menu_event(event,*gracz,*enemy);
-            if(menu.restared() )
-            {
-                obj_manager.reset();
-                obj_manager = std::make_unique<ObjectManager>(&window_);
-            }
+            this->restart();
+
         }
         this->update(elapsed.asSeconds());
         window_.clear(sf::Color::Black);

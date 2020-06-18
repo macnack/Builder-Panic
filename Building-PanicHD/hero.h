@@ -15,6 +15,7 @@ public:
     void moveSprite(const sf::Vector2f &dir, const float &dt);
     void updateMovement(const float &dt);
     void getHurt(Hero &hero, const float &dt);
+    void resetScore();
     virtual void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt) = 0;
     virtual void change_platform() = 0;
     virtual bool painting() = 0;
