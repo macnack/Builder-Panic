@@ -38,7 +38,12 @@ void Player::change_platform()
     }
 }
 
-Player::Player(const sf::Vector2f &pos) : Hero(pos, Object::Color::Player)
+Player::Player() : Hero( sf::Vector2f(825, 250), Object::Color::Player)
+{
+
+}
+
+Player::Player(const sf::Vector2f &pos) : Hero(pos, Object::Color::Player) , pos_(pos)
 {
 
 }
@@ -70,7 +75,7 @@ bool Player::down_move()
 
 bool Player::charge_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::E) && !stunned() && !painting();
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !stunned() && !painting();
 }
 
 

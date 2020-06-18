@@ -38,14 +38,19 @@ void Enemy::change_platform()
     }
 }
 
-Enemy::Enemy(const sf::Vector2f &pos) : Hero(pos, Object::Color::Enemy)
+Enemy::Enemy() : Hero(sf::Vector2f(1025, 250), Object::Color::Enemy)
+{
+
+}
+
+Enemy::Enemy(const sf::Vector2f &pos) : Hero(pos, Object::Color::Enemy), pos_(pos)
 {
 
 }
 
 bool Enemy::painting()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::N) && !stunned();
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::RControl) && !stunned();
 }
 
 bool Enemy::left_move()
@@ -70,5 +75,5 @@ bool Enemy::down_move()
 
 bool Enemy::charge_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::M) && !stunned() && !painting();
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::RShift) && !stunned() && !painting();
 }
