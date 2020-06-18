@@ -43,7 +43,7 @@ Enemy::Enemy() : Hero(sf::Vector2f(1025, 250), Object::Color::Enemy)
 
 }
 
-Enemy::Enemy(const sf::Vector2f &pos) : Hero(pos, Object::Color::Enemy), pos_(pos)
+Enemy::Enemy(const sf::Vector2f &pos) : Hero(pos, Object::Color::Enemy)
 {
 
 }

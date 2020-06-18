@@ -13,7 +13,6 @@ public:
     virtual ~Player() = default;
 
 private:
-    sf::Vector2f pos_ = sf::Vector2f(825, 250);
     bool painting();
     bool left_move();
     bool right_move();

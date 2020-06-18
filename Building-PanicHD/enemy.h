@@ -12,7 +12,6 @@ public:
     virtual ~Enemy() = default;
 
 private:
-    sf::Vector2f pos_ = sf::Vector2f(1025, 250);
     bool painting();
     bool left_move();
     bool right_move();
