@@ -8,10 +8,12 @@ class Player : public Hero
 public:
     void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
     void change_platform();
+    Player();
     Player(const sf::Vector2f &pos);
     virtual ~Player() = default;
 
 private:
+    sf::Vector2f pos_ = sf::Vector2f(825, 250);
     bool painting();
     bool left_move();
     bool right_move();
