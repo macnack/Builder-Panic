@@ -98,6 +98,11 @@ void Game::run()
                     std::cerr << gracz->getScore() << std::endl;
                     std::cerr << enemy->getScore() << std::endl;
                 }
+                if( obj_manager->full_board() )
+                {
+                    obj_manager->addScore(*gracz,*enemy);
+                    menu.end_window(*gracz,*enemy);
+                }
             }
 
             menu.menu_event(event,*gracz,*enemy);

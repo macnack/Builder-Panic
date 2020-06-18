@@ -165,15 +165,56 @@ void Menu::pause_window(){
     map["PAUSE"].emplace_back(std::move(text2));
 }
 
+void Menu::end_window(Hero &en1,Hero &en2)
+{
+    auto text = std::make_unique<sf::Text>("END",font,100);
+    text->setPosition(850,272);
+    map["END"].emplace_back(std::move(text));
+    text = std::make_unique<sf::Text>("HOME",font,60);
+    text->setPosition(655,292);
+    text->setFillColor(sf::Color(102,51,0));
+    text->setOutlineThickness(5);
+    text->setOutlineColor(sf::Color::Black);
+    map["END"].emplace_back(std::move(text));
+    text = std::make_unique<sf::Text>("EXIT",font,60);
+    text->setPosition(1170,292);
+    text->setFillColor(sf::Color(102,51,0));
+    text->setOutlineThickness(5);
+    text->setOutlineColor(sf::Color::Black);
+    map["END"].emplace_back(std::move(text));
+    auto player = std::make_unique<sf::Text>("PLAYER ONE",font,60);
+    player->setPosition(600,400);
+    auto text1 = std::make_unique<sf::Text>(std::to_string(int(en1.getScore())),font,60);
+    text1->setOrigin(text1->getLocalBounds().left+text1->getLocalBounds().width/2.0,0);
+    text1->setPosition((player->getGlobalBounds().left+0.5*player->getGlobalBounds().width),475);
+    map["END"].emplace_back(std::move(player));
+    player = std::make_unique<sf::Text>("PLAYER TWO",font,60);
+    player->setPosition(1070,400);
+    auto text2 = std::make_unique<sf::Text>(std::to_string(int(en2.getScore())),font,60);
+    text2->setOrigin(text2->getLocalBounds().left+text2->getLocalBounds().width/2.0,0);
+    text2->setPosition((player->getGlobalBounds().left+0.5*player->getGlobalBounds().width),475);
+    map["END"].emplace_back(std::move(player));
+    map["END"].emplace_back(std::move(text1));
+    map["END"].emplace_back(std::move(text2));
+    key = "END";
+}
+
 void Menu::pause_update(Hero &en1, Hero &en2)
 {
-    map["PAUSE"][map["PAUSE"].size()-2]->setString(std::to_string(int(en1.getScore())));
-    map["PAUSE"][map["PAUSE"].size()-1]->setString(std::to_string(int(en2.getScore())));
+    const auto &player_score = map["PAUSE"][map["PAUSE"].size()-2];
+    player_score->setString(std::to_string(int(en1.getScore())));
+    player_score->setOrigin(player_score->getLocalBounds().left+player_score->getLocalBounds().width/2.0,0);
+    const auto &player_score2 = map["PAUSE"][map["PAUSE"].size()-1];
+    player_score2->setString(std::to_string(int(en2.getScore())));
+    player_score2->setOrigin(player_score2->getLocalBounds().left+player_score2->getLocalBounds().width/2.0,0);
 }
 
 void Menu::Draw(){
     if(start)
     {
+        if ( key == "END"){
+            pause = true;
+        }
         for(const auto &m : map[key] )
         {
             window_->draw(*m);

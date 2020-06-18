@@ -13,6 +13,7 @@ public:
     void start_window();
     void credits_window();
     void pause_window();
+    void end_window(Hero &en1, Hero &en2);
     void pause_update(Hero &en1, Hero &en2);
     void Draw();
     bool restart = false;
