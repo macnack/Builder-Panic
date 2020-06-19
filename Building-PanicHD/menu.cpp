@@ -17,7 +17,7 @@ const bool &Menu::restared()
 
 bool Menu::game_view()
 {
-    return key == "PAUSE";
+    return key == "PAUSE" && restart;
 }
 
 void Menu::start_window(){
@@ -132,7 +132,6 @@ void Menu::credits_window(){
     start->setOutlineColor(sf::Color::Black);
     map["CREDITS"].emplace_back(std::move(start));
 }
-
 void Menu::pause_window(){
     auto text = std::make_unique<sf::Text>("PAUSE",font,100);
     text->setPosition(850,272);
@@ -164,13 +163,14 @@ void Menu::pause_window(){
     map["PAUSE"].emplace_back(std::move(text1));
     map["PAUSE"].emplace_back(std::move(text2));
 }
-
-void Menu::end_window(Hero &en1,Hero &en2)
+void Menu::end_window()
 {
+
     auto text = std::make_unique<sf::Text>("END",font,100);
-    text->setPosition(850,272);
+    text->setOrigin(text->getGlobalBounds().left+0.5*text->getGlobalBounds().width,0);
+    text->setPosition(960,272);
     map["END"].emplace_back(std::move(text));
-    text = std::make_unique<sf::Text>("HOME",font,60);
+    text = std::make_unique<sf::Text>("RESTART",font,60);
     text->setPosition(655,292);
     text->setFillColor(sf::Color(102,51,0));
     text->setOutlineThickness(5);
@@ -184,19 +184,18 @@ void Menu::end_window(Hero &en1,Hero &en2)
     map["END"].emplace_back(std::move(text));
     auto player = std::make_unique<sf::Text>("PLAYER ONE",font,60);
     player->setPosition(600,400);
-    auto text1 = std::make_unique<sf::Text>(std::to_string(int(en1.getScore())),font,60);
+    auto text1 = std::make_unique<sf::Text>("1000",font,60);
     text1->setOrigin(text1->getLocalBounds().left+text1->getLocalBounds().width/2.0,0);
     text1->setPosition((player->getGlobalBounds().left+0.5*player->getGlobalBounds().width),475);
     map["END"].emplace_back(std::move(player));
-    player = std::make_unique<sf::Text>("PLAYER TWO",font,60);
-    player->setPosition(1070,400);
-    auto text2 = std::make_unique<sf::Text>(std::to_string(int(en2.getScore())),font,60);
+    auto player2 = std::make_unique<sf::Text>("PLAYER TWO",font,60);
+    player2->setPosition(1070,400);
+    auto text2 = std::make_unique<sf::Text>("1000",font,60);
     text2->setOrigin(text2->getLocalBounds().left+text2->getLocalBounds().width/2.0,0);
-    text2->setPosition((player->getGlobalBounds().left+0.5*player->getGlobalBounds().width),475);
-    map["END"].emplace_back(std::move(player));
+    text2->setPosition((player2->getGlobalBounds().left+0.5*player2->getGlobalBounds().width),475);
+    map["END"].emplace_back(std::move(player2));
     map["END"].emplace_back(std::move(text1));
     map["END"].emplace_back(std::move(text2));
-    key = "END";
 }
 
 void Menu::pause_update(Hero &en1, Hero &en2)
@@ -208,6 +207,20 @@ void Menu::pause_update(Hero &en1, Hero &en2)
     player_score2->setString(std::to_string(int(en2.getScore())));
     player_score2->setOrigin(player_score2->getLocalBounds().left+player_score2->getLocalBounds().width/2.0,0);
 }
+
+void Menu::end_update(Hero &en1, Hero &en2)
+{
+    const auto &player_score = map["END"][map["END"].size()-2];
+    player_score->setString(std::to_string(int(en1.getScore())));
+    player_score->setOrigin(player_score->getLocalBounds().left+player_score->getLocalBounds().width/2.0,0);
+    const auto &player_score2 = map["END"][map["END"].size()-1];
+    player_score2->setString(std::to_string(int(en2.getScore())));
+    player_score2->setOrigin(player_score2->getLocalBounds().left+player_score2->getLocalBounds().width/2.0,0);
+    key = "END";
+    pause = true;
+    start = true;
+}
+
 
 void Menu::Draw(){
     if(start)
@@ -224,7 +237,7 @@ void Menu::Draw(){
 
 void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
     if (event.type == sf::Event::KeyPressed &&
-            sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && key == "PAUSE" )
     { // pauza
         pause = !pause;
         start = !start;
@@ -250,7 +263,7 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
                 {
                     key = "START";
                 }
-                if ( s == "START GAME")
+                if ( s == "START GAME" || s == "RESTART")
                 {
                     key = "PAUSE";
                     start = false;
@@ -285,7 +298,8 @@ Menu::Menu(sf::RenderWindow *window)
         throw("Could not load texture 'Dungeons Walls'");
     }
     texture.setRepeated(true);
-    pause_window();
-    start_window();
-    credits_window();
+    this->pause_window();
+    this->start_window();
+    this->credits_window();
+    this->end_window();
 }

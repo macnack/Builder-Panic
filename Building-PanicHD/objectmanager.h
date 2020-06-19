@@ -15,6 +15,7 @@ public:
     virtual ~ObjectManager() = default;
 
 private:
+    bool end_game = false;
     double x = 65.25;
     double y = 25.0;
     int rows = 4;

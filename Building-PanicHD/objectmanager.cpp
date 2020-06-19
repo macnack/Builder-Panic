@@ -199,20 +199,24 @@ const std::map<int, std::map<int, std::unique_ptr<Object>>> &ObjectManager::getB
 }
 
 void ObjectManager::addScore(Player &gracz, Enemy &enemy){
-    for (const auto &el : board_)
+    while(!end_game)
     {
-
-        for (const auto &v : el.second)
+        for (const auto &el : board_)
         {
-            if (v.second->getColor_Object() == gracz.getColor_Object())
+
+            for (const auto &v : el.second)
             {
-                gracz.addScore(150);
-            }
-            if (v.second->getColor_Object() == gracz.getColor_Object() )
-            {
-                enemy.addScore(150);
+                if (v.second->getColor_Object() == gracz.getColor_Object())
+                {
+                    gracz.addScore(150);
+                }
+                if (v.second->getColor_Object() == enemy.getColor_Object() )
+                {
+                    enemy.addScore(150);
+                }
             }
         }
+        end_game = true;
     }
 }
 
@@ -251,7 +255,7 @@ void ObjectManager::Paint(Hero &hero)
             if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10))
                 //&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
             {
-                if( hero.painting() && hero.can_paint())
+                if( 1/*hero.painting() && hero.can_paint()*/)
                 {
                     if(bd_el.second->getFill() !=  Object::Fill::full_full)
                     {
@@ -270,20 +274,16 @@ bool ObjectManager::full_board()
     bool is_full = true;
     for (const auto &el : board_)
     {
-
         for (const auto &v : el.second)
         {
-            if (v.second->getIntColor() == 0)
+
+            if ( v.second->getFill() < Object::Fill::full_full )
             {
                 is_full = false;
             }
         }
     }
-    if (is_full)
-    {
-        return true;
-    }
-    return false;
+    return is_full;
 }
 
 void ObjectManager::draw()

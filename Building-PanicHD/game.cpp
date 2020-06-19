@@ -17,11 +17,7 @@ void Game::update(const float &dt)
 {
     if (obj_manager->full_board())
     {
-        std::cerr << "Press R to reset" << std::endl;
-        sf::sleep(sf::microseconds(1000));
         obj_manager->addScore(*gracz, *enemy);
-        std::cerr << "Wynik dla gracza 1: " << gracz->getScore() << std::endl;
-        std::cerr << "Wynik dla gracza 2: " << enemy->getScore() << std::endl;
     }
     for (auto it = coins.begin(); it < coins.end(); it++)
     {
@@ -89,11 +85,6 @@ void Game::run()
             }
             if (event.type == sf::Event::KeyPressed)
             {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-                { // reset plansz
-                    obj_manager.reset();
-                    obj_manager = std::make_unique<ObjectManager>(&window_);
-                }
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::C)){
                     std::cerr << gracz->getScore() << std::endl;
                     std::cerr << enemy->getScore() << std::endl;
@@ -101,7 +92,7 @@ void Game::run()
                 if( obj_manager->full_board() )
                 {
                     obj_manager->addScore(*gracz,*enemy);
-                    menu.end_window(*gracz,*enemy);
+                    menu.end_update(*gracz,*enemy);
                 }
             }
 
