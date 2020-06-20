@@ -21,50 +21,50 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 
 ## MINI TUTORIAL
 
-* Zmiana koloru sciany przeciwnika odbywa się pod warunkiem że otoczymy je naszym kolorem. Odbywa się to w sposób prostopadły jak i po przekątnej...
-<br/>
+* Zmiana koloru sciany przeciwnika odbywa się pod warunkiem że otoczymy je naszym kolorem. Odbywa się to w sposób prostopadły jak i po przekątnej... <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanko.gif)
-* Pod warunkiem że zostały otoczone przez w pełni pomalowaną ściane 
-<br/>
+* Pod warunkiem że zostały otoczone przez w pełni pomalowaną ściane <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanie.gif)
-* Aby zaatakować należy poruszać się w kierunku którym chcemy go wykonać oraz wcisnąć przycisk ataku. Możliwośći ataku :
-<br/>
+* Aby zaatakować należy poruszać się w kierunku którym chcemy go wykonać oraz wcisnąć przycisk ataku. Możliwośći ataku : <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/attack_tutorial.gif)
 
-## Planowane do wykorzystania biblioteki:
+## Wykorzystane biblioteki:
 
-* SFML : Window.hpp, Graphics.hpp , *Audio.hpp*
-* vector
-* memory
+* SFML : Window.hpp, Graphics.hpp
+* cmath
 * time.h
+* map
+* memory
 
-## UML projektu
-![Image of UML model](https://github.com/macnack/Builder-Panic/blob/master/images/uml_model.png)
-
-### Przewidziane typy obiektu
-* Gracz
-* Przeciwnicy
+### Typy obiektu
+* GameObject - textury bloków sceny
+* Object
 * Żetony
 * Ściany ( pola do malowania)
 * Platforma / Podłoga
 
 ### Klasy
-**GAME** - tworzy scenę gry, odbywa się tam pętla gry, eventy, rysowanie obiektów, spawn przeciwników, <br/>
-**Player** - poruszanie, zadawanie obrażeń przeciwnika, malowanie, zbieranie monet, <br/>
-**Enemy** - *"boty" atakowanie gracza*, poruszanie się *malowanie ścian*, *w zależności od pozycji otrzymanej z klasy **Player** przeciwnicy powinni być bardziej aktywni*, <br/>
-**ObjectManager** - przechowuje w mapie nazwy obiektów oraz obiekty klas pochodnych od **Object** za pomocą mapy <br/>
-**Object** - klasa bazowa tworząca obiekt,
-* **Wall** - ściany (pola do malowania), tworzenie obiektu, scalowanie do 3 etapów elewacji {1/3 2/3 3/3} możliwość zmiany koloru przez klase **Player** i ***Enemy***, zmiana kolorów wykorzystując zasady gry Reversi, pomalowane ściany w kolorze gracza są przeliczane na punkty, które są dodawane do klasy **Player**,
-* **Floor** - podloga, po której poruszają się postacie, informacja o kolizjach przekazywana do **Player** **Enemy** , przeciwnicy byliby aktywniejsi na tym poziomie, daje informacje o kolizjach dla klasy **Player**,
-* **Coins** - dodaje punkty do klasy **Player** , pojawia się w losowym czasie w losowej lokalizacji, *czas istnienia przedmiotu*,
+* **GAME : public sf::RenderWindow** - tworzy scenę gry, odbywa się tam pętla gry, eventy, rysowanie obiektów, spawn przeciwników,
+* **Menu : public sf::RenderWindow** - obsługa ekranu startowego, pauzy, końca gry
+* **Animation : public sf::Sprite** - animacja tekstur <br/>
+  * **Entity : public Animation** - wykrywanie kolizji, interakcja ze sceneria
+    * **Coin : public Entity** - tworzenie monet
+    * **Hero : public Entity** - klasa postaci, poruszanie się, atak, cooldowny, 
+      * **Player : public Hero** 
+      * **Enemy : public Hero**
+* **GameObject : public sf::Sprite** - obiekty gry
+  * **Object : public GameObject** - sciany do malowania, zmiana rozmiaru, koloru
+* **ObjectManager** - przechowywanie malowanych ścian, logika Reversi, zmiana koloru przez obiekty klasy **Hero***
+* **Scena** - tworzenie scenerii gry, background, platformy
+### Wykorzystane tekstury 
+- Industrial pack - OllieBerzs https://ollieberzs.itch.io/industrial-pack
+- Gems / Coins - 	La Red Games https://laredgames.itch.io/gems-coins-free
+- Dungeons Walls - Evil_PoisonBR https://evil-poisonbr.itch.io/dungeons-walls
+- Castle Platformer Tileset - RottingPixels https://rottingpixels.itch.io/castle-platformer-tileset-16x16free
+### Czcionka
+- Fjalla One - Sorkin Type https://fonts.google.com/specimen/Fjalla+One?sort=popularity#standard-styles
 ### Żródła
 - link do img: https://images.app.goo.gl/8qSQiCF2y2jHCg2Y9
 - zasady gry Reversi: https://pl.wikipedia.org/wiki/Reversi
 - let's play Building Panic: https://youtu.be/CFZXPE8_2K8
 
-#### Obecny stan gry :disappointed_relieved:
-![Image of gra right now](https://github.com/macnack/Builder-Panic/blob/master/images/scena.png)
-![Image of board](https://github.com/macnack/Builder-Panic/blob/master/images/reversi_board.png)
-##### Małym druczkiem ...
-<br/>*elementy zapisane w **Italic** proszę uznać za elementy, które mogą zostać zmodyfikowane, bądź pominięte*
-<br/>*model uml nie pokrywa się z opisem klas, ponieważ podczas pisania opisu uległ lekkim modyfikacja, **do zaktualizowania w najbliższym czasie***
