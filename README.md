@@ -18,6 +18,14 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 * "**A**" i "**D**" poruszanie się lewo i prawo
 * "**E**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
 * "**Q**" malowanie - przytrzymac
+
+## MINI TUTORIAL
+
+* Zmiana koloru sciany przeciwnika odbywa się pod warunkiem że otoczymy je naszym kolorem. Odbywa się to w sposób prostopadły jak i po przekątnej...
+![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanko.gif)
+* Pod warunkiem że zostały otoczone przez w pełni pomalowaną ściane 
+![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanie.gif)
+
 ## Planowane do wykorzystania biblioteki:
 
 * SFML : Window.hpp, Graphics.hpp , *Audio.hpp*
