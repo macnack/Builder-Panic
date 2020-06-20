@@ -19,7 +19,7 @@ protected:
     bool bounce = false;
     bool stage_down = false;
     bool grounded = false;
-    int current_stage = 3; //define?
+    int current_stage = 3;
     int next_stage = current_stage;
     float gravity = 2000;
     float height_screen = 1080;

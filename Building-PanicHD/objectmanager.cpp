@@ -29,7 +29,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[m][i]->getIntColor() == Intcolor && reverse == true)
+            if (board_[m][i]->getFill() == Object::Fill::full_full
+                    && board_[m][i]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = n; k < i; k++)
                 {
@@ -55,7 +56,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[m][i]->getIntColor() == Intcolor && reverse == true)
+            if (board_[m][i]->getFill() == Object::Fill::full_full
+                    && board_[m][i]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = n; k > i; k--)
                 {
@@ -76,7 +78,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[i][n]->getIntColor() == Intcolor && reverse == true)
+            if ( board_[i][n]->getFill() == Object::Fill::full_full &&
+                    board_[i][n]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = m; k > i; k--)
                 {
@@ -97,7 +100,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[i][n]->getIntColor() == Intcolor && reverse == true)
+            if ( board_[i][n]->getFill() == Object::Fill::full_full &&
+                    board_[i][n]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = m; k < i; k++)
                 {
@@ -118,7 +122,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[i][j]->getIntColor() == Intcolor && reverse == true)
+            if ( board_[i][j]->getFill() == Object::Fill::full_full &&
+                    board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = m, l = n; k < i && l < j; l++ && k++)
                 {
@@ -139,7 +144,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[i][j]->getIntColor() == Intcolor && reverse == true)
+            if (board_[i][j]->getFill() == Object::Fill::full_full &&
+                    board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = m, l = n; k > i && l > j; l-- && k--)
                 {
@@ -160,7 +166,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[i][j]->getIntColor() == Intcolor && reverse == true)
+            if ( board_[i][j]->getFill() == Object::Fill::full_full &&
+                    board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = m, l = n; k < i && l > j; l-- && k++)
                 {
@@ -181,7 +188,8 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            if (board_[i][j]->getIntColor() == Intcolor && reverse == true)
+            if ( board_[i][j]->getFill() == Object::Fill::full_full &&
+                    board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
                 for (int k = m, l = n; k > i && l < j; l++ && k--)
                 {
@@ -208,11 +216,11 @@ void ObjectManager::addScore(Player &gracz, Enemy &enemy){
             {
                 if (v.second->getColor_Object() == gracz.getColor_Object())
                 {
-                    gracz.addScore(150);
+                    gracz.addScore(175);
                 }
                 if (v.second->getColor_Object() == enemy.getColor_Object() )
                 {
-                    enemy.addScore(150);
+                    enemy.addScore(175);
                 }
             }
         }
@@ -255,12 +263,13 @@ void ObjectManager::Paint(Hero &hero)
             if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10))
                 //&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
             {
-                if( 1/*hero.painting() && hero.can_paint()*/)
+                if( hero.painting() && hero.can_paint() )
                 {
                     if(bd_el.second->getFill() !=  Object::Fill::full_full)
                     {
                         int n = bd_el.first;
                         this->Reverse(m, n, hero.getColor_Object());
+                        hero.addScore(25);
                     }
                 }
             }
@@ -271,19 +280,17 @@ void ObjectManager::Paint(Hero &hero)
 
 bool ObjectManager::full_board()
 {
-    bool is_full = true;
     for (const auto &el : board_)
     {
         for (const auto &v : el.second)
         {
-
             if ( v.second->getFill() < Object::Fill::full_full )
             {
-                is_full = false;
+                return false;
             }
         }
     }
-    return is_full;
+    return true;
 }
 
 void ObjectManager::draw()

@@ -1,6 +1,7 @@
 #include "coin.h"
 
-Coin::Coin(const std::vector<std::unique_ptr<sf::Sprite>> &platforms) : Entity(platforms, rand() % 15, sf::IntRect(0, 0, 16, 16), 7, 4)
+Coin::Coin(const std::vector<std::unique_ptr<sf::Sprite>> &platforms)
+    : Entity(platforms, rand() % 15, sf::IntRect(0, 0, 16, 16), 7, 4)
 {
     bounce = true;
 }

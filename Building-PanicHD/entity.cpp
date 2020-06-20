@@ -22,9 +22,11 @@ int Entity::setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms)
 
 void Entity::updateGravity(const float &dt)
 {
-    //applying force of gravity
     velocity.y += gravity * dt;
-    velocity.y -= 1 / 5.f * gravity * dt; // for coin
+    if(bounce)
+    {
+        velocity.y -= 1 / 5.f * gravity * dt; // bouncing coin
+    }
 }
 
 void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
@@ -72,7 +74,6 @@ void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &pl
         this->setPosition(-(50) / 2.0, next_stagePlatformBounds.top - playerBounds.height);
     }
     this->updateGravity(dt);
-    //this->updateMovement(dt);
     this->move(velocity * dt);
 }
 

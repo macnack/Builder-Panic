@@ -7,7 +7,6 @@
 #include <iostream>
 #include <map>
 #include <memory>
-#include <algorithm>
 
 #include <cstdlib>
 

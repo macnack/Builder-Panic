@@ -9,7 +9,7 @@ public:
     const std::map<int, std::map<int, std::unique_ptr<Object>>> &getBoard();
     void draw();
     void Paint(Hero &hero);
-    void Paint(const sf::RenderWindow &window, const sf::Event &event); //inspekt
+    void Paint(const sf::RenderWindow &window, const sf::Event &event); //moudr inspekt
     void addScore(Player &gracz, Enemy &enemy);
     ObjectManager(sf::RenderWindow *window);
     virtual ~ObjectManager() = default;

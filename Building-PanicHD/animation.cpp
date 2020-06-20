@@ -10,6 +10,7 @@ Animation::Animation(const sf::IntRect &frame, const float &framerate, const int
 Animation::Animation(const sf::IntRect &frame, const float &framerate)
     : framerate_(framerate), frame_(frame)
 {
+
 }
 
 std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame, const int &length)
@@ -26,7 +27,7 @@ std::vector<sf::IntRect> Animation::addAnimation(const sf::IntRect &frame, const
                                       frame.width,
                                       frame.height);
     frames.push_back(endRect);
-    startRect.left = frame.width;
+    startRect.left = frame.width; //faceLeft
     startRect.width = -std::abs(startRect.width);
     frames.push_back(startRect);
     frames.push_back(startRect);
@@ -39,9 +40,12 @@ void Animation::playAnimation(const float &dt)
 {
     timer += dt;
     int startRect;
-    if(faceRight){
+    if(faceRight)
+    {
         startRect = 0;
-    }else{
+    }
+    else
+    {
         startRect = 3;
     }
     if (timer > 1 / framerate_)

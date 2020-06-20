@@ -10,17 +10,23 @@ const bool &Menu::started()
     return start;
 }
 
-const bool &Menu::restared()
+const bool &Menu::restarted()
 {
     return restart;
 }
 
-bool Menu::game_view()
+bool Menu::game_mode()
 {
-    return key == "PAUSE" && restart;
+    return key == "PAUSE" && !restart;
 }
 
-void Menu::start_window(){
+bool Menu::lobbie_mode()
+{
+    return key == "START";
+}
+
+void Menu::start_window()
+{
     auto start = std::make_unique<sf::Text>("START GAME",font,140);
     start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
     start->setPosition(960,20);
@@ -45,7 +51,8 @@ void Menu::start_window(){
 
 }
 
-void Menu::credits_window(){
+void Menu::credits_window()
+{
     auto start = std::make_unique<sf::Text>("GAME",font,40);
     start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
     start->setPosition(960,10);
@@ -132,7 +139,8 @@ void Menu::credits_window(){
     start->setOutlineColor(sf::Color::Black);
     map["CREDITS"].emplace_back(std::move(start));
 }
-void Menu::pause_window(){
+void Menu::pause_window()
+{
     auto text = std::make_unique<sf::Text>("PAUSE",font,100);
     text->setPosition(850,272);
     map["PAUSE"].emplace_back(std::move(text));
@@ -165,7 +173,6 @@ void Menu::pause_window(){
 }
 void Menu::end_window()
 {
-
     auto text = std::make_unique<sf::Text>("END",font,100);
     text->setOrigin(text->getGlobalBounds().left+0.5*text->getGlobalBounds().width,0);
     text->setPosition(960,272);
@@ -219,15 +226,14 @@ void Menu::end_update(Hero &en1, Hero &en2)
     key = "END";
     pause = true;
     start = true;
+    //restart = false;
 }
 
 
-void Menu::Draw(){
+void Menu::Draw()
+{
     if(start)
     {
-        if ( key == "END"){
-            pause = true;
-        }
         for(const auto &m : map[key] )
         {
             window_->draw(*m);
@@ -235,7 +241,13 @@ void Menu::Draw(){
     }
 }
 
-void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
+void Menu::reset()
+{
+    restart = false;
+}
+
+void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2)
+{
     if (event.type == sf::Event::KeyPressed &&
             sf::Keyboard::isKeyPressed(sf::Keyboard::Escape) && key == "PAUSE" )
     { // pauza
@@ -263,7 +275,7 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2){
                 {
                     key = "START";
                 }
-                if ( s == "START GAME" || s == "RESTART")
+                if ( s == "START GAME" || s == "RESTART" )
                 {
                     key = "PAUSE";
                     start = false;
@@ -293,10 +305,6 @@ Menu::Menu(sf::RenderWindow *window)
     : window_(window)
 {
     font.loadFromFile("Font/FjallaOne-Regular.ttf");
-    if (!texture.loadFromFile("Texture/Dungeons Walls.png"))
-    {
-        throw("Could not load texture 'Dungeons Walls'");
-    }
     texture.setRepeated(true);
     this->pause_window();
     this->start_window();

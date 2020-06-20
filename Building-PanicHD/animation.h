@@ -21,7 +21,6 @@ protected:
     bool faceRight = true;
     int switcher = 0;
     sf::IntRect frame_;
-    sf::Texture texture_;
     std::vector<sf::Texture> textures_;
     std::vector<std::vector<sf::IntRect>> frames_;
 };

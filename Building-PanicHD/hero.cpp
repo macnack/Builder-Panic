@@ -84,7 +84,8 @@ void Hero::getHurt(Hero &hero, const float &dt)
     }
 }
 
-void Hero::resetScore(){
+void Hero::resetScore()
+{
     score = 1000;
 }
 
@@ -183,7 +184,7 @@ float Hero::getScore()
 }
 
 void Hero::moveSprite(const sf::Vector2f &dir, const float &dt)
-{ //incrasing speed in the inputed dirction
+{
     velocity += dir * (dt * acceleration);
 }
 
@@ -200,7 +201,7 @@ void Hero::updateMovement(const float &dt)
         {
             velocity.y = maxFallingVelocity;
         }
-        if (attack_cooldown == false && timer < 0.1)// attack dash
+        if (attack_cooldown == false && timer < 0.1)// dodge attack
         {
             velocity.y = std::abs(attackVelocity);
         }
@@ -215,47 +216,44 @@ void Hero::updateMovement(const float &dt)
     }
     if (velocity.x > 0.f)
     { //right
-        //deceleration
         this->setFaceRight(true);
         velocity.x -= deceleration * dt;
         if (velocity.x < 0.f)
         {
             velocity.x = 0.f;
         }
-        //max velocity check
         if (velocity.x > maxVelocity)
         {
             velocity.x = maxVelocity;
         }
-        if (attack_cooldown == false && timer < 0.1)// attack dash
+        if (attack_cooldown == false && timer < 0.1)// dodge attack
         {
             velocity.x = attackVelocity;
             this->setColor(sf::Color(128, 128, 128));
         }else{
             this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
-            //attack = false;
+            attack = false;
         }
     }
     else if (velocity.x < 0.f)
     { //if going left
-        //decelaretion
         this->setFaceRight(false);
         velocity.x += deceleration * dt;
         if (velocity.x > 0.f)
         {
             velocity.x = 0.f;
         }
-        //max velocity check
         if (velocity.x < -maxVelocity)
         {
             velocity.x = -maxVelocity;
         }
-        if (attack_cooldown == false && timer < 0.1) // attack dash
+        if (attack_cooldown == false && timer < 0.1) // dodge attack
         {
             velocity.x = -std::abs(attackVelocity);
             this->setColor(sf::Color(128, 128, 128));
         }else{
             this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
+            attack = false;
         }
     }
     this->setTexture(textures_[switcher]);
