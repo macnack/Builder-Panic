@@ -1,24 +1,33 @@
 # Builder-Panic
 
 Odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w murarza/malarza, który ma za zadanie pomalować jak najwięcej ścian, a w międzyczasie walczyć z murarzami z innego corpo, którzy malują ściany na inny kolor. :smile: <br/>
-Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego poziomu. <br/>
+W przypadku gry dwuosobowej, gracz który uzykał najwiecej punktów wygrywa, zakończenie gry następuje gdy wszystkie ściany zostają zamalowane. <br/>
 ![Image of Building Panic](https://github.com/macnack/Builder-Panic/blob/master/images/building-panic_3_big.jpg)
 
 <br/><br/>
 Ściana posiada 4 etapy elewacji {Brak, 1/3, 2/3, 3/3}, podczas 3 pierwszych etapów kolor ścian może być zmieniony przez przeciwnego malarza akcją malowania, aby zmienić kolor ostatniego etapu elewacji, tutaj stosuje się zasady z gry planszowej [**Reversi**](https://pl.wikipedia.org/wiki/Reversi) aka **Othello** aka **Kapsle**(¿?) <br/>
-<br/> Sterowanie <br/>
+
+## Zdobywanie punktów
+* Kazda pomalowana elewacja +25
+* Wartości monet
+  * Zlota +100
+  * Srebrna +50
+  * Brązowa +25
+* Zakonczenie gry, każda pomalowana ściana to +175 
+
+# Sterowanie
 * Gracz pierwszy:
   * "**W**" - skok o jedną platformę do góry
   * "**S**" - skok o jedną platformę do dołu
   * "**A**" i "**D**" poruszanie się lewo i prawo
     * "**C**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
-  * "**Q**" malowanie - przytrzymac
+  * "**Q**" malowanie - przytrzymać
 * Drugi gracz:
   * :arrow_up: - skok o jedną platformę do góry
   * :arrow_down: - skok o jedną platformę do dołu
   * :arrow_left: i :arrow_right: poruszanie się lewo i prawo
     * "**M**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
-  * "**N**" malowanie - przytrzymac
+  * "**N**" malowanie - przytrzymać
 
 ## MINI TUTORIAL
 
@@ -30,7 +39,6 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/attack_tutorial.gif)
 
 ## Wykorzystane biblioteki:
-
 * SFML : Window.hpp, Graphics.hpp
 * cmath
 * time.h
