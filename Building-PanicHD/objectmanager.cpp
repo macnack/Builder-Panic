@@ -231,7 +231,7 @@ void ObjectManager::addScore(Player &gracz, Enemy &enemy){
 void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event)
 {
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(window);
-    std::cerr << "XY M : " << mouse_pos.x << " y : " << mouse_pos.y << std::endl;
+    //std::cerr << "XY M : " << mouse_pos.x << " y : " << mouse_pos.y << std::endl;
     for (auto &bd : board_)
     {
         for (auto &bd_el : bd.second)
@@ -261,7 +261,6 @@ void ObjectManager::Paint(Hero &hero)
         {
 
             if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10))
-                //&& bd_el.second->getGlobalBounds().contains(playerBounds.left, playerBounds.top + playerBounds.height - 10))
             {
                 if( hero.painting() && hero.can_paint() )
                 {
