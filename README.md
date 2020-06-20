@@ -32,7 +32,7 @@ Jest to odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w mur
 
 ## MINI TUTORIAL
 
-* Zmiana koloru sciany przeciwnika odbywa się pod warunkiem że otoczymy je naszym kolorem. Odbywa się to w sposób prostopadły jak i po przekątnej... <br/>
+* Zmiana koloru sciany przeciwnika odbywa się pod warunkiem że otoczymy je naszym kolorem. Odbywa się to w lini prostopadłej lub i po przekątnej <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanko.gif)
 * Pod warunkiem że zostały otoczone przez w pełni pomalowaną ściane <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanie.gif)
