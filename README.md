@@ -22,11 +22,15 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 ## MINI TUTORIAL
 
 * Zmiana koloru sciany przeciwnika odbywa się pod warunkiem że otoczymy je naszym kolorem. Odbywa się to w sposób prostopadły jak i po przekątnej...
+<br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanko.gif)
 * Pod warunkiem że zostały otoczone przez w pełni pomalowaną ściane 
+<br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanie.gif)
 * Aby zaatakować należy poruszać się w kierunku którym chcemy go wykonać oraz wcisnąć przycisk ataku. Możliwośći ataku :
-![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/attack.gif)
+<br/>
+![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/attack_tutorial.gif)
+
 ## Planowane do wykorzystania biblioteki:
 
 * SFML : Window.hpp, Graphics.hpp , *Audio.hpp*
