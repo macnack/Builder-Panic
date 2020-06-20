@@ -6,18 +6,19 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 
 <br/><br/>
 Ściana posiada 4 etapy elewacji {Brak, 1/3, 2/3, 3/3}, podczas 3 pierwszych etapów kolor ścian może być zmieniony przez przeciwnego malarza akcją malowania, aby zmienić kolor ostatniego etapu elewacji, tutaj stosuje się zasady z gry planszowej [**Reversi**](https://pl.wikipedia.org/wiki/Reversi) aka **Othello** aka **Kapsle**(¿?) <br/>
-<br/> Poruszanie się <br/>
-* :arrow_up: - skok o jedną platformę do góry
-* :arrow_down: - skok o jedną platformę do dołu
-* :arrow_left: i :arrow_right: poruszanie się lewo i prawo
-* "**M**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
-* "**N**" malowanie - przytrzymac
-<br/> Dla drugiego gracza <br/>
-* "**W**" - skok o jedną platformę do góry
-* "**S**" - skok o jedną platformę do dołu
-* "**A**" i "**D**" poruszanie się lewo i prawo
-* "**E**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
-* "**Q**" malowanie - przytrzymac
+<br/> Sterowanie <br/>
+* Gracz pierwszy:
+  * "**W**" - skok o jedną platformę do góry
+  * "**S**" - skok o jedną platformę do dołu
+  * "**A**" i "**D**" poruszanie się lewo i prawo
+    * "**C**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
+  * "**Q**" malowanie - przytrzymac
+* Drugi gracz:
+  * :arrow_up: - skok o jedną platformę do góry
+  * :arrow_down: - skok o jedną platformę do dołu
+  * :arrow_left: i :arrow_right: poruszanie się lewo i prawo
+    * "**M**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
+  * "**N**" malowanie - przytrzymac
 
 ## MINI TUTORIAL
 
@@ -37,25 +38,25 @@ Gra poziomowa, po pomalowaniu wszystkich ścian przechodzi się do następnego p
 * memory
 
 ### Typy obiektu
-* GameObject - textury bloków sceny
-* Object
-* Żetony
-* Ściany ( pola do malowania)
-* Platforma / Podłoga
+* Scena - background gry, platformy
+* Menu - ekran tekstowy
+* Player i Enemy 
+* Monety 
+* ObjectManager - agregacja obiektów do malowania
 
 ### Klasy
-* **GAME : public sf::RenderWindow** - tworzy scenę gry, odbywa się tam pętla gry, eventy, rysowanie obiektów, spawn przeciwników,
-* **Menu : public sf::RenderWindow** - obsługa ekranu startowego, pauzy, końca gry
+* **GAME : public sf::RenderWindow** - tworzy scenę gry, pętla gry, zdarzenia, rysowanie obiektów, spawn postaci i  monet,
+* **Menu : public sf::RenderWindow** - tworzenie i obsługa zdarzeń menu, wyswietlanie punktów obiektu klasy **Hero**
 * **Animation : public sf::Sprite** - animacja tekstur <br/>
   * **Entity : public Animation** - wykrywanie kolizji, interakcja ze sceneria
-    * **Coin : public Entity** - tworzenie monet
+    * **Coin : public Entity** - obiekt moneta, dodawanie punktow, jesli zostal zdobyty
     * **Hero : public Entity** - klasa postaci, poruszanie się, atak, cooldowny, 
       * **Player : public Hero** 
       * **Enemy : public Hero**
-* **GameObject : public sf::Sprite** - obiekty gry
-  * **Object : public GameObject** - sciany do malowania, zmiana rozmiaru, koloru
-* **ObjectManager** - przechowywanie malowanych ścian, logika Reversi, zmiana koloru przez obiekty klasy **Hero***
-* **Scena** - tworzenie scenerii gry, background, platformy
+* **GameObject : public sf::Sprite** 
+  * **Object : public GameObject** - obsługa zmiana koloru i  wypełnienia,
+* **ObjectManager** - przechowywanie malowanych ścian, logika Reversi, zmiana koloru przez obiekty klasy **Hero**, zliczanie punktow, warunek zakonczenia gry
+* **Scena** - tworzenie scenerii gry
 ### Wykorzystane tekstury 
 - Industrial pack - OllieBerzs https://ollieberzs.itch.io/industrial-pack
 - Gems / Coins - 	La Red Games https://laredgames.itch.io/gems-coins-free
