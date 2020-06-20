@@ -178,7 +178,7 @@ void Menu::end_window()
     text->setPosition(960,272);
     map["END"].emplace_back(std::move(text));
     text = std::make_unique<sf::Text>("RESTART",font,60);
-    text->setPosition(655,292);
+    text->setPosition(635,292);
     text->setFillColor(sf::Color(102,51,0));
     text->setOutlineThickness(5);
     text->setOutlineColor(sf::Color::Black);
