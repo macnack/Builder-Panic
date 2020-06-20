@@ -21,7 +21,7 @@ void Object::SetFill()
         fill_ = Fill::two_thirds;
         break;
     case Object::Fill::two_thirds:
-        this->setTextureRect(sf::IntRect(rect_.left, rect_.top, rect_.width, rect_.height * 2/3));
+        this->setTextureRect(sf::IntRect(rect_.left, rect_.top, rect_.width, rect_.height*2/3));
         fill_ = Fill::full;
         break;
     case Object::Fill::full:
@@ -39,10 +39,10 @@ void Object::Paint(const Object::Color &color)
     switch (color)
     {
     case Color::Enemy:
-        this->setColor(sf::Color(4, 41, 163)); //  //(150, 41, 56)
+        this->setColor(sf::Color(4, 41, 163));
         break;
     case Color::Player:
-        this->setColor(sf::Color(255, 195, 33)); //  //(102, 51, 0)
+        this->setColor(sf::Color(255, 195, 33));
         break;
     case Color::Default:
         this->setColor(sf::Color(255, 255, 255));

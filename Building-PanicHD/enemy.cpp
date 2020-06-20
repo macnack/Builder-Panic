@@ -66,7 +66,7 @@ bool Enemy::left_move()
 
 bool Enemy::right_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ;
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
 }
 
 bool Enemy::jump_move()
@@ -76,7 +76,7 @@ bool Enemy::jump_move()
 
 bool Enemy::down_move()
 {
-    return sf::Keyboard::isKeyPressed(sf::Keyboard::Down)  ;
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 }
 
 bool Enemy::charge_move()

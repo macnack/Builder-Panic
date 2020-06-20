@@ -7,7 +7,6 @@ class Player : public Hero
 {
 public:
     void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt);
-    void change_platform();
     Player();
     Player(const sf::Vector2f &pos);
     virtual ~Player() = default;
@@ -19,6 +18,7 @@ private:
     bool jump_move();
     bool down_move();
     bool charge_move();
+    void change_platform();
 };
 
 #endif // PLAYER_H
