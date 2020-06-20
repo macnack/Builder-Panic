@@ -61,7 +61,7 @@ Jest to odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w mur
   * **Entity : public Animation** - wykrywanie kolizji, interakcja ze sceneria
     * **Coin : public Entity** - obiekt moneta, dodawanie punktow, jesli zostal zdobyty
     * **Hero : public Entity** - klasa postaci, poruszanie się, atak, cooldowny, 
-      * **Player : public Hero** 
+      * **Player : public Hero** - sterowanie klawiatura, pętla zdarzeń
       * **Enemy : public Hero**
 * **GameObject : public sf::Sprite** 
   * **Object : public GameObject** - obsługa zmiana koloru i  wypełnienia,
