@@ -1,11 +1,9 @@
 # Builder-Panic
+Gra dwuosobowa, celem gry jest zbieranie punktów poprzez malowanie ścian i zdobywanie monet, malowanie odbywa się 3 etapowo {1/3, 2/3, 3/3} uzupelnienia elewacji. Przy pierwszych 2 elewacjach gracze moga zmieniać kolor na własny, w przypadku gdy ściana jest w pełni pomalowana, zgodnie z zasadą gry Rewersi, można ją przechwycić *(wiecej w mini tutorialu)*. Zakonczenie gry następuje gdy wszystkie ściany zostają zamalowanie. <br/>
+![Image of Buider Panic](https://github.com/macnack/Builder-Panic/blob/master/images/builder_panic.png)
 
-Odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w murarza/malarza, który ma za zadanie pomalować jak najwięcej ścian, a w międzyczasie walczyć z murarzami z innego corpo, którzy malują ściany na inny kolor. :smile: <br/>
-W przypadku gry dwuosobowej, gracz który uzykał najwiecej punktów wygrywa, zakończenie gry następuje gdy wszystkie ściany zostają zamalowane. <br/>
+Jest to odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w murarza/malarza, który ma za zadanie pomalować jak najwięcej ścian, a w międzyczasie walczyć z murarzami z innego corpo, którzy malują ściany na inny kolor. :smile: <br/>
 ![Image of Building Panic](https://github.com/macnack/Builder-Panic/blob/master/images/building-panic_3_big.jpg)
-
-<br/><br/>
-Ściana posiada 4 etapy elewacji {Brak, 1/3, 2/3, 3/3}, podczas 3 pierwszych etapów kolor ścian może być zmieniony przez przeciwnego malarza akcją malowania, aby zmienić kolor ostatniego etapu elewacji, tutaj stosuje się zasady z gry planszowej [**Reversi**](https://pl.wikipedia.org/wiki/Reversi) aka **Othello** aka **Kapsle**(¿?) <br/>
 
 ## Zdobywanie punktów
 * Kazda pomalowana elewacja +25
@@ -35,6 +33,7 @@ W przypadku gry dwuosobowej, gracz który uzykał najwiecej punktów wygrywa, za
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanko.gif)
 * Pod warunkiem że zostały otoczone przez w pełni pomalowaną ściane <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/malowanie.gif)
+* **Logika przechwytywania ścian** - [**Reversi**](https://pl.wikipedia.org/wiki/Reversi) aka **Othello** aka **Kapsle**(¿?) <br/>
 * Aby zaatakować należy poruszać się w kierunku którym chcemy go wykonać oraz wcisnąć przycisk ataku. Możliwośći ataku : <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/attack_tutorial.gif)
 
