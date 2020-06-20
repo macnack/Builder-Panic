@@ -36,7 +36,7 @@ Jest to odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w mur
 * **Logika przechwytywania ścian** - [**Reversi**](https://pl.wikipedia.org/wiki/Reversi) aka **Othello** aka **Kapsle**(¿?) <br/>
 * Aby zaatakować należy poruszać się w kierunku którym chcemy go wykonać oraz wcisnąć przycisk ataku. Możliwośći ataku : <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/attack_tutorial.gif)
-* Gdy postać otrzymuje obrażenia, nie może się poruszać, następnie staje się nietykalna przez kilka sek  
+* Gdy postać otrzymuje obrażenia, nie może się poruszać, następnie staje się nietykalna aby zapobiec ponownemu otrzymaniu obrażeń
 ## Wykorzystane biblioteki:
 * SFML : Window.hpp, Graphics.hpp
 * cmath
