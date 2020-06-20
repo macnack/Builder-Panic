@@ -1,5 +1,5 @@
 # Builder-Panic
-Gra dwuosobowa, celem gry jest zbieranie punktów poprzez malowanie ścian i zdobywanie monet, malowanie odbywa się 3 etapowo {1/3, 2/3, 3/3} uzupelnienia elewacji. Przy pierwszych 2 elewacjach gracze moga zmieniać kolor na własny, w przypadku gdy ściana jest w pełni pomalowana, zgodnie z zasadą gry Rewersi, można ją przechwycić *(wiecej w mini tutorialu)*. Zakonczenie gry następuje gdy wszystkie ściany zostają zamalowanie. <br/>
+Gra dwuosobowa, celem gry jest zbieranie punktów poprzez malowanie ścian i zdobywanie monet, malowanie odbywa się 3 etapowo {1/3, 2/3, 3/3} uzupelnienia elewacji. Przy pierwszych 2 elewacjach gracze moga zmieniać kolor na własny, w przypadku gdy ściana jest w pełni pomalowana, można ją przechwycić zgodnie z zasadą gry Rewersi *(wiecej w mini tutorialu)*. Zakonczenie gry następuje gdy wszystkie ściany zostają zamalowanie. <br/>
 ![Image of Buider Panic](https://github.com/macnack/Builder-Panic/blob/master/images/builder_panic.png)
 * Ekran startowy służy jako tutorial, po wciśnięciu *startu*, zdobyte punkty i pomalowane sciany zostana zresetowane, a ilosc monet na ekranie zostanie zmniejszona. 
 * Podczas wciśniećia pauzy przycisk **ESC** , otrzymujemy obecną ilość zdobytych punktów mozna zresetować obecny stan gry, poprzez wsciśniecie przycisku *HOME*, lub wyjść *EXIT*
