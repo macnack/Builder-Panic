@@ -10,6 +10,8 @@ public:
 
 private:
     sf::RenderWindow window_;
+    sf::SoundBuffer buffer;
+    sf::Sound coin_effect;
     Scena scena;
     Menu menu;
     float timer = 0.f;

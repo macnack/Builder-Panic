@@ -53,7 +53,7 @@ void Menu::start_window()
 
 void Menu::credits_window()
 {
-    auto start = std::make_unique<sf::Text>("GAME",font,40);
+    auto start = std::make_unique<sf::Text>("GAME AND MUSIC",font,40);
     start->setOrigin(start->getLocalBounds().left+start->getLocalBounds().width/2.0,0);
     start->setPosition(960,10);
     map["CREDITS"].emplace_back(std::move(start));

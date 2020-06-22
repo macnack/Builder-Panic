@@ -268,6 +268,7 @@ void ObjectManager::Paint(Hero &hero)
                     {
                         int n = bd_el.first;
                         this->Reverse(m, n, hero.getColor_Object());
+                        painting_effect.play();
                         hero.addScore(25);
                     }
                 }
@@ -324,4 +325,8 @@ ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
         x+= 7.25 * 32;
         y = 25.0 ;
     }
+    if (!buffer.loadFromFile("Audio/painting.wav"))
+        throw("sound wav");
+    painting_effect.setBuffer(buffer);
+
 }

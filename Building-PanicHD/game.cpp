@@ -43,6 +43,7 @@ void Game::update(const float &dt)
         if ((*it)->is_collected(*gracz,*enemy))
         {
             coins.erase(it);
+            coin_effect.play();
             if ( menu.lobbie_mode() )
             {
                 std::unique_ptr<Coin> coin = std::make_unique<Coin>(scena.getVec("floors"));
@@ -77,7 +78,13 @@ void Game::run()
 {
     //game loop
     //    sf::View view( gracz->view(), sf::Vector2f(800,600));
-
+    sf::Music music;
+    if (!music.openFromFile("Audio/muzyczka.wav")){
+        throw("sound.wav");
+    }
+    music.setLoop(true);
+    music.setVolume(30);
+    music.play();
     while (window_.isOpen())
     {
         sf::Time elapsed = clock.restart();
@@ -101,11 +108,13 @@ void Game::run()
             this->restart();
 
         }
+
         this->update(elapsed.asSeconds());
         window_.clear(sf::Color::Black);
         this->draw();
         window_.display();
     }
+
 }
 
 Game::Game(const float &w, const float &h)
@@ -114,4 +123,7 @@ Game::Game(const float &w, const float &h)
     obj_manager = std::make_unique<ObjectManager>(&window_);
     gracz = std::make_unique<Player>();
     enemy = std::make_unique<Enemy>();
+    if (!buffer.loadFromFile("Audio/coins.wav"))
+        throw("sound wav");
+    coin_effect.setBuffer(buffer);
 }

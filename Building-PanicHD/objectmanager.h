@@ -25,6 +25,8 @@ private:
     void Reverse(const int &m, const int &n, const Object::Color &color);
     sf::RenderWindow *window_;
     sf::Texture texture;
+    sf::SoundBuffer buffer;
+    sf::Sound painting_effect;
     std::map<int, std::map<int, std::unique_ptr<Object>>> board_;
 };
 

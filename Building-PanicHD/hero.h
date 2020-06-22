@@ -53,6 +53,8 @@ private:
     float painting_start = 0.5f;
     Object::Color color_;
     sf::Color RGB;
+    sf::SoundBuffer buffer;
+    sf::Sound getHurt_effect;
 
 protected:
     void attack_move();

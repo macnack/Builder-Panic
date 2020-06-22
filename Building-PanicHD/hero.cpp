@@ -9,6 +9,9 @@ Hero::Hero(const sf::Vector2f &pos, const Object::Color &color)
     RGB = this->getColor();
     grounded = true;
     bounce = false;
+    if (!buffer.loadFromFile("Audio/death.wav"))
+        throw("sound wav");
+    getHurt_effect.setBuffer(buffer);
 }
 
 void Hero::cooldown(const float &dt)
@@ -68,6 +71,7 @@ void Hero::getHurt(Hero &hero, const float &dt)
         {
             if (!hero.untouchable)
             {
+                getHurt_effect.play();
                 hero.velocity.y -= 450;
                 hero.untouchable = true;
                 hero.is_stunned = true;
