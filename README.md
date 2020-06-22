@@ -68,12 +68,15 @@ Jest to odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w mur
 * **ObjectManager** - przechowywanie malowanych ścian, logika Reversi, zmiana koloru przez obiekty klasy **Hero**, zliczanie punktow, warunek zakonczenia gry
 * **Scena** - tworzenie scenerii gry
 ### Wykorzystane tekstury 
-- Industrial pack - OllieBerzs https://ollieberzs.itch.io/industrial-pack
-- Gems / Coins - 	La Red Games https://laredgames.itch.io/gems-coins-free
-- Dungeons Walls - Evil_PoisonBR https://evil-poisonbr.itch.io/dungeons-walls
-- Castle Platformer Tileset - RottingPixels https://rottingpixels.itch.io/castle-platformer-tileset-16x16free
+- [Industrial pack](https://ollieberzs.itch.io/industrial-pack) - OllieBerzs 
+- [Gems / Coins](https://laredgames.itch.io/gems-coins-free) - 	La Red Games 
+- [Dungeons Walls](https://evil-poisonbr.itch.io/dungeons-walls) - Evil_PoisonBR 
+- [Castle Platformer Tileset](https://rottingpixels.itch.io/castle-platformer-tileset-16x16free) - RottingPixels 
 ### Czcionka
-- Fjalla One - Sorkin Type https://fonts.google.com/specimen/Fjalla+One?sort=popularity#standard-styles
+- [Fjalla One](https://fonts.google.com/specimen/Fjalla+One?sort=popularity#standard-styles) - Sorkin Type 
+### Dźwięk
+- Efekty dźwiękowe - [freesound](https://freesound.org/)
+- Muzyka produkcja własna - [GarageBand](https://www.apple.com/pl/ios/garageband/)
 ### Żródła
 - link do img: https://images.app.goo.gl/8qSQiCF2y2jHCg2Y9
 - zasady gry Reversi: https://pl.wikipedia.org/wiki/Reversi
