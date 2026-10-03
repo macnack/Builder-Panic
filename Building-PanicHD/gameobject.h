@@ -12,7 +12,6 @@ public:
 protected:
     sf::Vector2f pos_;
     sf::IntRect rect_;
-    sf::Texture texture_;
 };
 
 #endif // GAMEOBJECT_H

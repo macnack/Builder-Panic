@@ -1,7 +1,10 @@
 #include "hero.h"
+#include "assets.h"
+
+#include <iostream>
 
 Hero::Hero(const sf::Vector2f &pos, const Object::Color &color)
-    : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3), color_(color)
+    : Entity(pos, sf::IntRect(0, 0, 16, 28), 14, 8, 8, 3), color_(color), spawn_(pos)
 {
     if(color_ == Object::Color::Enemy){
         this->setColor(sf::Color(178, 102, 255));
@@ -9,9 +12,14 @@ Hero::Hero(const sf::Vector2f &pos, const Object::Color &color)
     RGB = this->getColor();
     grounded = true;
     bounce = false;
-    if (!buffer.loadFromFile("Audio/death.wav"))
-        throw("sound wav");
-    getHurt_effect.setBuffer(buffer);
+    const std::string death = assetPath("Audio/death.wav");
+    if (!buffer.loadFromFile(death))
+        std::cerr << "Builder Panic: hurt sound disabled (" << death << ")\n";
+    else
+    {
+        getHurt_effect.setBuffer(buffer);
+        hurt_sound_ = true;
+    }
 }
 
 void Hero::cooldown(const float &dt)
@@ -71,7 +79,8 @@ void Hero::getHurt(Hero &hero, const float &dt)
         {
             if (!hero.untouchable)
             {
-                getHurt_effect.play();
+                if (hurt_sound_)
+                    getHurt_effect.play();
                 hero.velocity.y -= 450;
                 hero.untouchable = true;
                 hero.is_stunned = true;
@@ -91,6 +100,33 @@ void Hero::getHurt(Hero &hero, const float &dt)
 void Hero::resetScore()
 {
     score = 1000;
+}
+
+void Hero::resetRound()
+{
+    attack = false;
+    attack_cooldown = true;
+    paint = false;
+    paint_cooldown = true;
+    untouchable = false;
+    is_stunned = false;
+    can_change = true;
+    score = 1000;
+    timer = timer_reset;
+    untouchable_timer = untouchable_reset;
+    change_platform_timer = change_platform_reset;
+    painting_timer = painting_start;
+    velocity = sf::Vector2f(0.f, 0.f);
+    grounded = true;
+    stage_down = false;
+    current_stage = 3;
+    next_stage = 3;
+    switcher = 0;
+    faceRight = true;
+    this->setPosition(spawn_);
+    this->setColor(RGB);
+    if (!textures_.empty())
+        this->setTexture(*textures_[0]);
 }
 
 sf::Vector2f Hero::view()
@@ -233,9 +269,11 @@ void Hero::updateMovement(const float &dt)
         if (attack_cooldown == false && timer < 0.1)// dodge attack
         {
             velocity.x = attackVelocity;
-            this->setColor(sf::Color(128, 128, 128));
+            if (!untouchable)
+                this->setColor(sf::Color(128, 128, 128));
         }else{
-            this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
+            if (!untouchable)
+                this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
             attack = false;
         }
     }
@@ -254,13 +292,15 @@ void Hero::updateMovement(const float &dt)
         if (attack_cooldown == false && timer < 0.1) // dodge attack
         {
             velocity.x = -std::abs(attackVelocity);
-            this->setColor(sf::Color(128, 128, 128));
+            if (!untouchable)
+                this->setColor(sf::Color(128, 128, 128));
         }else{
-            this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
+            if (!untouchable)
+                this->setColor(sf::Color(RGB.r, RGB.g, RGB.b));
             attack = false;
         }
     }
-    this->setTexture(textures_[switcher]);
+    this->setTexture(*textures_[switcher]);
     this->playAnimation(dt);
 }
 

@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "assets.h"
 
 const bool &Menu::paused()
 {
@@ -255,13 +256,15 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2)
         start = !start;
         pause_update(en1,en2);
     }
+    const bool click = event.type == sf::Event::MouseButtonPressed
+            && event.mouseButton.button == sf::Mouse::Left;
     sf::Vector2f mouse_position = window_->mapPixelToCoords(sf::Mouse::getPosition(*window_));
     for( auto &win : map[key] ){
         if( win->getGlobalBounds().contains(mouse_position)
                 && win->getFillColor() == sf::Color(102,51,0)){
             win->setOutlineThickness(5);
             win->setOutlineColor(sf::Color::White);
-            if(event.mouseButton.button == sf::Mouse::Left){
+            if(click){
                 std::string s = win->getString();
                 if( s == "EXIT" )
                 {
@@ -304,7 +307,8 @@ void Menu::menu_event(const sf::Event &event,Hero &en1, Hero &en2)
 Menu::Menu(sf::RenderWindow *window)
     : window_(window)
 {
-    font.loadFromFile("Font/FjallaOne-Regular.ttf");
+    if (!font.loadFromFile(assetPath("Font/FjallaOne-Regular.ttf")))
+        throw std::runtime_error("Could not load font Font/FjallaOne-Regular.ttf");
     texture.setRepeated(true);
     this->pause_window();
     this->start_window();

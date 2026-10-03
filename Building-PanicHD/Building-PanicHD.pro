@@ -1,3 +1,5 @@
+# Linux builds use CMakeLists.txt at the repository root.
+# The -d libraries below are Windows debug names and are not used by CMake.
 TEMPLATE = app
 CONFIG += console c++17
 CONFIG -= app_bundle

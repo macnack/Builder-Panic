@@ -16,6 +16,7 @@ public:
     void updateMovement(const float &dt);
     void getHurt(Hero &hero, const float &dt);
     void resetScore();
+    void resetRound();
     virtual void loop(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt) = 0;
     virtual void change_platform() = 0;
     virtual bool painting() = 0;
@@ -47,7 +48,7 @@ private:
     float snapshot_color = 0.3f;
     float change_platform_timer = 0.f;
     float change_platform_reset = 0.f;
-    float change_platform_elapsed = 0.6;
+    float change_platform_elapsed = 0.6f;
     float painting_timer = 0.5f;
     float painting_stop = 0.f;
     float painting_start = 0.5f;
@@ -55,6 +56,8 @@ private:
     sf::Color RGB;
     sf::SoundBuffer buffer;
     sf::Sound getHurt_effect;
+    bool hurt_sound_ = false;
+    sf::Vector2f spawn_;
 
 protected:
     void attack_move();

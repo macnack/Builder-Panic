@@ -1,4 +1,7 @@
 #include "objectmanager.h"
+#include "assets.h"
+
+#include <iostream>
 
 void ObjectManager::add(const int &m, const int &n, std::unique_ptr<Object> block_)
 {
@@ -40,6 +43,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
 
         }
+        reverse = false;
         for (int i = n; i >= 0; i--)
         { // to right
             if (board_[m][i]->getIntColor() == -Intcolor && reverse == false)
@@ -51,7 +55,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
                 reverse = false;
                 break;
             }
-            else if (i-1 > 0 && board_[m][i - 1]->getIntColor() == Intcolor && reverse == false)
+            else if (i > 0 && board_[m][i - 1]->getIntColor() == Intcolor && reverse == false)
             {
                 reverse = false;
                 break;
@@ -111,7 +115,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for (int i = m, j = n; i < rows && j < columns; j++ && i++)
+        for (int i = m, j = n; i < rows && j < columns; ++i, ++j)
         { // \ from r to l
             if (board_[i][j]->getIntColor() == -Intcolor && reverse == false)
             {
@@ -125,7 +129,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             if ( board_[i][j]->getFill() == Object::Fill::full_full &&
                     board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
-                for (int k = m, l = n; k < i && l < j; l++ && k++)
+                for (int k = m, l = n; k < i && l < j; ++k, ++l)
                 {
                     board_[k][l]->Paint(color);
                 }
@@ -133,7 +137,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for (int i = m, j = n; i >= 0 && j >= 0; j-- && i--)
+        for (int i = m, j = n; i >= 0 && j >= 0; --i, --j)
         { // \ from l to r
             if (board_[i][j]->getIntColor() == -Intcolor && reverse == false)
             {
@@ -147,7 +151,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             if (board_[i][j]->getFill() == Object::Fill::full_full &&
                     board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
-                for (int k = m, l = n; k > i && l > j; l-- && k--)
+                for (int k = m, l = n; k > i && l > j; --k, --l)
                 {
                     board_[k][l]->Paint(color);
                 }
@@ -155,7 +159,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for (int i = m, j = n; i < rows && j >= 0; j-- && i++)
+        for (int i = m, j = n; i < rows && j >= 0; ++i, --j)
         { // / left to right
             if (board_[i][j]->getIntColor() == -Intcolor && reverse == false)
             {
@@ -169,7 +173,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             if ( board_[i][j]->getFill() == Object::Fill::full_full &&
                     board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
-                for (int k = m, l = n; k < i && l > j; l-- && k++)
+                for (int k = m, l = n; k < i && l > j; ++k, --l)
                 {
                     board_[k][l]->Paint(color);
                 }
@@ -177,7 +181,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             }
         }
         reverse = false;
-        for (int i = m, j = n; i >= 0 && j < columns; j++ && i--)
+        for (int i = m, j = n; i >= 0 && j < columns; --i, ++j)
         { // / left to right
             if (board_[i][j]->getIntColor() == -Intcolor && reverse == false)
             {
@@ -191,7 +195,7 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
             if ( board_[i][j]->getFill() == Object::Fill::full_full &&
                     board_[i][j]->getIntColor() == Intcolor && reverse == true)
             {
-                for (int k = m, l = n; k > i && l < j; l++ && k--)
+                for (int k = m, l = n; k > i && l < j; --k, ++l)
                 {
                     board_[k][l]->Paint(color);
                 }
@@ -201,12 +205,12 @@ void ObjectManager::Reverse(const int &m, const int &n, const Object::Color &col
     }
 }
 
-const std::map<int, std::map<int, std::unique_ptr<Object>>> &ObjectManager::getBoard()
+const std::map<int, std::map<int, std::unique_ptr<Object>>> &ObjectManager::getBoard() const
 {
     return board_;
 }
 
-void ObjectManager::addScore(Player &gracz, Enemy &enemy){
+void ObjectManager::addScore(Hero &gracz, Hero &enemy){
     while(!end_game)
     {
         for (const auto &el : board_)
@@ -253,26 +257,25 @@ void ObjectManager::Paint(const sf::RenderWindow &window, const sf::Event &event
 
 void ObjectManager::Paint(Hero &hero)
 {
-    sf::FloatRect playerBounds = hero.getGlobalBounds();
+    const sf::FloatRect playerBounds = hero.getGlobalBounds();
+    const float px = playerBounds.left + playerBounds.width * 0.5f;
+    const float py = playerBounds.top + playerBounds.height - 10.f;
     for (auto &bd : board_)
     {
-        int m = bd.first;
+        const int m = bd.first;
         for (auto &bd_el : bd.second)
         {
-
-            if (bd_el.second->getGlobalBounds().contains(playerBounds.left + playerBounds.width / 2.0, playerBounds.top + playerBounds.height - 10))
+            if (!bd_el.second->getGlobalBounds().contains(px, py))
+                continue;
+            if (hero.painting() && hero.can_paint()
+                    && bd_el.second->getFill() != Object::Fill::full_full)
             {
-                if( hero.painting() && hero.can_paint() )
-                {
-                    if(bd_el.second->getFill() !=  Object::Fill::full_full)
-                    {
-                        int n = bd_el.first;
-                        this->Reverse(m, n, hero.getColor_Object());
-                        painting_effect.play();
-                        hero.addScore(25);
-                    }
-                }
+                this->Reverse(m, bd_el.first, hero.getColor_Object());
+                if (paint_sound_)
+                    painting_effect.play();
+                hero.addScore(25);
             }
+            return;
         }
     }
 }
@@ -284,7 +287,7 @@ bool ObjectManager::full_board()
     {
         for (const auto &v : el.second)
         {
-            if ( v.second->getFill() < Object::Fill::full_full )
+            if ( v.second->getFill() != Object::Fill::full_full )
             {
                 return false;
             }
@@ -309,24 +312,24 @@ void ObjectManager::draw()
 
 ObjectManager::ObjectManager(sf::RenderWindow *window) : window_(window)
 {
-    if (!texture.loadFromFile("Texture/Dungeons Walls.png"))
-    {
-        throw("Could not load texture 'Dungeons Walls'");
-    }
-    texture.setRepeated(true);
+    const sf::Texture &texture = cachedTexture("Texture/Dungeons Walls.png", true);
     for (int i = 0; i < columns; i++)
     {
         for (int k = 0; k < rows; k++)
         {
-            std::unique_ptr<Object> block_ = std::make_unique<Object>(sf::Vector2f(x, y), texture);
+            std::unique_ptr<Object> block_ = std::make_unique<Object>(sf::Vector2f(static_cast<float>(x), static_cast<float>(y)), texture);
             this->add(k, i, std::move(block_));
             y += 247;
         }
         x+= 7.25 * 32;
         y = 25.0 ;
     }
-    if (!buffer.loadFromFile("Audio/painting.wav"))
-        throw("sound wav");
-    painting_effect.setBuffer(buffer);
-
+    const std::string painting = assetPath("Audio/painting.wav");
+    if (!buffer.loadFromFile(painting))
+        std::cerr << "Builder Panic: paint sound disabled (" << painting << ")\n";
+    else
+    {
+        painting_effect.setBuffer(buffer);
+        paint_sound_ = true;
+    }
 }

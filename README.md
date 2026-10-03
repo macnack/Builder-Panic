@@ -29,6 +29,7 @@ Jest to odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w mur
   * :arrow_left: i :arrow_right: poruszanie się lewo i prawo
     * "**M**" szarża ( atak ), działa podczas przemieszczania sie postaci w wybranym kierunku
   * "**N**" malowanie - przytrzymać
+  * Jeśli nikt nie wciśnie tych klawiszy, drugi malarz gra sam: patroluje platformy, domalowuje ściany (woli dokończyć swoje i zamykać przejęcia jak w Reversi) i goni gracza, gdy jest blisko albo maluje. Wciśnięcie strzałek, **N** albo **M** oddaje go drugiemu graczowi do resetu rundy.
 
 ## MINI TUTORIAL
 
@@ -40,6 +41,18 @@ Jest to odwzorowanie istniejącej gry Building Panic, w grze wcielasz się w mur
 * Aby zaatakować należy poruszać się w kierunku którym chcemy go wykonać oraz wcisnąć przycisk ataku. Możliwośći ataku : <br/>
 ![Image of malowanie](https://github.com/macnack/Builder-Panic/blob/master/images/attack_tutorial.gif)
 * Gdy postać otrzymuje obrażenia, nie może się poruszać, następnie staje się nietykalna aby zapobiec ponownemu otrzymaniu obrażeń
+## Budowanie
+
+Linux, kompilator C++17, CMake i SFML 2.5 albo 2.6 (`sudo apt install build-essential cmake libsfml-dev`).
+
+```bash
+cmake -S . -B build
+cmake --build build
+./build/builder-panic
+```
+
+Zasoby są w `Resources/` i są szukane obok programu oraz względem katalogu, z którego go uruchamiasz. `--smoke N` przelicza N klatek (krok 1/60 s) i zamyka okno.
+
 ## Wykorzystane biblioteki:
 * SFML : Window.hpp, Graphics.hpp
 * cmath

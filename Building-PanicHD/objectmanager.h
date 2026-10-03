@@ -6,11 +6,11 @@ class ObjectManager
 {
 public:
     bool full_board();
-    const std::map<int, std::map<int, std::unique_ptr<Object>>> &getBoard();
+    const std::map<int, std::map<int, std::unique_ptr<Object>>> &getBoard() const;
     void draw();
     void Paint(Hero &hero);
     void Paint(const sf::RenderWindow &window, const sf::Event &event); //moudr inspekt
-    void addScore(Player &gracz, Enemy &enemy);
+    void addScore(Hero &gracz, Hero &enemy);
     ObjectManager(sf::RenderWindow *window);
     virtual ~ObjectManager() = default;
 
@@ -24,9 +24,9 @@ private:
     void add(const int &m, const int &n, std::unique_ptr<Object> block_);
     void Reverse(const int &m, const int &n, const Object::Color &color);
     sf::RenderWindow *window_;
-    sf::Texture texture;
     sf::SoundBuffer buffer;
     sf::Sound painting_effect;
+    bool paint_sound_ = false;
     std::map<int, std::map<int, std::unique_ptr<Object>>> board_;
 };
 
