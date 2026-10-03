@@ -1,9 +1,11 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
 gierka
+/build/
 build-Building-PanicHD-Desktop-Debug/
 build-gierka-Desktop-Debug/
-Building-PanicHD
+# In-source qmake binary. The source directory itself is tracked.
+/Building-PanicHD/Building-PanicHD
 
 .qmake.stash
 *~

@@ -1,4 +1,5 @@
 #include "entity.h"
+#include "assets.h"
 
 void Entity::setFaceRight(const bool &face){
     faceRight = face;
@@ -6,18 +7,17 @@ void Entity::setFaceRight(const bool &face){
 
 int Entity::setBounds(const std::vector<std::unique_ptr<sf::Sprite>> &platforms)
 { // whereAm
+    if (platforms.size() < 2)
+        return current_stage = 0;
     sf::FloatRect bound = this->getGlobalBounds();
-    for (unsigned int i = 0; i < platforms.size(); i++)
+    for (std::size_t i = 0; i + 1 < platforms.size(); ++i)
     {
-        if (i + 1 < platforms.size())
-        {
-            if (platforms[i]->getGlobalBounds().top < bound.top && bound.top < platforms[i + 1]->getGlobalBounds().top)
-            {
-                return current_stage = i + 1;
-            }
-        }
+        const float top = platforms[i]->getGlobalBounds().top;
+        const float next_top = platforms[i + 1]->getGlobalBounds().top;
+        if (top < bound.top && bound.top < next_top)
+            return current_stage = static_cast<int>(i + 1);
     }
-    return platforms.size() - 1;
+    return static_cast<int>(platforms.size() - 1);
 }
 
 void Entity::updateGravity(const float &dt)
@@ -31,6 +31,14 @@ void Entity::updateGravity(const float &dt)
 
 void Entity::updateCollisions(const std::vector<std::unique_ptr<sf::Sprite>> &platforms, const float &dt)
 {
+    if (platforms.empty())
+        return;
+    const int last = static_cast<int>(platforms.size()) - 1;
+    if (next_stage < 0)
+        next_stage = 0;
+    else if (next_stage > last)
+        next_stage = last;
+
     grounded = false;
     sf::FloatRect playerBounds = this->getGlobalBounds();
     sf::FloatRect playerBoundsNext = this->getGlobalBounds();
@@ -83,31 +91,22 @@ Entity::Entity(const sf::Vector2f &pos, const sf::IntRect &frame, const float &f
 {
     this->setScale(6, 6);
     this->setPosition(pos);
-    sf::Texture indle_texture;
-    if (!indle_texture.loadFromFile("Texture/engineer character/engineer-idle.png"))
-    {
-        throw("Could not load texture 'Engineer Idle'");
-    }
+    value = 0;
+    textures_.reserve(4);
+    frames_.reserve(4);
+    const sf::Texture &idle_texture = cachedTexture("Texture/engineer character/engineer-idle.png");
     frames_.push_back(addAnimation(frame, len_idle));
-    textures_.push_back(indle_texture);
-    sf::Texture run_texture;
-    if (!run_texture.loadFromFile("Texture/engineer character/engineer-run.png"))
-    {
-        throw("Could not load texture 'Engineer Run'");
-    }
+    textures_.push_back(&idle_texture);
+    const sf::Texture &run_texture = cachedTexture("Texture/engineer character/engineer-run.png");
     frames_.push_back(addAnimation(frame, len_move));
-    textures_.push_back(run_texture);
-    sf::Texture jump_texture;
-    if (!jump_texture.loadFromFile("Texture/engineer character/engineer-jump.png"))
-    {
-        throw("Could not load texture 'Engineer Jump'");
-    }
+    textures_.push_back(&run_texture);
+    const sf::Texture &jump_texture = cachedTexture("Texture/engineer character/engineer-jump.png");
     frames_.push_back(addAnimation(frame, len_jump));
-    textures_.push_back(jump_texture);
+    textures_.push_back(&jump_texture);
     //animacja otrzymania obrazen
     frames_.push_back(addAnimation(sf::IntRect(frame.left,frame.top,frame.width,frame.height - 5), len_idle));
-    textures_.push_back(indle_texture);
-    this->setTexture(textures_[0]);
+    textures_.push_back(&idle_texture);
+    this->setTexture(*textures_[0]);
 }
 
 Entity::Entity(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const int &x,
@@ -115,41 +114,31 @@ Entity::Entity(const std::vector<std::unique_ptr<sf::Sprite> > &platforms, const
     : Animation(frame, framerate, lenght)
 {
     this->setScale(4, 4);
-    sf::Texture texture;
+    const char *file = "Texture/MonedaD.png";
+    value = 100;
     if (x < 9)
     {
-        if (!texture.loadFromFile("Texture/MonedaR.png"))
-        {
-            throw("Could not load texture 'MonedaR'");
-        }
+        file = "Texture/MonedaR.png";
         value = 25;
     }
-    else if (x >= 9 && x <= 13)
+    else if (x <= 13)
     {
-        if (!texture.loadFromFile("Texture/MonedaP.png"))
-        {
-            throw("Could not load texture 'MonedaP'");
-        }
+        file = "Texture/MonedaP.png";
         value = 50;
     }
-    else
-    {
-        if (!texture.loadFromFile("Texture/MonedaD.png"))
-        {
-            throw("Could not load texture 'MonedaD'");
-        }
-        value = 100;
-    }
-    textures_.push_back(texture);
+    const sf::Texture &texture = cachedTexture(file);
+    textures_.push_back(&texture);
     this->setTexture(texture);
-    this->setPosition(sf::Vector2f(rand() % 1820, rand() % 1030));
+    this->setPosition(sf::Vector2f(static_cast<float>(std::rand() % 1820), static_cast<float>(std::rand() % 1030)));
     current_stage = setBounds(platforms);
     next_stage = current_stage;
     for (auto &pl : platforms)
     {
-        while (pl->getGlobalBounds().intersects(this->getGlobalBounds()))
+        int guard = 0;
+        while (guard < 32 && pl->getGlobalBounds().intersects(this->getGlobalBounds()))
         {
-            this->setPosition(sf::Vector2f(rand() % 1820, rand() % 1030));
+            this->setPosition(sf::Vector2f(static_cast<float>(std::rand() % 1820), static_cast<float>(std::rand() % 1030)));
+            ++guard;
         }
     }
 }

@@ -11,7 +11,6 @@ public:
     virtual ~Scena() = default;
 
 private:
-    sf::Texture texture;
     sf::RenderWindow *window_;
     std::map<std::string, std::vector<std::unique_ptr<sf::Sprite>>> map;
 };
